@@ -1,0 +1,42 @@
+/*textos del header*/
+.text-header{
+    color: white
+}
+
+header{
+    background-color: var(--ion-header-theme);
+}
+
+nav{
+    display: flex;
+    h1{
+        color: white;
+    }
+    
+}
+
+ion-menu-button{
+    color: white;
+    font-size: 2rem;
+}
+
+/*contenido del menu*/
+ion-menu{
+    header{
+        padding: 2vh;
+        display: flex;
+        ion-icon{
+            font-size: 2rem;
+        }
+    }
+}
+
+ion-menu > ion-content > main{
+    padding: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+
+}

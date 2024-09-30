@@ -1,0 +1,23 @@
+header {
+  padding: 2vh;
+
+  .text-title {
+    font-size: 3rem;
+    text-align: center;
+  }
+}
+
+
+.search-bar {
+  padding: 2vh;
+  display: flex;
+  justify-content: center;
+  gap: 2vh;
+
+  ion-button {
+    ion-icon {
+      font-size: 2rem;
+    }
+  }
+}
+

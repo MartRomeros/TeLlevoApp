@@ -1,0 +1,23 @@
+<ion-menu contentId="main-content">
+  <header>
+    <h1 class="text-header">Opciones</h1>
+    <ion-icon name="settings" class="text-header"></ion-icon>
+  </header>
+  <ion-content>
+    <main>
+      <ion-toggle>Tema oscuro <ion-icon src="assets/moon.svg"></ion-icon> </ion-toggle>
+      <ion-button color="danger">Cerrar sesión</ion-button>
+    </main>
+  </ion-content>
+</ion-menu>
+
+<div id="main-content">
+  <header>
+    <nav>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <h1>{{title}}</h1>
+    </nav>
+  </header>
+</div>

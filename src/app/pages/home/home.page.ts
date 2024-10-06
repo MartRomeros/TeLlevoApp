@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CambiarThemaService } from 'src/app/services/theme/cambiar-thema.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor() {}
+  
+  constructor(private cambiarTema: CambiarThemaService) { }
 
 }

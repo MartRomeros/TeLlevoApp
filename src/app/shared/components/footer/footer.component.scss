@@ -1,0 +1,11 @@
+ion-tab-bar{
+    background-color: var(--ion-content-theme);
+    ion-tab-button{
+        --background: var(--ion-content-theme);
+        --color: var(--ion-text-general);
+        ion-icon{
+            color: var(--ion-text-general);
+
+        }
+    }
+}

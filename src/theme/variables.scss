@@ -1,2 +1,9 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+:root {
+    --ion-header-theme: #b90000;
+    --ion-header-text: #fff;
+    --ion-content-theme: #fff;
+    --ion-text-general: #000;
+    --ion-ripple-theme: #d1cece;
+}

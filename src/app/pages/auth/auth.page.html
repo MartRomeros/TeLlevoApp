@@ -1,3 +1,27 @@
-<ion-content [fullscreen]="true">
-  Hola mundo!
+<app-header titulo="Inicio de Sesión"></app-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-title>Inicio de Sesión</ion-title>
+        <h5>Completa todos los campos para ingresar con tu usuario</h5>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Correo electronico" labelPlacement="floating" placeholder="Ingresa tu correo electronico"
+          fill="outline"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input type="password" label="Contraseña" labelPlacement="floating" placeholder="Ingresa tu contraseña"
+          fill="outline">
+          <ion-input-password-toggle slot="end" aria-label="Show/hide"></ion-input-password-toggle>
+        </ion-input>
+      </ion-col>
+      <ion-col size="5"><h5>¿Olvidaste tu contraseña?</h5></ion-col>
+      <ion-col size="5"><h5>Registrarme</h5></ion-col>
+      <ion-col size="12" class="col-btn">
+        <ion-button expand="block" color="danger">Ingresar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<app-footer></app-footer>

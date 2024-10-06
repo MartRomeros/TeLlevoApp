@@ -21,3 +21,16 @@ header {
   }
 }
 
+ion-item{
+  width: 90vh;
+}
+
+main{
+  padding: 2vh;
+  border: 1px red solid;
+  overflow: auto;
+}
+
+main,header,ion-item::part(native){
+  background-color: var(--ion-content-theme);
+}

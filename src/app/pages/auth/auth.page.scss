@@ -1,0 +1,36 @@
+ion-content {
+    ion-grid {
+        background: var(--ion-content-theme);
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ion-row {
+            gap: 6vh;
+            ion-col {
+                display: flex;
+                flex-direction: column !important;
+                align-items: center;
+
+                ion-title {
+                    --color: var(--ion-text-general);
+                }
+
+                h5 {
+                    color: var(--ion-text-general);
+                }
+
+                ion-input {
+                    --color: var(--ion-text-general);
+                    --padding-end: 2vh;
+                    --padding-start: 2vh;
+                    --border-color: var(--ion-header-theme);
+                }
+            }
+
+            ion-col.col-btn {
+                display: block;
+            }
+        }
+    }
+}

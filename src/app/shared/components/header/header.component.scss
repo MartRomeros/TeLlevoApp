@@ -1,42 +1,74 @@
-/*textos del header*/
-.text-header{
-    color: white
-}
+ion-menu {
 
-header{
-    background-color: var(--ion-header-theme);
-}
+    ion-header {
+        ion-toolbar {
+            --background: var(--ion-header-theme);
 
-nav{
-    display: flex;
-    h1{
-        color: white;
-    }
-    
-}
-
-ion-menu-button{
-    color: white;
-    font-size: 2rem;
-}
-
-/*contenido del menu*/
-ion-menu{
-    header{
-        padding: 2vh;
-        display: flex;
-        ion-icon{
-            font-size: 2rem;
+            ion-title {
+                --color: var(--ion-header-text)
+            }
         }
     }
+
+    ion-content > main{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        background: var(--ion-content-theme);
+
+        /*ion-button{
+            margin-top: 100%;
+            width: 97%;
+        }*/
+
+        ion-list{
+            background: var(--ion-content-theme);
+            ion-item{
+                --background: var(--ion-content-theme);
+                --ripple-color: var(--ion-ripple-theme);
+                ion-icon{
+                    color: var(--ion-text-general);
+                }
+                ion-label{
+                    color: var(--ion-text-general);
+                }
+                ion-toggle{
+                    color: var(--ion-text-general);
+                }
+            }
+        }
+
+    }
+
+
+
+
+
 }
 
-ion-menu > ion-content > main{
-    padding: 2vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
 
+
+#main-content>ion-header {
+    ion-toolbar {
+        --background: var(--ion-header-theme);
+
+        ion-buttons {
+            display: flex;
+            gap: 2vh;
+
+            ion-button {
+                --color: var(--ion-header-text)
+            }
+
+            ion-menu-button {
+                --color: var(--ion-header-text)
+            }
+        }
+
+        ion-title {
+            --color: var(--ion-header-text)
+        }
+    }
 
 }

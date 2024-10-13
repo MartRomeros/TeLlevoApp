@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -12,6 +13,12 @@ import { IonicModule } from '@ionic/angular';
 })
 export class FooterComponent{
 
-  constructor() { }
+  constructor(private router:Router) { }
+
+  navigateTo(ruta:string){
+
+    this.router.navigate([`pasajero/${ruta}`])
+
+  }
 
 }

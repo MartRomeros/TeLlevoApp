@@ -7,20 +7,9 @@ ion-header{
         }
 
         ion-buttons{
-            ion-menu-button{
+            ion-button{
                 --color: var(--ion-header-text);
             }
-        }
-    }
-}
-
-ion-menu{
-    ion-content{
-        main{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
     }
 }

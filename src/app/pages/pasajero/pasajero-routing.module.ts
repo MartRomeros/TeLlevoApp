@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PasajeroPage } from './pasajero.page';
 import { HomeComponent } from './components/home/home.component';
 import { ViajeDetailComponent } from './components/viaje-detail/viaje-detail.component';
+import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
+import { HistorialViajesComponent } from './components/historial-viajes/historial-viajes.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,20 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
     path: 'viaje-detail',
     component: ViajeDetailComponent
+  },
+  {
+    path: 'perfil-pasajero',
+    component: PerfilUsuarioComponent
+  },
+  {
+    path: 'historial-viajes',
+    component: HistorialViajesComponent
   },
 ];
 

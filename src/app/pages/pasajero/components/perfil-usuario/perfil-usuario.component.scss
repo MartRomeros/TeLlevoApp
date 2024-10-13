@@ -1,0 +1,17 @@
+ion-grid{
+    ion-row{
+        ion-col{
+            border: 1px red solid;
+            ion-list{
+                display: flex;
+                flex-direction: column;
+                gap: 2vh;
+                ion-item{
+                    ion-text-area{
+                        --border-color: lightgray;
+                    }
+                }
+            }
+        }
+    }
+}

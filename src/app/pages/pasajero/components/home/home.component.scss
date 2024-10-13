@@ -1,0 +1,31 @@
+ion-content {
+    ion-header {
+        --background: var(--ion-content-theme);
+        ion-toolbar {
+            --background: var(--ion-content-theme);
+            ion-title{
+                --color: var(--ion-text-general);
+            }
+            ion-searchbar{
+                --color: var(--ion-text-general);
+                --background: var(--ion-content-theme);
+                --icon-color:var(--ion-text-general);
+
+            }
+        }
+    }
+}
+
+ion-card{
+    --background: var(--ion-content-theme);
+    ion-card-header{
+        ion-card-title{
+            --color: var(--ion-text-general);
+        }
+    }
+
+    ion-card-content{
+        --color: var(--ion-text-general);
+    }
+
+}

@@ -4,21 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AuthPageRoutingModule } from './auth-routing.module';
+import { PasajeroPageRoutingModule } from './pasajero-routing.module';
 
-import { AuthPage } from './auth.page';
+import { PasajeroPage } from './pasajero.page';
 import { HeaderComponent } from './components/header/header.component';
-
-//header de auth
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AuthPageRoutingModule
+    PasajeroPageRoutingModule,
+    HeaderComponent
   ],
-  declarations: [AuthPage,HeaderComponent]
+  declarations: [PasajeroPage]
 })
-export class AuthPageModule { }
+export class PasajeroPageModule {}

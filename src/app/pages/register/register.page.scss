@@ -7,8 +7,6 @@ ion-content {
         align-items: center;
         ion-grid {
             ion-row {
-                gap: 6vh;
-
                 ion-col {
                     display: flex;
                     flex-direction: column !important;
@@ -30,12 +28,11 @@ ion-content {
                         --border-color: var(--ion-header-theme);
                     }
 
-                    ion-buttons{
+                    ion-radio-group{
                         display: flex;
                         justify-content: space-evenly;
                         width: 100%;
                     }
-
                 }
 
                 ion-col.col-btn {

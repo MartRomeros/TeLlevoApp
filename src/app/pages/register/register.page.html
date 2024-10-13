@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<ion-content>
+  <form>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12">
+          <ion-title>Registro de usuario</ion-title>
+          <h5>Completa todos los campos para crear una cuenta</h5>
+        </ion-col>
+        <ion-col size="6">
+          <ion-input label="Nombre" labelPlacement="floating" placeholder="Ingresa tu nombre"
+            fill="outline"></ion-input>
+        </ion-col>
+        <ion-col size="6">
+          <ion-input label="Apellido" labelPlacement="floating" placeholder="Ingresa tu apellido"
+            fill="outline"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="Correo electronico" labelPlacement="floating" placeholder="Ingresa tu correo electronico"
+            fill="outline" type="email"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="contraseña" labelPlacement="floating" placeholder="Ingresa tu contraseña" fill="outline"
+            type="password"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-radio-group value="pasajero" (ionChange)="esDriver()">
+            <ion-radio value="pasajero">Pasajero</ion-radio><br />
+            <ion-radio value="chofer">Chofer</ion-radio><br />
+          </ion-radio-group>
+        </ion-col>
+        @if (isDriver) {
+        <ion-col size="6">
+          <ion-input label="Marca" labelPlacement="floating" placeholder="Ingresa la marca de tu auto"
+            fill="outline"></ion-input>
+        </ion-col>
+        <ion-col size="6">
+          <ion-input label="Patente" labelPlacement="floating" placeholder="Ingresa la patente de tu auto"
+            fill="outline"></ion-input>
+        </ion-col>
+        }
+        <ion-col size="12" class="col-btn">
+          <ion-button expand="block" color="danger" (click)="registrar()">Registrarme</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

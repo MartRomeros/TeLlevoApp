@@ -1,0 +1,26 @@
+ion-header{
+    --background: var(--ion-header-theme);
+    ion-toolbar{
+        --background: var(--ion-header-theme);
+        ion-title{
+            --color: var(--ion-header-text);
+        }
+
+        ion-buttons{
+            ion-menu-button{
+                --color: var(--ion-header-text);
+            }
+        }
+    }
+}
+
+ion-menu{
+    ion-content{
+        main{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+}

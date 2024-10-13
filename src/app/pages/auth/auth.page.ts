@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -7,6 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPage{
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
+
+
+  logIn(){
+    this.router.navigate(['/pasajero'])
+  }
+
+  goToRegistro(){
+    this.router.navigate(['/register'])
+  }
 
 }

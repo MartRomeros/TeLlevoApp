@@ -6,18 +6,23 @@ import { Router } from '@angular/router';
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
 })
-export class AuthPage{
+export class AuthPage {
+  cargando?: boolean
 
   constructor(
-    private router:Router
+    private router: Router
   ) { }
 
 
-  logIn(){
-    this.router.navigate(['/pasajero'])
+  logIn() {
+    setTimeout(() => {
+      this.cargando = false
+      this.router.navigate(['/pasajero'])
+    }, 2000);
+    this.cargando = true
   }
 
-  goToRegistro(){
+  goToRegistro() {
     this.router.navigate(['/register'])
   }
 

@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { FooterComponent } from 'src/app/pages/pasajero/components/footer/footer.component';
+import { HeaderComponent } from 'src/app/pages/pasajero/components/header/header.component';
 
 @Component({
+  standalone:true,
   selector: 'app-configuracion',
-  templateUrl: './configuracion.page.html',
-  styleUrls: ['./configuracion.page.scss'],
+  templateUrl: './configuracion.component.html',
+  styleUrls: ['./configuracion.component.scss'],
+  imports:[IonicModule,HeaderComponent,FooterComponent]
 })
-export class ConfiguracionPage implements OnInit {
+export class ConfiguracionComponent  implements OnInit {
 
+  tema?:string
   paletteToggle = false
 
   constructor() { 
@@ -14,6 +20,7 @@ export class ConfiguracionPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log()
   }
 
   initDarkMode(){
@@ -42,4 +49,22 @@ export class ConfiguracionPage implements OnInit {
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
   }
+
+  TemaApp(){
+    this.tema = document.querySelector("ion-radio-group")?.value
+    alert(this.tema)
+    switch (this.tema) {
+      case 'oscuro':
+        document.documentElement.style.setProperty("--ion-content-theme","#000")
+        document.documentElement.style.setProperty("--ion-text-general","#fff")
+        break;
+      case 'claro':
+        document.documentElement.style.setProperty("--ion-content-theme","#fff")
+        document.documentElement.style.setProperty("--ion-text-general","#000")
+        break;
+      default:
+        break;
+    }
+  }
+
 }

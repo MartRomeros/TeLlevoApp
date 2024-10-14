@@ -16,9 +16,20 @@ export class FooterComponent{
   constructor(private router:Router) { }
 
   navigateTo(ruta:string){
-
-    this.router.navigate([`pasajero/${ruta}`])
-
+    switch (ruta) {
+      case 'home':
+        this.router.navigate([`pasajero/${ruta}`])
+        break;
+      case 'perfil-pasajero':
+        this.router.navigate([`pasajero/${ruta}`])
+        break;
+      case 'historial-viajes':
+        this.router.navigate([`pasajero/${ruta}`])
+        break;
+      default:
+        this.router.navigate([`${ruta}`])
+        break;
+    }
   }
 
 }

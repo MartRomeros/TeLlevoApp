@@ -1,0 +1,20 @@
+ion-content{
+    --background: var(--ion-content-theme);
+    ion-header{
+        --background: var(--ion-content-theme);
+        ion-toolbar{
+            --background: var(--ion-content-theme);
+            ion-title{
+                color: var(--ion-text-general);
+            }
+        }
+    }
+
+    ion-item::part(native){
+        background-color: var(--ion-content-theme);
+        color: var(--ion-text-general);
+        ion-radio-group{
+            background-color: var(--ion-content-theme);
+        }
+    }
+}

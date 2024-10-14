@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>configuracion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item lines="none">
+    <ion-label>
+      <h1>Modo oscuro</h1>
+      <p>Activar el modo oscuro en la aplicacion</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-radio-group value="claro" (ionChange)="TemaApp()">
+      <ion-radio value="claro">Claro</ion-radio><br />
+      <ion-radio value="oscuro">Oscuro</ion-radio><br />
+      <ion-radio value="predeterminado">Predeterminado del sistema</ion-radio><br />
+    </ion-radio-group>
+  </ion-item>
+
+</ion-content>
+
+<app-footer></app-footer>

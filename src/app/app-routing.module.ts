@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ConfiguracionComponent } from './shared/configuracion/configuracion.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'pasajero',
     loadChildren: () => import('./pages/pasajero/pasajero.module').then(m => m.PasajeroPageModule)
+  },
+  {
+    path: 'configuracion',
+    component:ConfiguracionComponent
   },
   {
     path: '**',

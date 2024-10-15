@@ -13,8 +13,13 @@ ion-content{
     ion-item::part(native){
         background-color: var(--ion-content-theme);
         color: var(--ion-text-general);
-        ion-radio-group{
-            background-color: var(--ion-content-theme);
+        --border-color: var(--ion-text-general);
+    }
+
+    ion-radio-group{
+        background-color: var(--ion-content-theme);
+        ion-radio{
+            --color:var(--ion-text-general);
         }
     }
 }

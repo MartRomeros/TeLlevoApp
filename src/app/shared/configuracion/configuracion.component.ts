@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule} from '@ionic/angular';
 import { FooterComponent } from 'src/app/pages/pasajero/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/pages/pasajero/components/header/header.component';
+import { ThemeService} from 'src/app/services/theme.service';
 
 @Component({
   standalone:true,
@@ -12,10 +13,9 @@ import { HeaderComponent } from 'src/app/pages/pasajero/components/header/header
 })
 export class ConfiguracionComponent  implements OnInit {
 
-  tema?:string
   paletteToggle = false
 
-  constructor() { 
+  constructor(private tema:ThemeService) { 
     this.initDarkMode();
   }
 
@@ -51,20 +51,8 @@ export class ConfiguracionComponent  implements OnInit {
   }
 
   TemaApp(){
-    this.tema = document.querySelector("ion-radio-group")?.value
-    alert(this.tema)
-    switch (this.tema) {
-      case 'oscuro':
-        document.documentElement.style.setProperty("--ion-content-theme","#000")
-        document.documentElement.style.setProperty("--ion-text-general","#fff")
-        break;
-      case 'claro':
-        document.documentElement.style.setProperty("--ion-content-theme","#fff")
-        document.documentElement.style.setProperty("--ion-text-general","#000")
-        break;
-      default:
-        break;
-    }
+    this.tema.TemaApp()
   }
+
 
 }

@@ -10,22 +10,13 @@ ion-content {
                 --color: var(--ion-text-general);
                 --background: var(--ion-content-theme);
                 --icon-color:var(--ion-text-general);
+                border: 1px var(--ion-content-theme);
 
             }
         }
     }
-}
 
-ion-card{
-    --background: var(--ion-content-theme);
-    ion-card-header{
-        ion-card-title{
-            --color: var(--ion-text-general);
-        }
+    ion-grid{
+        background-color: var(--ion-content-theme);
     }
-
-    ion-card-content{
-        --color: var(--ion-text-general);
-    }
-
 }

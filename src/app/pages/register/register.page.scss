@@ -33,6 +33,13 @@ ion-content {
                         justify-content: space-evenly;
                         width: 100%;
                     }
+
+                    ion-radio-group{
+                        background-color: var(--ion-content-theme);
+                        ion-radio{
+                            --color:var(--ion-text-general);
+                        }
+                    }
                 }
 
                 ion-col.col-btn {

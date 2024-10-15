@@ -1,0 +1,42 @@
+ion-content{
+    --background: var(--ion-content-theme);
+    ion-header{
+        --background: var(--ion-content-theme);
+        ion-toolbar{
+            --background: var(--ion-content-theme);
+            ion-title{
+                --color: var(--ion-text-general);
+            }
+            ion-searchbar{
+                --color: var(--ion-text-general);
+                --background: var(--ion-content-theme);
+                --icon-color:var(--ion-text-general);
+                border: 1px var(--ion-content-theme);
+
+            }
+        }
+
+    }
+
+    ion-list{
+        background: var(--ion-content-theme);
+
+        ion-item{
+            ion-icon.star{
+                color: var(--ion-header-text);
+            }
+            ion-icon{
+                color: var(--ion-text-general);
+            }
+            ion-label{
+                --color: var(--ion-text-general);
+            }
+        }
+
+        ion-item::part(native){
+            background-color: var(--ion-content-theme);
+            --border-color: var(--ion-text-general);
+
+        }
+    }
+}

@@ -14,8 +14,8 @@
                 Inicio del viaje: 01/01/2024. 22:30 PM <br>
                 Fin del viaje: 01/01/2024. 23:30 PM <br>
             </ion-card-content>
-            <ion-button fill="clear">Solicitar viaje</ion-button>
-            <ion-button fill="clear">Volver</ion-button>
+            <ion-button fill="clear" (click)="presentAlert()">Solicitar viaje</ion-button>
+            <ion-button fill="clear" (click)="goHome()">Volver</ion-button>
         </ion-card>
     </main>
 </ion-content>

@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { IonModal, IonInput, IonContent, IonHeader } from "@ionic/angular/standalone";
+import { Component} from '@angular/core';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -16,13 +16,25 @@ import { FooterComponent } from '../footer/footer.component';
   ]
 })
 export class ViajeDetailComponent {
-  @ViewChild(IonModal) modal?:IonModal
-  @Input() id?:string
-  nombre?:string
 
-  constructor() {}
 
-  abrirModal(){}
+  constructor(private router:Router,private alert:AlertController){}
+
+  goHome(){
+    this.router.navigate(['pasajero/home'])
+  }
+
+  async presentAlert() {
+    const alert = await this.alert.create({
+      header: 'A Short Title Is Best',
+      subHeader: 'A Sub Header Is Optional',
+      message: 'A message should be a short, complete sentence.',
+      buttons: ['Action'],
+    });
+
+    await alert.present();
+  }
+  
 
 
 

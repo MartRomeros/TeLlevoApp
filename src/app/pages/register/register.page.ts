@@ -47,6 +47,10 @@ export class RegisterPage implements OnInit {
     }
   }
 
+  goToLogin(){
+    this.router.navigate(['/auth'])
+  }
+
   registrar() {
 
     this.cargando = true
@@ -75,6 +79,9 @@ export class RegisterPage implements OnInit {
 
       this.usuarios.push(this.formularioRegistro.value)
       localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
+      this.cargando = false
+      this.router.navigate(['/auth'])
+
 
       return
     }

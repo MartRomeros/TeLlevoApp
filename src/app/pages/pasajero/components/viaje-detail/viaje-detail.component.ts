@@ -1,26 +1,31 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   standalone: true,
   selector: 'app-viaje-detail',
   templateUrl: './viaje-detail.component.html',
   styleUrls: ['./viaje-detail.component.scss'],
-  imports:[
+  imports: [
     IonicModule,
     HeaderComponent,
     FooterComponent
   ]
 })
-export class ViajeDetailComponent {
+export class ViajeDetailComponent implements OnInit {
 
 
-  constructor(private router:Router,private alert:AlertController){}
+  constructor(private router: Router, private alert: AlertController, private tema: ThemeService) { }
 
-  goHome(){
+  ngOnInit(): void {
+    this.tema.verificarTema()
+  }
+
+  goHome() {
     this.router.navigate(['pasajero/home'])
   }
 
@@ -34,7 +39,7 @@ export class ViajeDetailComponent {
 
     await alert.present();
   }
-  
+
 
 
 

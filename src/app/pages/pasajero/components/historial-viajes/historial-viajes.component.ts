@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   standalone:true,
@@ -12,10 +13,11 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class HistorialViajesComponent  implements OnInit {
 
-  constructor() {}
+  constructor(private tema:ThemeService) {}
 
   ngOnInit() {
     console.log()
+    this.tema.verificarTema()
   }
 
 }

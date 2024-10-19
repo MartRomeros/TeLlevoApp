@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { IonicModule } from '@ionic/angular';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   standalone:true,
@@ -12,10 +13,11 @@ import { IonicModule } from '@ionic/angular';
 })
 export class PerfilUsuarioComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private tema:ThemeService) { }
 
   ngOnInit() {
     console.log()
+    this.tema.verificarTema()
   }
 
 }

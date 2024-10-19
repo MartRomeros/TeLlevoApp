@@ -3,6 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { ViajeDetailComponent } from '../viaje-detail/viaje-detail.component';
 import { FooterComponent } from '../footer/footer.component';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   standalone: true,
@@ -13,10 +14,11 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tema:ThemeService) { }
 
   ngOnInit() {
     console.log("hola")
+    this.tema.verificarTema()
   }
 
 }

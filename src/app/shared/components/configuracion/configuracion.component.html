@@ -1,4 +1,7 @@
-<app-header></app-header>
+@if (usuario) {
+  <app-header-principal></app-header-principal>
+}
+
 
 <ion-content>
   <ion-header>
@@ -15,7 +18,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-radio-group value="claro" (ionChange)="TemaApp()">
+    <ion-radio-group value="claro" (ionChange)="cambiarTema()">
       <ion-radio value="claro">Claro</ion-radio><br />
       <ion-radio value="oscuro">Oscuro</ion-radio><br />
       <ion-radio value="predeterminado">Predeterminado del sistema</ion-radio><br />
@@ -23,5 +26,3 @@
   </ion-item>
 
 </ion-content>
-
-<app-footer></app-footer>

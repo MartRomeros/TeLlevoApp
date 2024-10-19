@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { ConfiguracionComponent } from './shared/configuracion/configuracion.component';
+import { ConfiguracionComponent } from './shared/components/configuracion/configuracion.component';
 
 const routes: Routes = [
   {

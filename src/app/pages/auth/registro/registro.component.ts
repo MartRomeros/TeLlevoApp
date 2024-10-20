@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegistroComponent implements OnInit {
 
   formularioRegistro?: FormGroup | any
   isDriver?: boolean
@@ -47,7 +47,7 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/auth'])
   }
 

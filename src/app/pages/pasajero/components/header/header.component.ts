@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule, MenuController } from '@ionic/angular';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 
 @Component({
   standalone: true,
@@ -11,7 +12,7 @@ import { IonicModule, MenuController } from '@ionic/angular';
 })
 export class HeaderComponent implements OnInit,OnDestroy {
 
-  constructor(private router: Router, private menu: MenuController) { }
+  constructor(private router: Router, private menu: MenuController, private authServicios: AuthServiceService) { }
 
   ngOnInit(): void {
     this.menu.close()
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   logOut() {
+    this.authServicios.logout()
     this.router.navigate(['login'])
   }
 

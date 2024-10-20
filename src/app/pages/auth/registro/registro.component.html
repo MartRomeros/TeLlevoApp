@@ -25,7 +25,9 @@
         </ion-col>
         <ion-col size="12">
           <ion-input label="contraseña" labelPlacement="floating" placeholder="Ingresa tu contraseña" fill="outline"
-            type="password" formControlName="password"></ion-input>
+            type="password" formControlName="password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
         </ion-col>
         <ion-col size="12">
           <ion-radio-group value="pasajero" (ionChange)="esDriver()" formControlName="tipoUsuario">

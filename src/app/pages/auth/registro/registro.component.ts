@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController, ToastController } from '@ionic/angular';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-registro',
@@ -15,7 +16,13 @@ export class RegistroComponent implements OnInit {
   usuarios: any = []
   cargando?: boolean
 
-  constructor(private router: Router, private fb: FormBuilder, private alert: AlertController, private toast: ToastController) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private alert: AlertController,
+    private toast: ToastController,
+    private tema: ThemeService,
+    private anim: AnimationController) {
 
     this.formularioRegistro = fb.group({
       nombre: ['', Validators.required],
@@ -33,6 +40,11 @@ export class RegistroComponent implements OnInit {
     if (!localStorage.getItem('usuarios')) {
       console.log("no existen usuarios registrados")
     }
+
+    this.tema.verificarTema()
+
+    this.animarExito()
+    this.animarLogo()
   }
 
   esDriver() {
@@ -47,8 +59,8 @@ export class RegistroComponent implements OnInit {
     }
   }
 
-  goToLogin() {
-    this.router.navigate(['/auth'])
+  goTo(ruta: string) {
+    this.router.navigate([ruta])
   }
 
   registrar() {
@@ -81,8 +93,6 @@ export class RegistroComponent implements OnInit {
       localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
       this.cargando = false
       this.router.navigate(['/auth'])
-
-
       return
     }
 
@@ -128,6 +138,23 @@ export class RegistroComponent implements OnInit {
     })
 
     await toast.present()
+  }
+
+  //animaciones
+
+  animarLogo() {
+    this.anim.create().addElement(document.querySelector('#logo')!)
+      .duration(4000).iterations(1)
+      .fromTo('opacity', '0.1', '2').play()
+  }
+
+  animarExito() {
+    this.anim.create()
+      .addElement(document.querySelector('#exito')!)
+      .duration(1000)
+      .fromTo('opacity', '0', '1')
+      .fromTo('transform', 'scale(0.5)', 'scale(1)')
+      .play();
   }
 
 }

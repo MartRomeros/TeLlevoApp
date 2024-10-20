@@ -8,7 +8,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { HeaderComponent } from "../pasajero/components/header/header.component";
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 
 
@@ -22,7 +21,6 @@ import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
     AuthPageRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    HeaderComponent,
 ],
   exports: [AuthPage, RegistroComponent, ForgotPasswordComponent, LoginComponent],
   providers:[AuthServiceService]

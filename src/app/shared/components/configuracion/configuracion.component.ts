@@ -20,6 +20,8 @@ export class ConfiguracionComponent implements OnInit {
       document.querySelector("ion-radio-group")?.setAttribute('value','oscuro')
     }
 
+    this.verificarUsuario()
+
     
 
   }
@@ -39,6 +41,28 @@ export class ConfiguracionComponent implements OnInit {
       position: position,
     });
     await toast.present();
+  }
+
+  verificarUsuario(){
+    let sesion = JSON.parse(localStorage.getItem('sesion')|| '[]')
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')||"[]")
+
+    for (let i=0;i< usuarios.length;i++){
+      if(usuarios[i].correo == sesion.correo){
+        sesion = usuarios[i]
+        break
+      }
+    }
+
+    if(sesion.tipoUsuario == "pasajero"){
+      this.usuario = true
+    }else{
+      this.usuario = false
+    }
+
+
+
+
   }
 
 

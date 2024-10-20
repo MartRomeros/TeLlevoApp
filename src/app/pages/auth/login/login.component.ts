@@ -1,26 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, AnimationController } from '@ionic/angular';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   cargando?: boolean
   loginForm?: any
   usuarios: any[] = []
 
-  constructor(private router: Router, private fb: FormBuilder, private alert: AlertController) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private alert: AlertController,
+    private tema: ThemeService,
+    private anim: AnimationController) {
 
     this.loginForm = fb.group({
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     })
 
+  }
+
+  ngOnInit(): void {
+    this.tema.verificarTema()
+
+    this.animarPulso()
   }
 
 
@@ -47,25 +59,22 @@ export class LoginComponent {
       }
 
       for (let i = 0; i < this.usuarios.length; i++) {
-        if (this.usuarios[i].correo != this.loginForm.get('correo').value) {
-          this.cargando = false
-          console.log('correo no valido')
-          this.presentAlert("Usuario no valido")
-          return
-        }
-
-        if (this.usuarios[i].password != this.loginForm.get('password').value) {
-          this.cargando = false
-          console.log('contra no valido')
-          this.presentAlert("Usuario no valido")
-          return
-
+        if (this.usuarios[i].correo == this.loginForm.get('correo').value) {
+          console.log("correo valido!")
+          if (this.usuarios[i].password == this.loginForm.get('password').value) {
+            console.log("contra valida!")
+            localStorage.setItem('sesion', JSON.stringify(this.loginForm.value))
+            this.cargando = false
+            this.router.navigate(['/pasajero'])
+            return
+          }
         }
       }
 
-      localStorage.setItem('sesion',JSON.stringify(this.loginForm.value))
+      console.log('el correo o contraseña no es valido!')
+      this.presentAlert("Usuario no valido")
       this.cargando = false
-      this.router.navigate(['/pasajero'])
+      return
 
     }, 1000);
     this.cargando = true
@@ -75,7 +84,7 @@ export class LoginComponent {
     this.router.navigate(['auth/registro'])
   }
 
-  goToForgotPassword(){
+  goToForgotPassword() {
     this.router.navigate(['/auth/forgot-password'])
   }
 
@@ -83,10 +92,34 @@ export class LoginComponent {
     const alert = await this.alert.create({
       header: 'ATENCION!',
       message: mensaje,
-      buttons: ['Action'],
+      buttons: ['Aceptar'],
     });
 
     await alert.present();
+  }
+
+  animarPulso() {
+    this.anim.create()
+      .addElement(document.querySelector('#pulso')!)
+      .duration(1000)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.5, transform: 'scale(1.2)' },
+        { offset: 1, transform: 'scale(1)' }
+      ])
+      .play();
+
+    this.anim.create()
+      .addElement(document.querySelector('#olvido')!)
+      .duration(1000)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.5, transform: 'scale(1.2)' },
+        { offset: 1, transform: 'scale(1)' }
+      ])
+      .play();
   }
 
 }

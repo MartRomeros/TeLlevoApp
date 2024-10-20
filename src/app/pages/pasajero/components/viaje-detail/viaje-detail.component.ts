@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonicModule } from '@ionic/angular';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
+import { AlertController} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
-  standalone: true,
   selector: 'app-viaje-detail',
   templateUrl: './viaje-detail.component.html',
   styleUrls: ['./viaje-detail.component.scss'],
-  imports: [
-    IonicModule,
-    HeaderComponent,
-    FooterComponent
-  ]
 })
 export class ViajeDetailComponent implements OnInit {
 

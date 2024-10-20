@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
-  standalone:true,
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  imports:[
-    IonicModule
-  ]
+  selector: 'app-footer-pasajero',
+  templateUrl: './footer-pasajero.component.html',
+  styleUrls: ['./footer-pasajero.component.scss'],
 })
-export class FooterComponent{
+export class FooterPasajeroComponent {
 
   constructor(private router:Router) { }
 

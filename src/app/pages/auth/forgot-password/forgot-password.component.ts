@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
@@ -14,13 +14,15 @@ export class ForgotPasswordComponent implements OnInit {
 
   forgotForm?: any
   usuarios: any[] = []
+  cargando?: boolean
 
   constructor(
-    private fb: FormBuilder, 
-    private alert: AlertController, 
-    private authServicio: AuthServiceService, 
-    private router: Router, 
-    private tema: ThemeService) {
+    private fb: FormBuilder,
+    private alert: AlertController,
+    private authServicio: AuthServiceService,
+    private router: Router,
+    private tema: ThemeService,
+    private toast: ToastController) {
 
     this.forgotForm = fb.group({
       correo: ['', [Validators.required, Validators.email]]
@@ -28,11 +30,15 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("fogot-iniciado")
+
+    this.cargando = false
+
+    console.log("forgot-iniciado")
     this.tema.verificarTema()
   }
 
   resetearContrasena() {
+    this.cargando = true
     if (this.forgotForm.get("correo").errors) {
       this.mostrarMensaje("Ingresa un correo valido!")
       return
@@ -44,6 +50,9 @@ export class ForgotPasswordComponent implements OnInit {
       if (this.usuarios[i].correo == this.forgotForm.get('correo').value) {
         this.authServicio.resetPassword(this.usuarios[i].nombre, this.usuarios[i].correo).subscribe({
           next: (response) => {
+            this.cargando = false
+            this.mostrarToast(response.message)
+            this.goTo('/auth/login')
             console.log(response)
           },
           error: (err) => {
@@ -67,6 +76,17 @@ export class ForgotPasswordComponent implements OnInit {
     })
 
     await alert.present()
+  }
+
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toast.create({
+      message: mensaje,
+      duration: 1500,
+      position: 'bottom'
+    })
+
+    await toast.present()
+
   }
 
   goTo(ruta: string) {

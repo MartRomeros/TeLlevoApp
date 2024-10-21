@@ -1,0 +1,15 @@
+ion-header{
+    --background: var(--ion-header-theme);
+    ion-toolbar{
+        --background: var(--ion-header-theme);
+        ion-title{
+            --color: var(--ion-header-text);
+        }
+
+        ion-buttons{
+            ion-button{
+                --color: var(--ion-header-text);
+            }
+        }
+    }
+}

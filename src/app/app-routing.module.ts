@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/pasajero/pasajero.module').then(m => m.PasajeroPageModule)
   },
   {
+    path: 'conductor',
+    loadChildren: () => import('./pages/conductor/conductor.module').then(m => m.ConductorPageModule)
+  },
+  {
     path: 'configuracion',
     component: ConfiguracionComponent
   },
@@ -24,7 +28,12 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'auth',
     pathMatch: 'full'
+  },
+  {
+    path: 'conductor',
+    loadChildren: () => import('./pages/conductor/conductor.module').then( m => m.ConductorPageModule)
   }
+
 
 
 ];

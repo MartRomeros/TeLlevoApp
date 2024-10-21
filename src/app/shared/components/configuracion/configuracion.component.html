@@ -1,5 +1,7 @@
 @if (usuario) {
 <app-header-pasajero></app-header-pasajero>
+}@else{
+  <app-header-conductor></app-header-conductor>
 }
 
 
@@ -30,4 +32,6 @@
 
 @if (usuario) {
 <app-footer-pasajero></app-footer-pasajero>
+}@else{
+  <app-footer-conductor></app-footer-conductor>
 }

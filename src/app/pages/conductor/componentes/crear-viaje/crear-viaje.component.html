@@ -1,0 +1,40 @@
+<app-header-conductor></app-header-conductor>
+
+<ion-content>
+  <ion-title>Iniciar Viaje</ion-title>
+  <form (ngSubmit)="comienzoViaje()">
+    <ion-item class="calendario">
+      <ion-label position="floating">Hora de Inicio</ion-label>
+      <br>
+      <ion-datetime [(ngModel)]="datosViaje.inicioViaje" name="inicioViaje" presentation="date-time"
+        [preferWheel]="true"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Lugar de Inicio</ion-label>
+      <ion-input type="text" [(ngModel)]="datosViaje.lugarInicio" (ionInput)="updateSearchResults('inicio')"
+        name="lugarInicio"></ion-input>
+      <ion-list *ngIf="autocompletadoInicio.length > 0">
+        <ion-item *ngFor="let item of autocompletadoInicio" (click)="selectSearchResult('inicio', item)">
+          {{ item.description }}
+        </ion-item>
+      </ion-list>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Lugar de Destino</ion-label>
+      <ion-input type="text" [(ngModel)]="datosViaje.lugarFinal" (ionInput)="updateSearchResults('final')"
+        name="lugarFinal"></ion-input>
+      <ion-list *ngIf="autocompletadoFinal.length > 0">
+        <ion-item *ngFor="let item of autocompletadoFinal" (click)="selectSearchResult('final', item)">
+          {{ item.description }}
+        </ion-item>
+      </ion-list>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Capacidad de Pasajeros</ion-label>
+      <ion-input type="number" [(ngModel)]="datosViaje.capacidadPasajeros" name="capacidadPasajeros"></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">Iniciar Viaje</ion-button>
+  </form>
+</ion-content>
+
+<app-footer-conductor></app-footer-conductor>

@@ -15,4 +15,14 @@ export class PerfilUsuarioComponent  implements OnInit {
     this.tema.verificarTema()
   }
 
+
+  obtenerDatos(){
+    const sesion = JSON.parse(localStorage.getItem('sesion') || '{}')
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')|| '[]')
+
+    
+
+  }
+
+
 }

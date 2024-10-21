@@ -65,8 +65,14 @@ export class LoginComponent implements OnInit {
             console.log("contra valida!")
             localStorage.setItem('sesion', JSON.stringify(this.loginForm.value))
             this.cargando = false
-            this.router.navigate(['/pasajero'])
-            return
+            if(this.usuarios[i].tipoUsuario == "pasajero"){
+              this.router.navigate(['/pasajero'])
+              return
+            }else{
+              this.router.navigate(['/conductor'])
+              return
+            }
+            
           }
         }
       }

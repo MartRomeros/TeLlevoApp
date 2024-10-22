@@ -1,14 +1,24 @@
 <app-header-conductor></app-header-conductor>
 
 <ion-content>
-  <ion-title>Historial de Viajes</ion-title>
-  <ion-list>
-    <ion-item *ngFor="let viaje of viajes">
-      <ion-label>
-        <h2>{{ viaje.lugarInicio }} - {{ viaje.lugarFinal }}</h2>
-        <p>Hora de Inicio: {{ viaje.inicioViaje }}</p>
-        <p>Capacidad de Pasajeros: {{ viaje.capacidadPasajeros }}</p>
-      </ion-label>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Viajes creados</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar placeholder="Buscar viajes"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-list *ngFor="let viaje of viajes">
+    <ion-item>
+      <ion-icon aria-hidden="true" name="car-sport" slot="start"></ion-icon>
+      <ion-label>{{ viaje.lugarInicio }} - {{ viaje.lugarFinal }}</ion-label>
+      <ion-button slot="end" color="danger">
+        <ion-icon name="star" slot="end" class="star"></ion-icon>
+        Ver Detalles
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

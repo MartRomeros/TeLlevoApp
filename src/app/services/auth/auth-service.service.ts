@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
@@ -12,14 +13,14 @@ export class AuthServiceService {
   private usuarios: any[] = []
 
 
-  constructor(private client: HttpClient, private alert: AlertController) { }
+  constructor(private client: HttpClient, private alert: AlertController, private router:Router) { }
 
   logout() {
     localStorage.removeItem('sesion')
+    this.router.navigate(['auth/login'])
   }
 
   resetPassword(nombre: string, correo: string): Observable<any> {
-
     //traemos el localstorage
     this.usuarios = JSON.parse(localStorage.getItem('usuarios') || "[]")
 

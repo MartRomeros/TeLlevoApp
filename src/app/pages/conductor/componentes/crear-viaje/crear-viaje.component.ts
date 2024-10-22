@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViajesService } from 'src/app/services/viajes/viajes.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 declare var google: any;
 
@@ -11,32 +12,42 @@ declare var google: any;
   templateUrl: './crear-viaje.component.html',
   styleUrls: ['./crear-viaje.component.scss'],
 })
-export class CrearViajeComponent  implements OnInit {
+export class CrearViajeComponent implements OnInit {
 
   datosViaje = {
     inicioViaje: '',
     lugarInicio: '',
     lugarFinal: '',
-    capacidadPasajeros: null
+    capacidadPasajeros: null,
+    nombre: '',
+    correo: '',
+
   };
 
   autocompletadoInicio: any[] = [];
   autocompletadoFinal: any[] = [];
   GoogleAutocomplete: any;
 
-  constructor(private navCtrl: NavController, private router: Router, private zone: NgZone, private viajesService: ViajesService) { // Inyectar el servicio
+  constructor(private navCtrl: NavController,
+    private router: Router,
+    private zone: NgZone,
+    private viajesService: ViajesService,
+    private theme: ThemeService) { // Inyectar el servicio
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("")
+    this.theme.verificarTema()
+  }
 
   comienzoViaje() {
     console.log('Datos del viaje:', this.datosViaje);
 
-    
+
     this.viajesService.nuevoViaje(this.datosViaje);
 
-    
+
     this.router.navigate(['conductor/mapa'], {
       queryParams: {
         lugarInicio: this.datosViaje.lugarInicio,

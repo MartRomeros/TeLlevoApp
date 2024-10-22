@@ -10,7 +10,7 @@
         [preferWheel]="true"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Lugar de Inicio</ion-label>
+      <ion-label position="floating">Lugar de inicio</ion-label>
       <ion-input type="text" [(ngModel)]="datosViaje.lugarInicio" (ionInput)="updateSearchResults('inicio')"
         name="lugarInicio"></ion-input>
       <ion-list *ngIf="autocompletadoInicio.length > 0">
@@ -33,7 +33,7 @@
       <ion-label position="floating">Capacidad de Pasajeros</ion-label>
       <ion-input type="number" [(ngModel)]="datosViaje.capacidadPasajeros" name="capacidadPasajeros"></ion-input>
     </ion-item>
-    <ion-button expand="full" type="submit">Iniciar Viaje</ion-button>
+    <ion-button expand="full" type="submit" color="danger">Iniciar Viaje</ion-button>
   </form>
 </ion-content>
 

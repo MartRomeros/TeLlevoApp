@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ConfiguracionComponent implements OnInit {
 
   usuario?:boolean
 
-  constructor(private tema: ThemeService,private toast: ToastController) {}
+  constructor(private tema: ThemeService,private toast: ToastController, private auth:AuthServiceService) {}
 
   ngOnInit() {
 
@@ -19,13 +20,8 @@ export class ConfiguracionComponent implements OnInit {
     if(JSON.parse(localStorage.getItem('tema')!) == "oscuro"){
       document.querySelector("ion-radio-group")?.setAttribute('value','oscuro')
     }
-
     this.verificarUsuario()
-
-    
-
   }
-
 
   cambiarTema() {
     this.tema.cambiarTema(document.querySelector("ion-radio-group")?.value)
@@ -59,10 +55,10 @@ export class ConfiguracionComponent implements OnInit {
     }else{
       this.usuario = false
     }
+  }
 
-
-
-
+  cerrarSesion(){
+    this.auth.logout()
   }
 
 

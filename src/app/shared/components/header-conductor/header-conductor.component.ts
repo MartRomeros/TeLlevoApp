@@ -15,17 +15,13 @@ export class HeaderConductorComponent  implements OnInit {
     this.menu.close()
   }
 
-  ngOnDestroy(): void {
-    this.menu.close()
-  }
-
   logOut() {
     this.router.navigate(['login'])
   }
 
   navigateTo(ruta: string) {
     this.menu.close()
-    this.router.navigate([`pasajero/${ruta}`])
+    this.router.navigate([`conductor/${ruta}`])
 
   }
 

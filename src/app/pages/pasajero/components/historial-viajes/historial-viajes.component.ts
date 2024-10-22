@@ -8,6 +8,10 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class HistorialViajesComponent  implements OnInit {
 
+  usuario:any
+
+  historial:any = JSON.parse(localStorage.getItem('historial')||'{}')
+
   constructor(private tema:ThemeService) {}
 
   ngOnInit() {

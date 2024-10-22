@@ -1,7 +1,7 @@
 @if (usuario) {
 <app-header-pasajero></app-header-pasajero>
 }@else{
-  <app-header-conductor></app-header-conductor>
+<app-header-conductor></app-header-conductor>
 }
 
 
@@ -23,15 +23,16 @@
     <ion-radio-group value="claro" (ionChange)="cambiarTema()">
       <ion-radio value="claro">Claro <ion-icon name="sunny"></ion-icon></ion-radio><br />
       <ion-radio value="oscuro">Oscuro <ion-icon name="moon"></ion-icon></ion-radio><br />
-      <ion-radio value="predeterminado">Predeterminado del sistema <ion-icon name="logo-windows"></ion-icon> </ion-radio><br />
+      <ion-radio value="predeterminado">Predeterminado del sistema <ion-icon name="logo-windows"></ion-icon>
+      </ion-radio><br />
     </ion-radio-group>
   </ion-item>
-
+  <ion-button expand="block" color="danger" (click)="cerrarSesion()">Cerrar Sesión</ion-button>
 </ion-content>
 
 
 @if (usuario) {
 <app-footer-pasajero></app-footer-pasajero>
 }@else{
-  <app-footer-conductor></app-footer-conductor>
+<app-footer-conductor></app-footer-conductor>
 }

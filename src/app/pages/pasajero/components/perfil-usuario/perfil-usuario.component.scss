@@ -1,43 +1,36 @@
-ion-grid{
-    background-color: var(--ion-content-theme);
-    ion-row{
+ion-content{
+    --background: var(--ion-content-theme);
+    form{
         background-color: var(--ion-content-theme);
-        ion-col{
+        ion-grid{
             background-color: var(--ion-content-theme);
-            ion-title{
-                --color: var(--ion-text-general);
-            }
-            ion-list{
+            ion-row{
                 background-color: var(--ion-content-theme);
-                display: flex;
-                flex-direction: column;
-                gap: 2vh;
-                ion-item{
+                ion-col{
                     background-color: var(--ion-content-theme);
-                    ion-text-area{
-                        --border-color: lightgray;
+                    ion-title{
+                        text-align: center;
+                        --color: var(--ion-text-general);
+                    }
+                    h1{
+                        text-align: center;
+                    }
+                    ion-icon{
+                        color: var(--ion-text-general);
+                        font-size: 5rem;
+                    }
+                    ion-button{
+                        ion-icon{
+                            color: white;
+                            font-size: 1.5rem;
+                        }
                     }
                     ion-input{
-                        border: 1px solid;
-                        --background: var(--ion-content-theme);
                         --color: var(--ion-text-general);
-                        --border-color: var(--ion-header-theme);
+                        --border-color: var(--ion-text-general);
                     }
-
-                    ion-segment-button{
-                        color: var(--ion-text-general);
-                    }
-                }
-
-                ion-item::part(native){
-                    background-color: var(--ion-content-theme);
-
                 }
             }
         }
     }
-}
-
-ion-content{
-    --background: var(--ion-content-theme);
 }

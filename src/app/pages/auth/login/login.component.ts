@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.tema.verificarTema()
-
+    this.animarLogo()
     this.animarPulso()
   }
 
@@ -127,5 +127,11 @@ export class LoginComponent implements OnInit {
       ])
       .play();
   }
+
+  animarLogo() {
+    this.anim.create().addElement(document.querySelector('#gerundio')!)
+    .duration(1000).iterations(Infinity).direction("alternate").fromTo("color", "red", "white")
+    .fromTo("transfore", "scale(.1)", "scale(1.3)").play()
+  }
 
 }

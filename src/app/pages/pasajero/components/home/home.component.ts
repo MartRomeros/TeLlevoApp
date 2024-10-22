@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.viajes = this.viajesService.getViajes();
   }
 
-  solicitarViaje() {
+  solicitarViaje() {    
     const viaje = document.querySelector("ion-card-title")?.textContent
     const viajes = JSON.parse(localStorage.getItem('viajes') || '[]')
     for (let index = 0; index < viajes.length; index++) {
@@ -43,19 +43,23 @@ export class HomeComponent implements OnInit {
 
         }
         viajes[index].capacidadPasajeros = viajes[index].capacidadPasajeros - 1
+        const historialViajes = JSON.parse(localStorage.getItem('historial') || '[]')
+        const viajeSolicitado = {
+          
+        }
         localStorage.setItem('historial', JSON.stringify({ viajeInic: viajes[index].lugarInicio, viajeTer: viajes[index].lugarFinal }))
         break
       }
 
     }
 
-    const historialViajes = JSON.parse(localStorage.getItem('historial') || '[]')
-
 
     localStorage.setItem('viajes', JSON.stringify(viajes))
     this.presentAlert("tu viaje se ha reservado con exito")
     this.viajes = this.viajesService.getViajes()
   }
+
+
 
   async presentAlert(mensaje: string) {
     const alert = await this.alert.create({

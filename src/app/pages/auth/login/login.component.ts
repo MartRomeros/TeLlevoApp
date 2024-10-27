@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, AnimationController } from '@ionic/angular';
+import { AnimationController } from '@ionic/angular';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
+import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -13,14 +15,19 @@ export class LoginComponent implements OnInit {
 
   cargando?: boolean
   loginForm?: any
-  usuarios: any[] = []
+  correo?: string
+  password?: string
+  errorMail?: string
+  errorPassword?: string
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private alert: AlertController,
     private tema: ThemeService,
-    private anim: AnimationController) {
+    private anim: AnimationController,
+    private mensajeria: MensajeriaService,
+    private auth: AuthServiceService
+  ) {
 
     this.loginForm = fb.group({
       correo: ['', [Validators.required, Validators.email]],
@@ -30,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargando = false
     this.tema.verificarTema()
     this.animarLogo()
     this.animarPulso()
@@ -37,71 +45,47 @@ export class LoginComponent implements OnInit {
 
 
   logIn() {
-    setTimeout(() => {
+    //validacion de campos
+    this.cargando = true
+    if (this.loginForm.get('correo').errors) {
 
-      const campos = Object.keys(this.loginForm.controls)
-
-      for (let i = 0; i < campos.length; i++) {
-        const nombreCampo = campos[i]
-        const campo = this.loginForm.get(nombreCampo)
-
-        if (campo.errors) {
-          this.presentAlert(`El campo ${nombreCampo} Tiene un error`)
-          this.cargando = false
-          return
-        }
-      }
-
-      this.usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
-      if (this.usuarios?.length == 0) {
-        this.presentAlert("Usuario No encontrado!")
+      if(this.loginForm.get('correo').errors.required){
+        this.errorMail = 'Correo requerido'
+        this.mensajeria.mostrarAlert('el campo correo presenta un error')
+        this.cargando = false
         return
       }
 
-      for (let i = 0; i < this.usuarios.length; i++) {
-        if (this.usuarios[i].correo == this.loginForm.get('correo').value) {
-          console.log("correo valido!")
-          if (this.usuarios[i].password == this.loginForm.get('password').value) {
-            console.log("contra valida!")
-            localStorage.setItem('sesion', JSON.stringify(this.loginForm.value))
-            this.cargando = false
-            if(this.usuarios[i].tipoUsuario == "pasajero"){
-              this.router.navigate(['/pasajero'])
-              return
-            }else{
-              this.router.navigate(['/conductor'])
-              return
-            }
-            
-          }
-        }
+      if(this.loginForm.get('correo').errors.email){
+        this.errorMail = 'Formato invalido'
+        this.mensajeria.mostrarAlert('el campo correo presenta un error')
+        this.cargando = false
+        return
       }
 
-      console.log('el correo o contraseña no es valido!')
-      this.presentAlert("Usuario no valido")
-      this.cargando = false
-      return
+    }
 
-    }, 1000);
-    this.cargando = true
+
+    if (this.loginForm.get('password').errors) {
+      
+      if(this.loginForm.get('password').errors.required){
+        this.errorMail = 'Contraseña requerida'
+        this.mensajeria.mostrarAlert('el campo contraseña presenta un error')
+        this.cargando = false
+        return
+      }
+
+    }
+
+    this.correo = this.loginForm.get('correo').value
+    this.password = this.loginForm.get('password').value
+    this.auth.login(this.correo, this.password)
+    this.cargando = false
+
   }
 
-  goToRegistro() {
-    this.router.navigate(['auth/registro'])
-  }
-
-  goToForgotPassword() {
-    this.router.navigate(['/auth/forgot-password'])
-  }
-
-  async presentAlert(mensaje: string) {
-    const alert = await this.alert.create({
-      header: 'ATENCION!',
-      message: mensaje,
-      buttons: ['Aceptar'],
-    });
-
-    await alert.present();
+  goTo(ruta:string){
+    this.router.navigate([`/auth/${ruta}`])
   }
 
   animarPulso() {
@@ -130,8 +114,8 @@ export class LoginComponent implements OnInit {
 
   animarLogo() {
     this.anim.create().addElement(document.querySelector('#gerundio')!)
-    .duration(1000).iterations(Infinity).direction("alternate").fromTo("color", "red", "white")
-    .fromTo("transfore", "scale(.1)", "scale(1.3)").play()
-  }
+      .duration(1000).iterations(Infinity).direction("alternate").fromTo("color", "red", "white")
+      .fromTo("transfore", "scale(.1)", "scale(1.3)").play()
+  }
 
 }

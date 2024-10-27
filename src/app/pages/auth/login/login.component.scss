@@ -24,18 +24,19 @@ ion-content {
                     }
 
                     ion-input {
+                        padding: 1vh;
                         --color: var(--ion-text-general);
-                        --padding-end: 2vh;
-                        --padding-start: 2vh;
                         --border-color: var(--ion-header-theme);
                     }
 
-                    ion-buttons{
-                        display: flex;
-                        justify-content: space-evenly;
-                        width: 100%;
-                        ion-button{
-                            --color: var(--ion-text-general);
+                    ion-toolbar{
+                        --background: var(--ion-content-theme);
+                        ion-buttons{
+                            background: var(--ion-content-theme);
+                            ion-button{
+                                --color: var(--ion-text-general);
+                            }
+
                         }
                     }
 
@@ -46,12 +47,6 @@ ion-content {
                 }
             }
         }
-    }
-
-    ion-icon{
-        font-size: 40px;
-        display: flex;
-        justify-content: flex-start;
     }
 
     #gerundio {

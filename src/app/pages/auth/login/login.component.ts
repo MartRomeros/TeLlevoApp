@@ -15,8 +15,10 @@ export class LoginComponent implements OnInit {
 
   cargando?: boolean
   loginForm?: any
-  correo?:string
-  password?:string
+  correo?: string
+  password?: string
+  errorMail?: string
+  errorPassword?: string
 
   constructor(
     private router: Router,
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargando = false
     this.tema.verificarTema()
     this.animarLogo()
     this.animarPulso()
@@ -43,28 +46,47 @@ export class LoginComponent implements OnInit {
 
   logIn() {
     //validacion de campos
+    this.cargando = true
     if (this.loginForm.get('correo').errors) {
-      this.mensajeria.mostrarAlert('el campo correo presenta un error')
-      return
+
+      if(this.loginForm.get('correo').errors.required){
+        this.errorMail = 'Correo requerido'
+        this.mensajeria.mostrarAlert('el campo correo presenta un error')
+        this.cargando = false
+        return
+      }
+
+      if(this.loginForm.get('correo').errors.email){
+        this.errorMail = 'Formato invalido'
+        this.mensajeria.mostrarAlert('el campo correo presenta un error')
+        this.cargando = false
+        return
+      }
+
     }
+
+
     if (this.loginForm.get('password').errors) {
-      this.mensajeria.mostrarAlert('el campo Contraseña presenta un error')
-      return
+      
+      if(this.loginForm.get('password').errors.required){
+        this.errorMail = 'Contraseña requerida'
+        this.mensajeria.mostrarAlert('el campo contraseña presenta un error')
+        this.cargando = false
+        return
+      }
+
     }
 
     this.correo = this.loginForm.get('correo').value
     this.password = this.loginForm.get('password').value
-    this.auth.login(this.correo ,this.password)
+    this.auth.login(this.correo, this.password)
+    this.cargando = false
+
   }
 
-  goToRegistro() {
-    this.router.navigate(['auth/registro'])
+  goTo(ruta:string){
+    this.router.navigate([`/auth/${ruta}`])
   }
-
-  goToForgotPassword() {
-    this.router.navigate(['/auth/forgot-password'])
-  }
-
 
   animarPulso() {
     this.anim.create()

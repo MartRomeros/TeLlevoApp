@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { MensajeriaService } from '../mensajeria/mensajeria.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,33 +14,63 @@ export class AuthServiceService {
   private usuarios: any = JSON.parse(localStorage.getItem('usuarios') || '[]')
 
 
-  constructor(private client: HttpClient, private alert: AlertController, private router: Router) { }
+  constructor(
+    private client: HttpClient,
+    private router: Router,
+    private mensajeria: MensajeriaService
+  ) { }
 
-  login(correo:string='',password:string=''){
+  login(correo: string = '', password: string = '') {
 
-    if(this.usuarios.length == 0){
-      this.generarMensaje("No hay usuarios disponibles")
+    if (this.usuarios.length == 0) {
+      this.mensajeria.mostrarAlert('No hay usuarios disponibles')
       return
     }
 
-    for(let i = 0; i < this.usuarios.length; i++){
-      if(correo == this.usuarios[i].correo){
-        if(password == this.usuarios[i].password){
-          console.log(this.usuarios[i])
-          return
+    for (let i = 0; i < this.usuarios.length; i++) {
+      if (correo == this.usuarios[i].correo) {
+        if (password == this.usuarios[i].password) {
+          if (this.usuarios[i].tipoUsuario == 'pasajero') {
+            this.router.navigate(['pasajero'])
+            this.mensajeria.mostrarToast(`bienvenido ${this.usuarios[i].nombre}`)
+            return
+          } else {
+            this.mensajeria.mostrarToast(`bienvenido ${this.usuarios[i].nombre}`)
+            this.router.navigate(['conductor'])
+            return
+          }
+
         }
       }
     }
 
-    this.generarMensaje("usuario no valido!")
+    this.mensajeria.mostrarAlert('usuario no valido!')
     return
-
 
   }
 
   logout() {
     localStorage.removeItem('sesion')
     this.router.navigate(['auth/login'])
+  }
+
+  registrar(usuario: any) {
+
+    for (let i = 0; i < this.usuarios.length; i++) {
+      if (usuario.correo == this.usuarios[i].correo) {
+        this.mensajeria.mostrarToast('Usuario no disponible')
+        return
+      }
+      if (usuario.password == this.usuarios[i].password) {
+        this.mensajeria.mostrarToast('Usuario no disponible')
+        return
+      }
+    }
+
+    this.usuarios.push(usuario)
+    localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
+    this.mensajeria.mostrarToast('Usuario registrado!')
+
   }
 
   resetPassword(nombre: string, correo: string): Observable<any> {
@@ -64,7 +95,7 @@ export class AuthServiceService {
       }
     }
 
-    this.generarMensaje("Ingresa un correo valido!")
+    this.mensajeria.mostrarToast('Ingresa un correo valido!')
     return new Observable(observer => {
       observer.error("Usuario no valido!")
     })
@@ -85,17 +116,6 @@ export class AuthServiceService {
   }
 
 
-
-  async generarMensaje(mensaje: string) {
-    const alert = await this.alert.create({
-      header: 'ATENCION!',
-      message: mensaje,
-      buttons: ['Action'],
-    });
-
-    await alert.present();
-
-  }
 
 
 

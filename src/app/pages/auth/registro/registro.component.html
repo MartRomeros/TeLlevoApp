@@ -12,20 +12,20 @@
           <h5>Completa todos los campos para crear una cuenta</h5>
         </ion-col>
         <ion-col size="6">
-          <ion-input label="Nombre" labelPlacement="floating" placeholder="Ingresa tu nombre" fill="outline"
-            formControlName="nombre"></ion-input>
+          <ion-input label="Nombre" labelPlacement="stacked" placeholder="Ingresa tu nombre" fill="outline"
+            formControlName="nombre" helperText="Ingresa tu nombre" [errorText]="errorRequired"></ion-input>
         </ion-col>
         <ion-col size="6">
-          <ion-input label="Apellido" labelPlacement="floating" placeholder="Ingresa tu apellido" fill="outline"
-            formControlName="apellido"></ion-input>
+          <ion-input label="Apellido" labelPlacement="stacked" placeholder="Ingresa tu apellido" fill="outline"
+            formControlName="apellido" helperText="Ingresa tu Apellido" [errorText]="errorRequired"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input label="Correo electronico" labelPlacement="floating" placeholder="Ingresa tu correo electronico"
-            fill="outline" formControlName="correo"></ion-input>
+          <ion-input label="Correo electronico" labelPlacement="stacked" placeholder="Ingresa tu correo electronico"
+            fill="outline" formControlName="correo" helperText="Ingresa tu correo electronico" [errorText]="errorMail"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input label="contraseña" labelPlacement="floating" placeholder="Ingresa tu contraseña" fill="outline"
-            type="password" formControlName="password">
+          <ion-input label="contraseña" labelPlacement="stacked" placeholder="Ingresa tu contraseña" fill="outline"
+            type="password" formControlName="password" helperText="Contraseña" [errorText]="errorRequired">
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-col>
@@ -40,13 +40,13 @@
           <ion-title>Registro de vehiculo</ion-title>
           <h5>Ingresa los siguientes datos sobre tu vehiculo</h5>
         </ion-col>
-        <ion-col size="6">
-          <ion-input label="Marca" labelPlacement="floating" placeholder="Ingresa la marca de tu auto" fill="outline"
-            formControlName="marca"></ion-input>
+        <ion-col size="12">
+          <ion-input label="Marca" labelPlacement="stacked" placeholder="Ingresa la marca de tu auto" fill="outline"
+            formControlName="marca" helperText="Ingresa la marca de tu vehiculo" [errorText]="errorRequired"></ion-input>
         </ion-col>
-        <ion-col size="6">
-          <ion-input label="Patente" labelPlacement="floating" placeholder="Ingresa la patente de tu auto"
-            fill="outline" formControlName="patente"></ion-input>
+        <ion-col size="12">
+          <ion-input label="Patente" labelPlacement="stacked" placeholder="Ingresa la patente de tu auto" fill="outline"
+            formControlName="patente" helperText="Ingresa la patente de tu vehiculo" [errorText]="errorRequired"></ion-input>
         </ion-col>
         }
         <ion-col size="12">

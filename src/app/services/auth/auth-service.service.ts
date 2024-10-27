@@ -10,10 +10,32 @@ import { Observable } from 'rxjs';
 export class AuthServiceService {
 
   private baseUrl: string = "https://myths.cl/api"
-  private usuarios: any[] = []
+  private usuarios: any = JSON.parse(localStorage.getItem('usuarios') || '[]')
 
 
-  constructor(private client: HttpClient, private alert: AlertController, private router:Router) { }
+  constructor(private client: HttpClient, private alert: AlertController, private router: Router) { }
+
+  login(correo:string='',password:string=''){
+
+    if(this.usuarios.length == 0){
+      this.generarMensaje("No hay usuarios disponibles")
+      return
+    }
+
+    for(let i = 0; i < this.usuarios.length; i++){
+      if(correo == this.usuarios[i].correo){
+        if(password == this.usuarios[i].password){
+          console.log(this.usuarios[i])
+          return
+        }
+      }
+    }
+
+    this.generarMensaje("usuario no valido!")
+    return
+
+
+  }
 
   logout() {
     localStorage.removeItem('sesion')
@@ -62,6 +84,8 @@ export class AuthServiceService {
     return clave;
   }
 
+
+
   async generarMensaje(mensaje: string) {
     const alert = await this.alert.create({
       header: 'ATENCION!',
@@ -72,6 +96,8 @@ export class AuthServiceService {
     await alert.present();
 
   }
+
+
 
 
 }

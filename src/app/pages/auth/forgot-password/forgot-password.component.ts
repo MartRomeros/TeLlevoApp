@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
+import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -18,11 +18,11 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private alert: AlertController,
     private authServicio: AuthServiceService,
     private router: Router,
     private tema: ThemeService,
-    private toast: ToastController) {
+    private mensajeria: MensajeriaService
+  ) {
 
     this.forgotForm = fb.group({
       correo: ['', [Validators.required, Validators.email]]
@@ -40,7 +40,7 @@ export class ForgotPasswordComponent implements OnInit {
   resetearContrasena() {
     this.cargando = true
     if (this.forgotForm.get("correo").errors) {
-      this.mostrarMensaje("Ingresa un correo valido!")
+      this.mensajeria.mostrarAlert("Ingresa un correo valido!")
       return
     }
 
@@ -51,7 +51,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.authServicio.resetPassword(this.usuarios[i].nombre, this.usuarios[i].correo).subscribe({
           next: (response) => {
             this.cargando = false
-            this.mostrarToast(response.message)
+            this.mensajeria.mostrarToast(response.message)
             this.goTo('/auth/login')
             console.log(response)
           },
@@ -64,35 +64,12 @@ export class ForgotPasswordComponent implements OnInit {
       }
     }
 
-    this.mostrarMensaje("Ingresa un correo valido!")
-
-  }
-
-  async mostrarMensaje(mensaje: string) {
-    const alert = await this.alert.create({
-      header: "ATENCION!",
-      message: mensaje,
-      buttons: ["Aceptar"]
-    })
-
-    await alert.present()
-  }
-
-  async mostrarToast(mensaje: string) {
-    const toast = await this.toast.create({
-      message: mensaje,
-      duration: 1500,
-      position: 'bottom'
-    })
-
-    await toast.present()
+    this.mensajeria.mostrarAlert("Ingresa un correo valido!")
 
   }
 
   goTo(ruta: string) {
-
     this.router.navigate([ruta])
-
   }
 
 }

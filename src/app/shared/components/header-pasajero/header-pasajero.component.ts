@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class HeaderPasajeroComponent{
 
   logOut() {
     this.authServicios.logout()
-    this.router.navigate(['login'])
   }
 
   navigateTo(ruta:string){

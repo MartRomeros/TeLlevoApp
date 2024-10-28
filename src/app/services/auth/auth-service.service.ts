@@ -31,10 +31,12 @@ export class AuthServiceService {
       if (correo == this.usuarios[i].correo) {
         if (password == this.usuarios[i].password) {
           if (this.usuarios[i].tipoUsuario == 'pasajero') {
+            localStorage.setItem('sesion', JSON.stringify({ correo: correo, password: password }))
             this.router.navigate(['pasajero'])
             this.mensajeria.mostrarToast(`bienvenido ${this.usuarios[i].nombre}`)
             return
           } else {
+            localStorage.setItem('sesion', JSON.stringify({ correo: correo, password: password }))
             this.mensajeria.mostrarToast(`bienvenido ${this.usuarios[i].nombre}`)
             this.router.navigate(['conductor'])
             return
@@ -104,7 +106,7 @@ export class AuthServiceService {
 
   generarClave(): string {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const longitudClave = 8;
+    const longitudClave = 10;
     let clave = '';
 
     for (let i = 0; i < longitudClave; i++) {

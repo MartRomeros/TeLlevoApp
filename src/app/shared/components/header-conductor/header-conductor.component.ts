@@ -1,28 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 
 @Component({
   selector: 'app-header-conductor',
   templateUrl: './header-conductor.component.html',
   styleUrls: ['./header-conductor.component.scss'],
 })
-export class HeaderConductorComponent  implements OnInit {
+export class HeaderConductorComponent{
 
-  constructor(private router: Router, private menu: MenuController) { }
-
-  ngOnInit(): void {
-    this.menu.close()
-  }
+  constructor(private auth:AuthServiceService) { }
 
   logOut() {
-    this.router.navigate(['login'])
-  }
-
-  navigateTo(ruta: string) {
-    this.menu.close()
-    this.router.navigate([`conductor/${ruta}`])
-
+    this.auth.logout()
   }
 
 }

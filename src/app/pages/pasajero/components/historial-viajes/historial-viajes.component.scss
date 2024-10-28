@@ -18,6 +18,10 @@ ion-content{
 
     }
 
+    ion-title{
+        --color: var(--ion-text-general);
+    }
+
     ion-list{
         background: var(--ion-content-theme);
 

@@ -20,4 +20,8 @@ ion-content {
     ion-grid{
         background-color: var(--ion-content-theme);
     }
+
+    ion-title{
+        --color: var(--ion-text-general);
+    }
 }

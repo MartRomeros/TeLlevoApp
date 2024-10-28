@@ -8,17 +8,22 @@
       <ion-searchbar placeholder="Buscar viajes"></ion-searchbar>
     </ion-toolbar>
   </ion-header>
-
-
+  @if(historial.length){
   <ion-list>
     <ion-item>
       <ion-icon aria-hidden="true" name="car-sport" slot="start"></ion-icon>
-      <ion-label>{{historial.viajeInic}}  -  {{historial.viajeTer}}</ion-label>
+      <ion-label>{{historial.viajeInic}} - {{historial.viajeTer}}</ion-label>
       <ion-button slot="end" color="danger">
         <ion-icon name="star" slot="end" class="star"></ion-icon>
         Ver Detalles
       </ion-button>
     </ion-item>
   </ion-list>
+  }@else{
+    <ion-title>Aun no tienes viajes solicitados</ion-title>
+  }
+
+
+
 </ion-content>
 <app-footer-pasajero></app-footer-pasajero>

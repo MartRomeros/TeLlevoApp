@@ -10,7 +10,7 @@ export class HistorialViajesComponent  implements OnInit {
 
   usuario:any
 
-  historial:any = JSON.parse(localStorage.getItem('historial')||'{}')
+  historial:any = JSON.parse(localStorage.getItem('historial')||'[]')
 
   constructor(private tema:ThemeService) {}
 

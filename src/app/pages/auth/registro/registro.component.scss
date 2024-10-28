@@ -1,60 +1,26 @@
 ion-content {
-    form {
-        background: var(--ion-content-theme);
-        height: 100%;
+    --background-color: var(--ion-content-theme);
+
+    main {
+        padding: 2vh;
         display: flex;
         justify-content: center;
-        align-items: center;
-
-        ion-grid {
-            ion-row {
-                ion-col {
-                    display: flex;
-                    flex-direction: column !important;
-                    align-items: center;
-
-                    ion-buttons {
-                        display: flex;
-                        justify-content: space-evenly;
-                        width: 100%;
-
-                        ion-button {
-                            --color: var(--ion-text-general);
-                        }
-                    }
-
-                    ion-title {
-                        --color: var(--ion-text-general);
-                    }
-
-                    h5 {
-                        text-align: center;
-                        color: var(--ion-text-general);
-                    }
-
-                    ion-input {
-                        --color: var(--ion-text-general);
-                        --border-color: var(--ion-header-theme);
-                    }
-
-                    ion-radio-group {
-                        display: flex;
-                        justify-content: space-evenly;
-                        width: 100%;
-                    }
-
-                    ion-radio-group {
-                        background-color: var(--ion-content-theme);
-
-                        ion-radio {
-                            --color: var(--ion-text-general);
-                            color: var(--ion-text-general);
-                        }
-                    }
-                }
-
-                ion-col.col-btn {
-                    display: block;
+        form {
+            background: var(--ion-content-theme);
+            display: flex;
+            flex-direction: column;
+            gap: 4vh;
+            ion-title{
+                text-align: center;
+            }
+            h5{
+                text-align: center;
+            }
+            div{
+                ion-input{
+                    --border-radius: 2vh;
+                    --border-color: var(--ion-text-general);
+                    outline: none;
                 }
             }
         }

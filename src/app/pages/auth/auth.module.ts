@@ -20,7 +20,7 @@ import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
     IonicModule,
     AuthPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
 ],
   exports: [AuthPage, RegistroComponent, ForgotPasswordComponent, LoginComponent],
   providers:[AuthServiceService]

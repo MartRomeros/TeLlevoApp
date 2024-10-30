@@ -1,9 +1,19 @@
-ion-header{
+ion-header {
     --background: var(--ion-header-theme);
-    ion-toolbar{
+
+    ion-toolbar {
         --background: var(--ion-header-theme);
-        ion-title{
+
+        ion-title {
             --color: var(--ion-header-text);
+        }
+
+        ion-buttons {
+            ion-button {
+                ion-icon {
+                    color: var(--ion-header-text);
+                }
+            }
         }
     }
 }

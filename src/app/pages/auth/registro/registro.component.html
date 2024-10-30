@@ -1,4 +1,4 @@
-<app-header-principal></app-header-principal>
+<app-header-principal titulo="Crear una cuenta"></app-header-principal>
 @if (cargando) {
 <ion-progress-bar type="indeterminate"></ion-progress-bar>
 }
@@ -6,19 +6,20 @@
 <ion-content>
   <main>
     <form [formGroup]="formularioRegistro" (ngSubmit)="registrar()">
-      <div><ion-title>Registro de usuario</ion-title>
+      <div>
         <h5>Completa los campos para ingresar con tu perfil de usuario</h5>
       </div>
-      <div><ion-input label="Nombre" label-placement="stacked" fill="outline"
-          helperText="Ingresa tu nombre"></ion-input></div>
-      <div><ion-input label="Apellido" label-placement="stacked" fill="outline"
-          helperText="Ingresa tu apellido"></ion-input></div>
-      <div><ion-input label="Correo electronico" label-placement="stacked" fill="outline"
-          helperText="Ingresa tu correo electronico"></ion-input></div>
-      <div><ion-input label="Contraseña" label-placement="stacked" fill="outline"
-          helperText="Ingresa tu contraseña"></ion-input></div>
-      <div><ion-input label="Repetir contraseña" label-placement="stacked" fill="outline"
-          helperText="Repite tu contraseña"></ion-input></div>
+      <div>
+        <ion-input label="Nombre" helperText="Ingresa tu nombre"></ion-input>
+      </div>
+      <div>
+        <ion-input label="Apellido" helperText="Ingresa tu apellido"></ion-input>
+      </div>
+      <div>
+        <ion-input label="Correo electronico" helperText="Ingresa tu correo electronico"></ion-input>
+      </div>
+      <div><ion-input label="Contraseña" helperText="Ingresa tu contraseña"></ion-input></div>
+      <div><ion-input label="Repetir contraseña" helperText="Repite tu contraseña"></ion-input></div>
       <div><ion-buttons>
           <ion-button>Ya tengo una cuenta</ion-button>
         </ion-buttons></div>

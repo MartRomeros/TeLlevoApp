@@ -1,25 +1,36 @@
 ion-content {
-    --background-color: var(--ion-content-theme);
-
+    --background: var(--ion-content-theme);
     main {
         padding: 2vh;
         display: flex;
         justify-content: center;
+        align-items: center;
+        background: var(--ion-content-theme);
+
         form {
-            background: var(--ion-content-theme);
+            border-radius: 2vh;
+            background: white;
+            padding: 2vh;
             display: flex;
             flex-direction: column;
             gap: 4vh;
-            ion-title{
+
+            ion-button{
+                --border-radius: 2vh;
+            }
+
+            ion-title {
                 text-align: center;
             }
-            h5{
+
+            h5 {
                 text-align: center;
             }
-            div{
-                ion-input{
-                    --border-radius: 2vh;
+
+            div {
+                ion-input {
                     --border-color: var(--ion-text-general);
+                    --background: white;
                     outline: none;
                 }
             }

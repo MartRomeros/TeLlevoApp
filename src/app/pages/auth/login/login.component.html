@@ -1,40 +1,31 @@
-<app-header-principal></app-header-principal>
+<app-header-principal titulo="Inicio de Sesión"></app-header-principal>
 @if(cargando){
 <ion-progress-bar type="indeterminate"></ion-progress-bar>
 }
 <ion-content>
-  <form [formGroup]="loginForm">
+  <form>
     <ion-grid>
-      <ion-row class="ion-align-items-center">
+      <ion-row>
         <ion-col size="12">
-          <ion-icon name="log-in" id="gerundio"></ion-icon>
-          <ion-title>Inicio de Sesión</ion-title>
-          <h5>Completa todos los campos para ingresar con tu usuario</h5>
+          <h3>Bienvenido de vuelta!, nos alegra verte de nuevo!</h3>
         </ion-col>
         <ion-col size="12">
-          <ion-input label="Correo electronico" labelPlacement="stacked" placeholder="Ingresa tu correo electronico"
-            fill="outline" formControlName="correo" helperText="Ingresa tu correo electronico" [errorText]="errorMail"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu correo electronico" fill="outline"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingresa tu contraseña"
-            fill="outline" formControlName="password" helperText="Ingresa tu contraseña">
-            <ion-input-password-toggle slot="end" aria-label="Show/hide"></ion-input-password-toggle>
+          <ion-input type="password" placeholder="Ingresa tu Contraseña" fill="outline">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
+          <a [routerLink]="['/auth/forgot-password']">¿Olvidaste tu contraseña?</a>
         </ion-col>
         <ion-col size="12">
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="goTo('registro')">Registrarme</ion-button>
-            </ion-buttons>
-            <ion-buttons slot="end">
-              <ion-button>¿Olvidaste tu contraseña?</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-col>
-        <ion-col size="12" class="col-btn">
-          <ion-button expand="block" color="danger" (click)="logIn()">Ingresar</ion-button>
+          <ion-button expand="block">Iniciar sesion</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <h6>No tienes una cuenta? <a [routerLink]="['/auth/registro']">Registrate Ahora</a></h6>
+</ion-footer>

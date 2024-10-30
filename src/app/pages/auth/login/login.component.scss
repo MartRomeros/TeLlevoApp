@@ -21,6 +21,10 @@ ion-content {
                         text-decoration: none;
                         color: black;
                     }
+
+                    ion-input{
+                        --background: #F7F8F9;
+                    }
                 }
             }
         }
@@ -28,6 +32,7 @@ ion-content {
 }
 
 ion-footer {
+    padding-bottom: 4vh;
     h6 {
         text-align: center;
         a{

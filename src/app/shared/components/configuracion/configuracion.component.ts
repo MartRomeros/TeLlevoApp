@@ -10,9 +10,11 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class ConfiguracionComponent implements OnInit {
 
-  usuario?:boolean
+  usuario?:string
 
-  constructor(private tema: ThemeService,private toast: ToastController, private auth:AuthServiceService) {}
+  constructor(private tema: ThemeService,private toast: ToastController, private auth:AuthServiceService) {
+    this.verificarUsuario()
+  }
 
   ngOnInit() {
 
@@ -20,7 +22,6 @@ export class ConfiguracionComponent implements OnInit {
     if(JSON.parse(localStorage.getItem('tema')!) == "oscuro"){
       document.querySelector("ion-radio-group")?.setAttribute('value','oscuro')
     }
-    this.verificarUsuario()
   }
 
   cambiarTema() {
@@ -41,7 +42,14 @@ export class ConfiguracionComponent implements OnInit {
 
   verificarUsuario(){
     let sesion = JSON.parse(localStorage.getItem('sesion')|| '[]')
+
     const usuarios = JSON.parse(localStorage.getItem('usuarios')||"[]")
+
+    if(sesion.length == 0){
+      this.usuario = "noUser"
+      console.log(this.usuario)
+      return
+    }
 
     for (let i=0;i< usuarios.length;i++){
       if(usuarios[i].correo == sesion.correo){
@@ -51,10 +59,11 @@ export class ConfiguracionComponent implements OnInit {
     }
 
     if(sesion.tipoUsuario == "pasajero"){
-      this.usuario = true
+      this.usuario = "pasajero"
     }else{
-      this.usuario = false
+      this.usuario = "chofer"
     }
+
   }
 
   cerrarSesion(){

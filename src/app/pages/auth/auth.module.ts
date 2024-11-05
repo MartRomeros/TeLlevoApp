@@ -9,11 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
+import { RegistroAutoComponent } from './registro-auto/registro-auto.component';
 
 
 
 @NgModule({
-  declarations: [AuthPage, LoginComponent, RegistroComponent, ForgotPasswordComponent],
+  declarations: [AuthPage, LoginComponent, RegistroComponent, ForgotPasswordComponent, RegistroAutoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,8 +22,8 @@ import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
     AuthPageRoutingModule,
     SharedModule,
     ReactiveFormsModule
-],
-  exports: [AuthPage, RegistroComponent, ForgotPasswordComponent, LoginComponent],
-  providers:[AuthServiceService]
+  ],
+  exports: [AuthPage, RegistroComponent, ForgotPasswordComponent, LoginComponent, RegistroAutoComponent],
+  providers: [AuthServiceService]
 })
 export class AuthPageModule { }

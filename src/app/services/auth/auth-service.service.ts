@@ -10,7 +10,8 @@ import { MensajeriaService } from '../mensajeria/mensajeria.service';
 export class AuthServiceService {
 
   private baseUrl: string = "https://myths.cl/api"
-  private usuarios: any = JSON.parse(localStorage.getItem('usuarios') || '[]')
+  private usuarios: any []= []
+  private usuarioConductor?: any
 
 
   constructor(
@@ -18,6 +19,19 @@ export class AuthServiceService {
     private router: Router,
     private mensajeria: MensajeriaService
   ) { }
+
+
+
+  //GETTER Y SETTER
+  getUsuarioConductor() {
+    return this.usuarioConductor
+  }
+
+  setUsuarioConductor(usuario: any) {
+    this.usuarioConductor = usuario
+  }
+
+
 
   login(correo: string = '', password: string = '') {
 
@@ -63,7 +77,7 @@ export class AuthServiceService {
         return
       }
     }
-    
+
     this.usuarios.push(usuario)
     localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
     this.mensajeria.mostrarToast('Usuario registrado!')

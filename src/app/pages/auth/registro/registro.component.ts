@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnimationController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
@@ -23,6 +22,8 @@ export class RegistroComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private tema: ThemeService,
+    private _mensajeria: MensajeriaService,
+    private _auth: AuthServiceService
 
   ) {
 
@@ -32,8 +33,11 @@ export class RegistroComponent implements OnInit {
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required,]],
       password2: ['', [Validators.required,]],
+      tipoUsuario: ['', [Validators.required,]],
 
     })
+
+    document.querySelector("ion-toggle")?.click()
 
   }
 
@@ -51,29 +55,82 @@ export class RegistroComponent implements OnInit {
 
   registrar() {
 
-    this.validarCampos()
+    if (!this.validarCampos()) {
+      return
+    }
+
+    if (!this.verificarPassword()) {
+      return
+    }
 
     this.usuario = {
       usuario: this.formularioRegistro.get('usuario')?.value,
       correo: this.formularioRegistro.get('correo')?.value,
-      password: this.formularioRegistro.get('password')?.value
+      password: this.formularioRegistro.get('password')?.value,
+      tipoUsuario: this.formularioRegistro.get('tipoUsuario')?.value
     }
 
-    console.log(this.usuario)
+    if (this.usuario.tipoUsuario == 'pasajero') {
+      this._auth.registrar(this.usuario)
+      this.router.navigate(['login'])
+      return
+
+    } else {
+      this._auth.setUsuarioConductor(this.usuario)
+      this.router.navigate(['auth/registro-auto'])
+      return
+    }
 
   }
 
-  validarCampos() {
+  validarCampos(): boolean {
 
     const campos = Object.keys(this.formularioRegistro.controls)
 
-    campos.forEach(campo => {
-      const campoFormulario = this.formularioRegistro.get(campo)
-      if (campoFormulario?.errors) {
-        console.log(`el campo ${campo} posee un error!`)
+    for (let i = 0; i < campos.length; i++) {
+      const campo = this.formularioRegistro.get(campos[i])
+      console.log(campo?.value)
+      if (campo?.errors) {
+        this._mensajeria.mostrarAlert(`El campo ${campos[i]} presenta un error!`)
+        return false
       }
-    })
+    }
+
+    return true
 
   }
+
+  hasError(campo: string): string {
+
+    if (this.formularioRegistro.get(campo)?.hasError('required')) {
+      return 'Campo requerido'
+    } else {
+      return 'Email requerido'
+    }
+
+  }
+
+  verificarPassword(): boolean {
+
+    const password1 = this.formularioRegistro.get('password')!.value
+    const password2 = this.formularioRegistro.get('password2')!.value
+
+    console.log(password1)
+    console.log(password2)
+
+    if (password1 !== password2) {
+      this._mensajeria.mostrarAlert("Las contraseñas no coinciden!")
+      console.log("no son iguales")
+      return false
+    }
+
+    return true
+
+  }
+
+  verifcarTipoUsuario() {
+
+  }
+
 
 }

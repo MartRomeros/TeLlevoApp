@@ -1,5 +1,6 @@
 ion-content {
     --background-color: var(--ion-content-theme);
+    padding: 2vh;
 
     form {
         height: 65%;
@@ -24,6 +25,11 @@ ion-content {
 
                     ion-input{
                         --background: #F7F8F9;
+                    }
+
+                    h3{
+                        padding: 2vh;
+                        text-align: center;
                     }
                 }
             }

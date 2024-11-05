@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
 
@@ -59,21 +58,19 @@ export class AuthServiceService {
   registrar(usuario: any) {
 
     for (let i = 0; i < this.usuarios.length; i++) {
-      if (usuario.correo == this.usuarios[i].correo) {
-        this.mensajeria.mostrarToast('Usuario no disponible')
-        return
-      }
-      if (usuario.password == this.usuarios[i].password) {
-        this.mensajeria.mostrarToast('Usuario no disponible')
+      if (usuario.correo == this.usuarios[i].correo || usuario.password == this.usuarios[i].password) {
+        this.mensajeria.mostrarToast('Credenciales ya registradas!')
         return
       }
     }
-
+    
     this.usuarios.push(usuario)
     localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
     this.mensajeria.mostrarToast('Usuario registrado!')
 
   }
+
+
 
   resetPassword(nombre: string, correo: string): Observable<any> {
     //traemos el localstorage

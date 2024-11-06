@@ -1,25 +1,25 @@
 <app-header-principal titulo="Inicio de Sesión"></app-header-principal>
-@if(cargando){
-<ion-progress-bar type="indeterminate"></ion-progress-bar>
-}
+
 <ion-content>
-  <form>
+  <form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
           <h3>Bienvenido de vuelta!, nos alegra verte de nuevo!</h3>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu correo electronico" fill="outline"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="correo"
+            [errorText]="hasError('correo')"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="password" placeholder="Ingresa tu Contraseña" fill="outline">
+          <ion-input type="password" placeholder="Ingresa tu Contraseña" fill="outline" formControlName="password"
+            [errorText]="hasError('password')">
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
           <a [routerLink]="['/auth/forgot-password']">¿Olvidaste tu contraseña?</a>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">Iniciar sesion</ion-button>
+          <ion-button expand="block" type="submit">Iniciar sesion</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

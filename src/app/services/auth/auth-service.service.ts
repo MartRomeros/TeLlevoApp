@@ -10,8 +10,7 @@ import { MensajeriaService } from '../mensajeria/mensajeria.service';
 export class AuthServiceService {
 
   private baseUrl: string = "https://myths.cl/api"
-  private usuarios: any []= []
-  private usuarioConductor?: any
+  private usuarios: any[] = JSON.parse(localStorage.getItem('users') || '[]')
 
 
   constructor(
@@ -20,47 +19,28 @@ export class AuthServiceService {
     private mensajeria: MensajeriaService
   ) { }
 
-
-
-  //GETTER Y SETTER
-  getUsuarioConductor() {
-    return this.usuarioConductor
-  }
-
-  setUsuarioConductor(usuario: any) {
-    this.usuarioConductor = usuario
-  }
-
-
-
   login(correo: string = '', password: string = '') {
 
-    if (this.usuarios.length == 0) {
-      this.mensajeria.mostrarAlert('No hay usuarios disponibles')
-      return
-    }
-
     for (let i = 0; i < this.usuarios.length; i++) {
-      if (correo == this.usuarios[i].correo) {
-        if (password == this.usuarios[i].password) {
-          if (this.usuarios[i].tipoUsuario == 'pasajero') {
-            localStorage.setItem('sesion', JSON.stringify({ correo: correo, password: password }))
-            this.router.navigate(['pasajero'])
-            this.mensajeria.mostrarToast(`bienvenido ${this.usuarios[i].nombre}`)
-            return
-          } else {
-            localStorage.setItem('sesion', JSON.stringify({ correo: correo, password: password }))
-            this.mensajeria.mostrarToast(`bienvenido ${this.usuarios[i].nombre}`)
-            this.router.navigate(['conductor'])
-            return
-          }
-
-        }
+      if (correo != this.usuarios[i].correo || password != this.usuarios[i].password) {
+        this.mensajeria.mostrarAlert('Las credenciales no coinciden!')
+        return
       }
     }
 
-    this.mensajeria.mostrarAlert('usuario no valido!')
-    return
+    const sesion = { correo: correo, password: password }
+    localStorage.setItem('sesion', JSON.stringify(sesion))
+
+    for (let i = 0; i < this.usuarios.length; i++) {
+
+      if (this.usuarios[i].tipoUsuario == 'pasajero') {
+        this.router.navigate(['pasajero'])
+        break
+      } else {
+        this.router.navigate(['conductor'])
+        break
+      }
+    }
 
   }
 
@@ -79,7 +59,7 @@ export class AuthServiceService {
     }
 
     this.usuarios.push(usuario)
-    localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
+    localStorage.setItem('users', JSON.stringify(this.usuarios))
     this.mensajeria.mostrarToast('Usuario registrado!')
 
   }

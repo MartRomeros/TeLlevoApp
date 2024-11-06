@@ -32,8 +32,7 @@ export class RegistroComponent implements OnInit {
       usuario: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required,]],
-      password2: ['', [Validators.required,]],
-      tipoUsuario: ['', [Validators.required,]],
+      password2: ['', [Validators.required,]]
 
     })
 
@@ -67,19 +66,12 @@ export class RegistroComponent implements OnInit {
       usuario: this.formularioRegistro.get('usuario')?.value,
       correo: this.formularioRegistro.get('correo')?.value,
       password: this.formularioRegistro.get('password')?.value,
-      tipoUsuario: this.formularioRegistro.get('tipoUsuario')?.value
+      tipoUsuario: 'pasajero'
     }
 
-    if (this.usuario.tipoUsuario == 'pasajero') {
-      this._auth.registrar(this.usuario)
-      this.router.navigate(['login'])
-      return
+    this._auth.registrar(this.usuario)
+    this.router.navigate(['pasajero'])
 
-    } else {
-      this._auth.setUsuarioConductor(this.usuario)
-      this.router.navigate(['auth/registro-auto'])
-      return
-    }
 
   }
 
@@ -89,7 +81,6 @@ export class RegistroComponent implements OnInit {
 
     for (let i = 0; i < campos.length; i++) {
       const campo = this.formularioRegistro.get(campos[i])
-      console.log(campo?.value)
       if (campo?.errors) {
         this._mensajeria.mostrarAlert(`El campo ${campos[i]} presenta un error!`)
         return false
@@ -125,10 +116,6 @@ export class RegistroComponent implements OnInit {
     }
 
     return true
-
-  }
-
-  verifcarTipoUsuario() {
 
   }
 

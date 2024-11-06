@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
@@ -13,19 +13,16 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class LoginComponent implements OnInit {
 
-  cargando?: boolean
-  loginForm?: any
-  correo?: string
-  password?: string
-  errorMail?: string
-  errorPassword?: string
+  loginForm!: FormGroup
+  email!: string
+  password!: string
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private tema: ThemeService,
-    private mensajeria: MensajeriaService,
-    private auth: AuthServiceService
+    private _mensajeria: MensajeriaService,
+    private _auth: AuthServiceService
   ) {
 
     this.loginForm = fb.group({
@@ -36,54 +33,49 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.removeItem('usuarios')
-    this.cargando = false
     this.tema.verificarTema()
   }
 
 
   logIn() {
-    //validacion de campos
-    this.cargando = true
-    if (this.loginForm.get('correo').errors) {
 
-      if (this.loginForm.get('correo').errors.required) {
-        this.errorMail = 'Correo requerido'
-        this.mensajeria.mostrarAlert('el campo correo presenta un error')
-        this.cargando = false
-        return
-      }
-
-      if (this.loginForm.get('correo').errors.email) {
-        this.errorMail = 'Formato invalido'
-        this.mensajeria.mostrarAlert('el campo correo presenta un error')
-        this.cargando = false
-        return
-      }
-
+    if (!this.verificarCampos()) {
+      return
     }
 
+    this.email = this.loginForm.get('correo')!.value
+    this.password = this.loginForm.get('password')!.value
 
-    if (this.loginForm.get('password').errors) {
-
-      if (this.loginForm.get('password').errors.required) {
-        this.errorMail = 'Contraseña requerida'
-        this.mensajeria.mostrarAlert('el campo contraseña presenta un error')
-        this.cargando = false
-        return
-      }
-
-    }
-
-    this.correo = this.loginForm.get('correo').value
-    this.password = this.loginForm.get('password').value
-    this.auth.login(this.correo, this.password)
-    this.cargando = false
+    this._auth.login(this.email, this.password)    
 
   }
 
   goTo(ruta: string) {
     this.router.navigate([`/auth/${ruta}`])
+  }
+
+  verificarCampos(): boolean {
+    const campos = Object.keys(this.loginForm.controls)
+
+    for (let i = 0; i < campos.length; i++) {
+      const campo = this.loginForm.get(campos[i])
+      if (campo?.errors) {
+        this._mensajeria.mostrarAlert(`el campo ${campos[i]} presenta un error`)
+        return false
+      }
+    }
+
+    return true
+  }
+
+  hasError(name: string): string {
+    if (this.loginForm.get(name)?.hasError('required')) {
+      return 'Campo Requerido!'
+    } else {
+      return 'Formato Invalido!'
+    }
+
+
   }
 
 }

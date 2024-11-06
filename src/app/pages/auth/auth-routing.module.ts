@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { RegistroAutoComponent } from './registro-auto/registro-auto.component';
 
 const routes: Routes = [
   {
@@ -23,11 +22,7 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
-  },
-  {
-    path: 'registro-auto',
-    component: RegistroAutoComponent
-  },
+  }
 ];
 
 @NgModule({

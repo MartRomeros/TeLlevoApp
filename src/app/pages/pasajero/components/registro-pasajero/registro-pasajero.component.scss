@@ -3,9 +3,9 @@ ion-content {
     padding: 2vh;
 
     form {
+        height: 65%;
         display: flex;
         align-items: center;
-        padding: 2vh;
 
         ion-grid {
 
@@ -16,9 +16,6 @@ ion-content {
                     display: flex;
                     flex-direction: column;
                     gap: 1vh;
-                    h3{
-                        padding: 2vh;
-                    }
 
                     a {
                         text-align: end;
@@ -29,6 +26,11 @@ ion-content {
                     ion-input{
                         --background: #F7F8F9;
                     }
+
+                    h3{
+                        padding: 2vh;
+                        text-align: center;
+                    }
                 }
             }
         }
@@ -37,11 +39,9 @@ ion-content {
 
 ion-footer {
     padding-bottom: 4vh;
-
     h6 {
         text-align: center;
-
-        a {
+        a{
             text-decoration: none;
         }
     }

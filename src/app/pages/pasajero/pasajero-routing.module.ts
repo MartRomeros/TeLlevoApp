@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ViajeDetailComponent } from './components/viaje-detail/viaje-detail.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { HistorialViajesComponent } from './components/historial-viajes/historial-viajes.component';
+import { RegistroPasajeroComponent } from './components/registro-pasajero/registro-pasajero.component';
 
 const routes: Routes = [
   {
@@ -27,10 +28,14 @@ const routes: Routes = [
     path: 'historial-viajes',
     component: HistorialViajesComponent
   },
+  {
+    path: 'registro-pasajero',
+    component: RegistroPasajeroComponent
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PasajeroPageRoutingModule {}
+export class PasajeroPageRoutingModule { }

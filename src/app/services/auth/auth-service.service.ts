@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
+  private urlPrueba: string = 'http://localhost:3000'
   private baseUrl: string = "https://myths.cl/api"
   private usuarios: any[] = JSON.parse(localStorage.getItem('users') || '[]')
 
@@ -19,27 +21,48 @@ export class AuthServiceService {
     private mensajeria: MensajeriaService
   ) { }
 
-  login(correo: string = '', password: string = '') {
+  validarCampos(formulario: FormGroup): boolean {
 
-    for (let i = 0; i < this.usuarios.length; i++) {
-      if (correo != this.usuarios[i].correo || password != this.usuarios[i].password) {
-        this.mensajeria.mostrarAlert('Las credenciales no coinciden!')
-        return
+    const campos = Object.keys(formulario.controls)
+
+    for (let index = 0; index < campos.length; index++) {
+      const campo = formulario.get(campos[index])
+      if (campo?.errors) {
+        this.mensajeria.mostrarAlert(`El campo ${campos[index]} presenta un error`)
+        return false
       }
     }
+    return true
+  }
 
-    const sesion = { correo: correo, password: password }
-    localStorage.setItem('sesion', JSON.stringify(sesion))
+  validarCampo(formulario: FormGroup, nombre: string): string {
 
-    for (let i = 0; i < this.usuarios.length; i++) {
+    if (formulario.get(nombre)?.hasError('required') && formulario.get(nombre)?.touched) {
+      return `${nombre} es requerido!`
 
-      if (this.usuarios[i].tipoUsuario == 'pasajero') {
-        this.router.navigate(['pasajero'])
-        break
-      } else {
-        this.router.navigate(['conductor'])
-        break
-      }
+    } else if (formulario.get(nombre)?.hasError('email') && formulario.get(nombre)?.touched) {
+      return `formato invalido!`
+
+    } else {
+      return ``
+    }
+
+  }
+
+
+
+  async loginPasajero(data: any) {
+
+    try {
+
+      const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/pasajero/login`, data))
+      localStorage.setItem('sesion', JSON.stringify(results.token))
+      console.log(results.token)
+
+    } catch (error) {
+
+      console.log(error)
+
     }
 
   }
@@ -49,18 +72,20 @@ export class AuthServiceService {
     this.router.navigate(['auth/login'])
   }
 
-  registrar(usuario: any) {
 
-    for (let i = 0; i < this.usuarios.length; i++) {
-      if (usuario.correo == this.usuarios[i].correo || usuario.password == this.usuarios[i].password) {
-        this.mensajeria.mostrarToast('Credenciales ya registradas!')
-        return
-      }
+  async registrarPasajero(data: any) {
+
+    try {
+
+      const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/pasajero/registro`, data))
+      this.mensajeria.mostrarToast(results.message)
+      this.router.navigate(['auth/login'])
+
+    } catch (error) {
+
+      console.log(error)
+
     }
-
-    this.usuarios.push(usuario)
-    localStorage.setItem('users', JSON.stringify(this.usuarios))
-    this.mensajeria.mostrarToast('Usuario registrado!')
 
   }
 

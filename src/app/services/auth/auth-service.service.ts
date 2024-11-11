@@ -59,9 +59,11 @@ export class AuthServiceService {
       localStorage.setItem('sesion', JSON.stringify(results.token))
       console.log(results.token)
 
-    } catch (error) {
+    } catch (error: any) {
 
-      console.log(error)
+      if (error.status == 404) {
+        this.mensajeria.mostrarAlert('Usuario no encontrado!')
+      }
 
     }
 
@@ -83,6 +85,7 @@ export class AuthServiceService {
       this.router.navigate(['auth/login'])
 
     } catch (error) {
+
 
       console.log(error)
 
@@ -108,33 +111,28 @@ export class AuthServiceService {
 
 
 
-  resetPassword(nombre: string, correo: string): Observable<any> {
-    //traemos el localstorage
-    this.usuarios = JSON.parse(localStorage.getItem('usuarios') || "[]")
+  async resetPassword(tipoUsuario: string, correo: string) {
 
-    for (let i = 0; i < this.usuarios.length; i++) {
-      if (this.usuarios[i].correo == correo) {
-        const nuevaClave = this.generarClave()
-        this.usuarios[i].password = nuevaClave
+    try {
 
-        const data = {
-          nombre: nombre,
-          app: "TellevoApp",
-          clave: nuevaClave,
-          email: correo
-        }
+      const results: any = await lastValueFrom(this.client.get(`${this.urlPrueba}/users/${tipoUsuario}/${correo}`))
 
-        localStorage.setItem('usuarios', JSON.stringify(this.usuarios))
+      const nuevaClave = this.generarClave()
 
-        return this.client.post(`${this.baseUrl}/reset_password.php`, data)
+      const data = {
+        nombre: results.user.username,
+        app: 'Te llevo App',
+        clave: nuevaClave,
+        email: results.user.email
       }
+
+      const envio = await lastValueFrom(this.client.post(`${this.baseUrl}/reset_password.php`, data))
+
+    } catch (error: any) {
+
+      console.log(error)
+
     }
-
-    this.mensajeria.mostrarToast('Ingresa un correo valido!')
-    return new Observable(observer => {
-      observer.error("Usuario no valido!")
-    })
-
   }
 
   generarClave(): string {
@@ -149,10 +147,5 @@ export class AuthServiceService {
 
     return clave;
   }
-
-
-
-
-
 
 }

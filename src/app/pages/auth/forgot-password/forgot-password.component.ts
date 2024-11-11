@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
-import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -12,8 +11,7 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  forgotForm?: any
-  usuarios: any[] = []
+  forgotForm!: FormGroup
   cargando?: boolean
 
   constructor(
@@ -21,55 +19,37 @@ export class ForgotPasswordComponent implements OnInit {
     private authServicio: AuthServiceService,
     private router: Router,
     private tema: ThemeService,
-    private mensajeria: MensajeriaService
   ) {
 
     this.forgotForm = fb.group({
-      correo: ['', [Validators.required, Validators.email]]
+      correo: ['', [Validators.required, Validators.email]],
+      tipoUsuario: ['', Validators.required]
     })
   }
 
   ngOnInit() {
 
     this.cargando = false
-
-    console.log("forgot-iniciado")
     this.tema.verificarTema()
   }
 
-  resetearContrasena() {
-    this.cargando = true
-    if (this.forgotForm.get("correo").errors) {
-      this.mensajeria.mostrarAlert("Ingresa un correo valido!")
+  recuperarPassword() {
+
+    if (!this.authServicio.validarCampos(this.forgotForm)) {
       return
     }
 
-    this.usuarios = JSON.parse(localStorage.getItem('usuarios') || "[]")
+    const tipoUsuario = this.forgotForm.get('tipoUsuario')?.value
+    const email = this.forgotForm.get('correo')?.value
 
-    for (let i = 0; i < this.usuarios.length; i++) {
-      if (this.usuarios[i].correo == this.forgotForm.get('correo').value) {
-        this.authServicio.resetPassword(this.usuarios[i].nombre, this.usuarios[i].correo).subscribe({
-          next: (response) => {
-            this.cargando = false
-            this.mensajeria.mostrarToast(response.message)
-            this.goTo('/auth/login')
-            console.log(response)
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        })
-        return
+    this.authServicio.resetPassword(tipoUsuario, email)
 
-      }
-    }
 
-    this.mensajeria.mostrarAlert("Ingresa un correo valido!")
 
   }
 
-  goTo(ruta: string) {
-    this.router.navigate([ruta])
+  validarCampo(nombre: string): string {
+    return this.authServicio.validarCampo(this.forgotForm, nombre)
   }
 
 }

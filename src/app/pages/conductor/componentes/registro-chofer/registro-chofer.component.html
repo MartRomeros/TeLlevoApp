@@ -1,0 +1,42 @@
+<app-header-principal titulo="Inicio de Sesión"></app-header-principal>
+
+<ion-content>
+  <form [formGroup]="registroForm" (ngSubmit)="registrar()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <h3>Registrarse como Chofer</h3>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa tu nombre de usuario" fill="outline" formControlName="username"
+            [errorText]="validarCampo('username')"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="email"
+            [errorText]="validarCampo('email')"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="password" placeholder="Ingresa tu Contraseña" fill="outline" formControlName="password"
+            [errorText]="validarCampo('password')">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa la patente de tu vehiculo" fill="outline"
+            formControlName="patente" [errorText]="validarCampo('patente')"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa la marca de tu vehiculo" fill="outline" formControlName="marca"
+            [errorText]="validarCampo('marca')"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block" type="submit">Iniciar sesion</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <h6>Ya tienes una cuenta? <a [routerLink]="['/auth/login']">Iniciar Sesión</a></h6>
+</ion-footer>

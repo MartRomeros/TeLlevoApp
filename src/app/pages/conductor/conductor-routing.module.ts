@@ -6,6 +6,7 @@ import { HistorialConductorViajesComponent } from './componentes/historial-condu
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { PerfilConductorComponent } from './componentes/perfil-conductor/perfil-conductor.component';
 import { CrearViajeComponent } from './componentes/crear-viaje/crear-viaje.component';
+import { RegistroChoferComponent } from './componentes/registro-chofer/registro-chofer.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     component: MapaComponent
   },
   {
+    path: 'registro-chofer',
+    component: RegistroChoferComponent
+  },
+  {
     path: 'perfil-conductor',
     component: PerfilConductorComponent
   },
@@ -29,6 +34,7 @@ const routes: Routes = [
     path: 'crear-viaje',
     component: CrearViajeComponent
   },
+
   { path: 'crear-viaje', loadChildren: () => import('./componentes/crear-viaje/crear-viaje.component').then(m => m.CrearViajeComponent) },
   { path: 'crear-viaje', loadChildren: () => import('./componentes/mapa/mapa.component').then(m => m.MapaComponent) },
   {

@@ -67,6 +67,7 @@ export class AuthServiceService {
 
   }
 
+
   logout() {
     localStorage.removeItem('sesion')
     this.router.navigate(['auth/login'])
@@ -78,6 +79,22 @@ export class AuthServiceService {
     try {
 
       const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/pasajero/registro`, data))
+      this.mensajeria.mostrarToast(results.message)
+      this.router.navigate(['auth/login'])
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
+
+  }
+
+  async registrarChofer(data: any) {
+
+    try {
+
+      const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/chofer/registro`, data))
       this.mensajeria.mostrarToast(results.message)
       this.router.navigate(['auth/login'])
 

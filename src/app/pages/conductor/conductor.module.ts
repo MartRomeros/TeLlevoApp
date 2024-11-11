@@ -12,6 +12,7 @@ import { HistorialConductorViajesComponent } from './componentes/historial-condu
 import { CrearViajeComponent } from './componentes/crear-viaje/crear-viaje.component';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { PerfilConductorComponent } from './componentes/perfil-conductor/perfil-conductor.component';
+import { RegistroChoferComponent } from './componentes/registro-chofer/registro-chofer.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { PerfilConductorComponent } from './componentes/perfil-conductor/perfil-
     SharedModule,
     ReactiveFormsModule
   ],
-  declarations: [ConductorPage,HistorialConductorViajesComponent,CrearViajeComponent,MapaComponent,PerfilConductorComponent],
-  exports:[]
+  declarations: [ConductorPage, HistorialConductorViajesComponent, CrearViajeComponent, MapaComponent, PerfilConductorComponent, RegistroChoferComponent],
+  exports: []
 })
-export class ConductorPageModule {}
+export class ConductorPageModule { }

@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
 import { FormGroup } from '@angular/forms';
+import { user } from 'src/app/models/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
-  private urlPrueba: string = 'http://localhost:3000'
-  private baseUrl: string = "https://myths.cl/api"
-  private usuarios: any[] = JSON.parse(localStorage.getItem('users') || '[]')
+  private urlPrueba: string = 'http://localhost:3000/users'
+  private urlResetPassword: string = "https://myths.cl/api"
 
 
   constructor(
@@ -49,15 +49,12 @@ export class AuthServiceService {
 
   }
 
-
-
-  async loginPasajero(data: any) {
+  async login(data: user, tipoUsuario: string) {
 
     try {
 
-      const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/pasajero/login`, data))
-      localStorage.setItem('sesion', JSON.stringify(results.token))
-      console.log(results.token)
+      const response = await lastValueFrom(this.client.post(`${this.urlPrueba}/${tipoUsuario}/login`, data))
+      console.log(response)
 
     } catch (error: any) {
 
@@ -65,87 +62,47 @@ export class AuthServiceService {
         this.mensajeria.mostrarAlert('Usuario no encontrado!')
       }
 
+      console.log(error)
+
     }
 
   }
-
 
   logout() {
     localStorage.removeItem('sesion')
     this.router.navigate(['auth/login'])
   }
 
-
-  async registrarPasajero(data: any) {
-
-    try {
-
-      const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/pasajero/registro`, data))
-      this.mensajeria.mostrarToast(results.message)
-      this.router.navigate(['auth/login'])
-
-    } catch (error) {
-
-
-      console.log(error)
-
-    }
-
-  }
-
-  async registrarChofer(data: any) {
-
-    try {
-
-      const results: any = await lastValueFrom(this.client.post(`${this.urlPrueba}/users/chofer/registro`, data))
-      this.mensajeria.mostrarToast(results.message)
-      this.router.navigate(['auth/login'])
-
-    } catch (error) {
-
-      console.log(error)
-
-    }
-
-  }
-
-
-
   async resetPassword(tipoUsuario: string, correo: string) {
 
     try {
 
       const results: any = await lastValueFrom(this.client.get(`${this.urlPrueba}/users/${tipoUsuario}/${correo}`))
+      console.log(results)
 
-      const nuevaClave = this.generarClave()
+      //const nuevaClave = this.generarClave()
 
       const data = {
         nombre: results.user.username,
         app: 'Te llevo App',
-        clave: nuevaClave,
+        clave: 'nuevaClave',
         email: results.user.email
       }
 
-      const envio = await lastValueFrom(this.client.post(`${this.baseUrl}/reset_password.php`, data))
+      await lastValueFrom(this.client.post(`${this.urlResetPassword}/reset_password.php`, data))
+      await lastValueFrom(this.client.put(`${this.urlPrueba}/users/${tipoUsuario}/reset-password/${results.user.id}`, { password: 'nuevaClave' }))
+
+      this.mensajeria.mostrarToast('Correo enviado!')
+      this.router.navigate(['/login'])
 
     } catch (error: any) {
 
+      if (error.status == 404) {
+        this.mensajeria.mostrarAlert('Correo no valido!')
+        return
+      }
       console.log(error)
-
-    }
-  }
-
-  generarClave(): string {
-    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const longitudClave = 10;
-    let clave = '';
-
-    for (let i = 0; i < longitudClave; i++) {
-      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
-      clave += caracteres.charAt(indiceAleatorio);
     }
 
-    return clave;
   }
-
 }

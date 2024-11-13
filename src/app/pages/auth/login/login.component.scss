@@ -31,6 +31,12 @@ ion-content {
                         padding: 2vh;
                         text-align: center;
                     }
+
+                    ion-radio-group {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                    }
                 }
             }
         }

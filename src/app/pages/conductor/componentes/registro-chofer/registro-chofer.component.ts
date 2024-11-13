@@ -37,8 +37,6 @@ export class RegistroChoferComponent {
       marca: this.registroForm.get('marca')?.value
     }
 
-    this._auth.registrarChofer(data)
-
   }
 
   validarCampo(nombre: string) {

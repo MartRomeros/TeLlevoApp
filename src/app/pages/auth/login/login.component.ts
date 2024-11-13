@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AnimationController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
-import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -26,7 +24,8 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      tipoUsuario: ['pasajeros', [Validators.required]],
     })
 
   }
@@ -44,10 +43,11 @@ export class LoginComponent implements OnInit {
 
     const data = {
       email: this.loginForm.get('correo')?.value,
-      password: this.loginForm.get('password')?.value,
+      password: this.loginForm.get('password')?.value
     }
+    const tipoUsuario: string = this.loginForm.get('tipoUsuario')?.value
 
-    this._auth.loginPasajero(data)
+    this._auth.login(data, tipoUsuario)
 
   }
 

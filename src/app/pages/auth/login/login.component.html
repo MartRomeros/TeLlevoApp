@@ -8,7 +8,7 @@
           <h3>Bienvenido de vuelta!, nos alegra verte de nuevo!</h3>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="correo"
+          <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="correo"
             [errorText]="hasError('correo')"></ion-input>
         </ion-col>
         <ion-col size="12">
@@ -17,6 +17,12 @@
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
           <a [routerLink]="['/auth/forgot-password']">¿Olvidaste tu contraseña?</a>
+        </ion-col>
+        <ion-col size="12">
+          <ion-radio-group value="pasajero" formControlName="tipoUsuario">
+            <ion-radio value="pasajeros">Me registre como pasajero</ion-radio>
+            <ion-radio value="conductor">Me registre como Chofer</ion-radio>
+          </ion-radio-group>
         </ion-col>
         <ion-col size="12">
           <ion-button expand="block" type="submit">Iniciar sesion</ion-button>

@@ -5,6 +5,15 @@ export interface pasajero {
     password: string
 }
 
+export interface conductor {
+    id?: number,
+    username: string,
+    email: string,
+    password: string,
+    patente: string,
+    marca: string
+}
+
 export interface user {
     email: string,
     password: string

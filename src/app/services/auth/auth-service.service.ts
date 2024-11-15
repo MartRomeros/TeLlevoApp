@@ -77,23 +77,21 @@ export class AuthServiceService {
 
     try {
 
-      const results: any = await lastValueFrom(this.client.get(`${this.urlPrueba}/users/${tipoUsuario}/${correo}`))
-      console.log(results)
+      const data: any = { password: this.generatePassword(10) }
 
-      //const nuevaClave = this.generarClave()
-
-      const data = {
-        nombre: results.user.username,
-        app: 'Te llevo App',
-        clave: 'nuevaClave',
-        email: results.user.email
+      const response1: any = await lastValueFrom(this.client.put(`${this.urlPrueba}/${tipoUsuario}/reset_password/${correo}`, data))
+      this.mensajeria.mostrarToast(response1.message)
+      //TO DO: MEJORAR EL CORREO ELECTRONICO ENVIADO!!
+      const datos = {
+        nombre: 'usuario',
+        app: 'Te Llevo App',
+        clave: data.password,
+        email: correo
       }
+      //await lastValueFrom(this.client.post(this.urlResetPassword, data))
+      this.mensajeria.mostrarToast('En instantes deberas recibir un correo electronico de la aplicación')
+      this.router.navigate(['login'])
 
-      await lastValueFrom(this.client.post(`${this.urlResetPassword}/reset_password.php`, data))
-      await lastValueFrom(this.client.put(`${this.urlPrueba}/users/${tipoUsuario}/reset-password/${results.user.id}`, { password: 'nuevaClave' }))
-
-      this.mensajeria.mostrarToast('Correo enviado!')
-      this.router.navigate(['/login'])
 
     } catch (error: any) {
 
@@ -105,4 +103,16 @@ export class AuthServiceService {
     }
 
   }
+
+  generatePassword(length: number): string {
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+    return password;
+  }
+
+
 }

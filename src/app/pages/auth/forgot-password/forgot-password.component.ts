@@ -17,7 +17,6 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authServicio: AuthServiceService,
-    private router: Router,
     private tema: ThemeService,
   ) {
 

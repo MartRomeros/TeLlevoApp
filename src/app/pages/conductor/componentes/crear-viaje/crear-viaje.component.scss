@@ -1,5 +1,15 @@
-.calendario {
-    display: flex;
-    height: 12rem;
-    flex-direction: row;
+ion-content{
+    form{
+        padding: 2vh;
+        ion-grid{
+            padding: 2vh;
+            ion-row{
+                ion-col{
+                    h3,h6{
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
 }

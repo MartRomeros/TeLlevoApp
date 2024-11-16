@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ConductorPage } from './conductor.page';
-import { HistorialConductorViajesComponent } from './componentes/historial-conductor-viajes/historial-conductor-viajes.component';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { PerfilConductorComponent } from './componentes/perfil-conductor/perfil-conductor.component';
 import { CrearViajeComponent } from './componentes/crear-viaje/crear-viaje.component';
 import { RegistroChoferComponent } from './componentes/registro-chofer/registro-chofer.component';
+import { HomeConductorComponent } from './componentes/home-conductor/home-conductor.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'historial-viajes-conductor',
     pathMatch: 'full'
-  },
-  {
-    path: 'historial-viajes-conductor',
-    component: HistorialConductorViajesComponent
   },
   {
     path: 'mapa',
@@ -33,6 +28,10 @@ const routes: Routes = [
   {
     path: 'crear-viaje',
     component: CrearViajeComponent
+  },
+  {
+    path: 'home-conductor',
+    component: HomeConductorComponent
   },
 
   { path: 'crear-viaje', loadChildren: () => import('./componentes/crear-viaje/crear-viaje.component').then(m => m.CrearViajeComponent) },

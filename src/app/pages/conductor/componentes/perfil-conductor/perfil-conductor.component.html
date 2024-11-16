@@ -1,41 +1,53 @@
 <app-header-conductor></app-header-conductor>
 
 <ion-content>
-  <form [formGroup]="perfilForm">
-    <ion-grid>
+  <main>
+    <form>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card-title>Perfil de Usuario</ion-card-title>
+            <ion-card-subtitle>Visualiza y edita tu información personal</ion-card-subtitle>
+          </ion-col>
 
-      <ion-row>
-        <ion-col size="12">
-          <ion-title>Datos del usuario</ion-title>
-        </ion-col>
-        <ion-col size="12">
-          <h1><ion-icon name="person-circle-outline"></ion-icon></h1>
-        </ion-col>
+          <ion-col size="3">
+            <ion-img src="https://docs-demo.ionic.io/assets/madison.jpg"
+              alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+          </ion-col>
 
-        <ion-col size="12">
-          <ion-input label="Nombre" labelPlacement="stacked" formControlName="nombre"></ion-input>
-        </ion-col>
-        <ion-col size="12">
-          <ion-input label="Apellido" labelPlacement="stacked" formControlName="apellido"></ion-input>
-        </ion-col>
-        <ion-col size="12">
-          <ion-input label="Correo electronico" labelPlacement="stacked" formControlName="correo"></ion-input>
-        </ion-col>
-      </ion-row>
+          <ion-col size="9">
+            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-col>
 
-      <ion-row>
-        <ion-col size="12">
-          <ion-button expand="block" color="danger" size="small" (click)="goTo('historial-viajes-conductor')"> <ion-icon
-              name="book" slot="end"></ion-icon>Mis
-            viajes</ion-button>
-        </ion-col>
-        <ion-col size="12">
-          <ion-button expand="block" color="danger" size="smnall" (click)="goTo('crear-viaje')">Crear un viaje <ion-icon name="car-sport"
-              slot="end"></ion-icon></ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+          <ion-col size="12">
+            <ion-input placeholder="Ingrese su nombre" fill="outline"></ion-input>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-input placeholder="Numero telefonico" fill="outline"></ion-input>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-input placeholder="Correo electronico" fill="outline"></ion-input>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-input placeholder="Patente" fill="outline"></ion-input>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-input placeholder="Marca" fill="outline"></ion-input>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-button expand="block">Editar perfil</ion-button>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </form>
+  </main>
 </ion-content>
 
 <app-footer-conductor></app-footer-conductor>

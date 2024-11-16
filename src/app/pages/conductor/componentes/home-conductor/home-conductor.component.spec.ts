@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { HistorialConductorViajesComponent } from './historial-conductor-viajes.component';
+import { HomeConductorComponent } from './home-conductor.component';
 
-describe('HistorialConductorViajesComponent', () => {
-  let component: HistorialConductorViajesComponent;
-  let fixture: ComponentFixture<HistorialConductorViajesComponent>;
+describe('HomeConductorComponent', () => {
+  let component: HomeConductorComponent;
+  let fixture: ComponentFixture<HomeConductorComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistorialConductorViajesComponent ],
+      declarations: [ HomeConductorComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HistorialConductorViajesComponent);
+    fixture = TestBed.createComponent(HomeConductorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

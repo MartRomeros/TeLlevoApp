@@ -1,39 +1,54 @@
 <app-header-conductor></app-header-conductor>
 
 <ion-content>
-  <ion-title>Iniciar Viaje</ion-title>
   <form (ngSubmit)="comienzoViaje()">
-    <ion-item class="calendario">
-      <ion-label position="floating">Hora de Inicio</ion-label>
-      <br>
-      <ion-datetime [(ngModel)]="datosViaje.inicioViaje" name="inicioViaje" presentation="date-time"
-        [preferWheel]="true"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Lugar de inicio</ion-label>
-      <ion-input type="text" [(ngModel)]="datosViaje.lugarInicio" (ionInput)="updateSearchResults('inicio')"
-        name="lugarInicio"></ion-input>
-      <ion-list *ngIf="autocompletadoInicio.length > 0">
-        <ion-item *ngFor="let item of autocompletadoInicio" (click)="selectSearchResult('inicio', item)">
-          {{ item.description }}
-        </ion-item>
-      </ion-list>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Lugar de Destino</ion-label>
-      <ion-input type="text" [(ngModel)]="datosViaje.lugarFinal" (ionInput)="updateSearchResults('final')"
-        name="lugarFinal"></ion-input>
-      <ion-list *ngIf="autocompletadoFinal.length > 0">
-        <ion-item *ngFor="let item of autocompletadoFinal" (click)="selectSearchResult('final', item)">
-          {{ item.description }}
-        </ion-item>
-      </ion-list>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Capacidad de Pasajeros</ion-label>
-      <ion-input type="number" [(ngModel)]="datosViaje.capacidadPasajeros" name="capacidadPasajeros"></ion-input>
-    </ion-item>
-    <ion-button expand="full" type="submit" color="danger">Iniciar Viaje</ion-button>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col size="12">
+          <h3>Crear un Viaje</h3>
+          <h6>Completa el formulario para establecer un viaje como conductor</h6>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa tu lugar de salida" fill="outline"></ion-input>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa la fecha de salida" fill="outline"></ion-input>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa la hora de salida" fill="outline"></ion-input>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa tu lugar de destino" fill="outline"></ion-input>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-input type="text" placeholder="Ingresa la hora de llegada" fill="outline"></ion-input>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-select placeholder="Cantidad de pasajeros" fill="outline" interface="popover">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="7">7</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+          </ion-select>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button expand="block">Crear Viaje</ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>
 

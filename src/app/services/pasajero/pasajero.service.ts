@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class PasajeroService {
 
   baseUrlDesarrollo: string = 'http://localhost:3000/users/pasajeros'
+  baseProduccion:string = 'https://charismatic-determination-production.up.railway.app/pasajeros'
 
   constructor(
     private _http: HttpClient,

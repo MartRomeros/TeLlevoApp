@@ -12,6 +12,7 @@ import { user } from 'src/app/models/interfaces';
 export class AuthServiceService {
 
   private urlPrueba: string = 'http://localhost:3000/users'
+  private urlProduccion: string = 'https://charismatic-determination-production.up.railway.app/users'
   private urlResetPassword: string = "https://myths.cl/api"
 
 
@@ -49,13 +50,21 @@ export class AuthServiceService {
 
   }
 
-  async login(data: user, tipoUsuario: string) {
+  async login(data: user) {
 
     try {
 
-      const response = await lastValueFrom(this.client.post(`${this.urlPrueba}/${tipoUsuario}/login`, data))
-      console.log(response)
 
+      const usuario: any = await lastValueFrom(this.client.get(`${this.urlPrueba}/buscar_usuarios/${data.email}`))
+      console.log("obteniendo tipo de usuario")
+      const token = await lastValueFrom(this.client.post(`${this.urlPrueba}/${usuario.user.tipoUsuario}/login`, data))
+      console.log(token)
+
+      if(usuario.user.tipoUsuario == 'conductor'){
+        this.router.navigate(['conductor/home-conductor'])
+      }
+
+  
     } catch (error: any) {
 
       if (error.status == 404) {

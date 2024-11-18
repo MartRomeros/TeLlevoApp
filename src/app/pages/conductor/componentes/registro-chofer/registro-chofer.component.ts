@@ -36,7 +36,8 @@ export class RegistroChoferComponent {
       email: this.registroForm.get('email')?.value,
       password: this.registroForm.get('password')?.value,
       patente: this.registroForm.get('patente')?.value,
-      marca: this.registroForm.get('marca')?.value
+      marca: this.registroForm.get('marca')?.value,
+      tipoUsuario: 'conductor'
     }
 
     this._conductor.registrarConductor(data)

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ConductorService {
 
   basePrueba: string = 'http://localhost:3000'
+  baseProduccion:string = 'https://charismatic-determination-production.up.railway.app'
 
   constructor(
     private _http: HttpClient,

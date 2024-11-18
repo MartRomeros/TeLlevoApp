@@ -10,6 +10,7 @@ export interface conductor {
     username: string,
     email: string,
     password: string,
+    tipoUsuario:string,
     patente: string,
     marca: string
 }

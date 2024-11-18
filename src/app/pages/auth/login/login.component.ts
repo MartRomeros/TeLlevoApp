@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      tipoUsuario: ['pasajeros', [Validators.required]],
+      password: ['', [Validators.required]]
     })
 
   }
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit {
     }
     const tipoUsuario: string = this.loginForm.get('tipoUsuario')?.value
 
-    this._auth.login(data, tipoUsuario)
+    this._auth.login(data)
 
   }
 

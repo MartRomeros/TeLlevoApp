@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-conductor',
   templateUrl: './header-conductor.component.html',
   styleUrls: ['./header-conductor.component.scss'],
 })
-export class HeaderConductorComponent{
+export class HeaderConductorComponent {
 
-  constructor(private auth:AuthServiceService) { }
+  constructor(private _router: Router) { }
 
-  logOut() {
-    this.auth.logout()
+  goHome() {
+    this._router.navigate(['conductor/home-conductor'])
   }
 
 }

@@ -7,32 +7,32 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid>
-    <ion-row>
+  <ion-card>
+    <div>
+      <!-- Contenedor del mapa -->
+      <div #map id="map" style="height: 500px; width: 100%;"></div>
 
-      <ion-col size="12">
+      <!-- Contenedor para distancia y duración -->
+      <div>
+        <p><strong>Distancia:</strong> {{ distancia }}</p>
+        <p><strong>Duración:</strong> {{ duracion }}</p>
+      </div>
+    </div>
+    <ion-card-header>
+      <ion-card-title>Detalles de tu viaje como conductor:</ion-card-title>
+      <ion-card-subtitle>Aqui encontrarás todos los detalles de tu viaje que seran visibles para los
+        usuarios</ion-card-subtitle>
+    </ion-card-header>
 
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Duoc Uc - EL Monte <ion-badge>Vigente</ion-badge></ion-card-title>
-            <ion-card-subtitle>Viaje N°1</ion-card-subtitle>
-          </ion-card-header>
-
-          <ion-card-content>
-            <ion-icon name="calendar"></ion-icon> Fecha de inicio: 15-11-2024 <br>
-            <ion-icon name="time"></ion-icon>Hora de inicio: 21:00 PM <br>
-            <ion-icon name="time"></ion-icon> Hora de termino: 22:30 PM <br>
-            <ion-icon name="people"></ion-icon> Capacidad de pasajeros: 2
-
-          </ion-card-content>
-        </ion-card>
-
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-
+    <ion-card-content>
+      N° de viaje: <span>{{id}}</span> <br>
+      fecha: <span>{{fecha}}</span> <br>
+      Salida: <span>{{salida}}</span> <br>
+      Destino: <span>{{destino}}</span> <br>
+      Capacidad de pasajeros: <span>{{capacidad}}</span> <br>
+      Conductor: <span>{{correo}}</span> <br>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
 <app-footer-conductor></app-footer-conductor>

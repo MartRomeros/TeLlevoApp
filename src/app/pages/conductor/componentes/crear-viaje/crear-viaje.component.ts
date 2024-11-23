@@ -4,6 +4,8 @@ import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViajesService } from 'src/app/services/viajes/viajes.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
+import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
+import { lastValueFrom } from 'rxjs';
 
 declare var google: any;
 
@@ -19,8 +21,8 @@ export class CrearViajeComponent implements OnInit {
     lugarInicio: '',
     lugarFinal: '',
     capacidadPasajeros: null,
-    nombre: '',
     correo: '',
+    fecha: ''
 
   };
 
@@ -32,28 +34,38 @@ export class CrearViajeComponent implements OnInit {
     private router: Router,
     private zone: NgZone,
     private viajesService: ViajesService,
-    private theme: ThemeService) { // Inyectar el servicio
+    private theme: ThemeService,
+    private _mensajeria: MensajeriaService) { // Inyectar el servicio
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
   }
 
   ngOnInit() {
-    console.log("")
     this.theme.verificarTema()
   }
 
-  comienzoViaje() {
-    console.log('Datos del viaje:', this.datosViaje);
+  async comienzoViaje() {
 
+    if (localStorage.getItem('viaje')) {
+      console.log('viaje encontrado!')
+      this._mensajeria.mostrarAlert('Ya tienes un viaje vigente!')
+      return
+    }
 
-    this.viajesService.nuevoViaje(this.datosViaje);
+    const correo = JSON.parse(localStorage.getItem('usuario') || '')
+    this.datosViaje.correo = correo
 
+    const fecha = new Date(this.datosViaje.inicioViaje).toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+    this.datosViaje.fecha = fecha
+    console.log(this.datosViaje)
 
-    this.router.navigate(['conductor/mapa'], {
-      queryParams: {
-        lugarInicio: this.datosViaje.lugarInicio,
-        lugarFinal: this.datosViaje.lugarFinal
-      }
-    });
+    try {
+      localStorage.setItem('viaje', JSON.stringify(this.datosViaje))
+      const response: any = await lastValueFrom(this.viajesService.nuevoViaje(this.datosViaje))
+      console.log(response)
+    } catch (error: any) {
+      console.log(error)
+    }
+
   }
 
   updateSearchResults(type: string) {

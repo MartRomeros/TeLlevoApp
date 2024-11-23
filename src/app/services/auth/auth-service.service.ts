@@ -59,12 +59,14 @@ export class AuthServiceService {
       console.log("obteniendo tipo de usuario")
       const token = await lastValueFrom(this.client.post(`${this.urlPrueba}/${usuario.user.tipoUsuario}/login`, data))
       console.log(token)
+      localStorage.setItem('usuario', JSON.stringify(usuario.user.email))
+      localStorage.setItem('token', JSON.stringify(token))
 
-      if(usuario.user.tipoUsuario == 'conductor'){
+      if (usuario.user.tipoUsuario == 'conductor') {
         this.router.navigate(['conductor/home-conductor'])
       }
 
-  
+
     } catch (error: any) {
 
       if (error.status == 404) {
@@ -78,7 +80,7 @@ export class AuthServiceService {
   }
 
   logout() {
-    localStorage.removeItem('sesion')
+    localStorage.clear()
     this.router.navigate(['auth/login'])
   }
 

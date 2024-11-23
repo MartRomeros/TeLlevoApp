@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,8 @@ export class MensajeriaService {
 
   constructor(
     private alert: AlertController,
-    private toast:ToastController
+    private toast: ToastController,
+    private actionSheet: ActionSheetController
   ) { }
 
 
@@ -31,6 +32,21 @@ export class MensajeriaService {
     })
 
     await toast.present()
+
+  }
+
+  async mostrarActionSheet() {
+
+    const actionSheet = await this.actionSheet.create({
+      header: 'Informacion sobre el viaje',
+      buttons: [
+        {
+          text: 'contenido del viaje',
+        }
+      ]
+    })
+
+    await actionSheet.present()
 
   }
 

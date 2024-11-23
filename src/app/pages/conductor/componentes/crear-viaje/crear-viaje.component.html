@@ -11,27 +11,29 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu lugar de salida" fill="outline"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu lugar de salida" fill="outline"
+            [(ngModel)]="datosViaje.lugarInicio" (ionInput)="updateSearchResults('inicio')"
+            name="lugarInicio"></ion-input>
+          <ion-list *ngIf="autocompletadoInicio.length > 0">
+            <ion-item *ngFor="let item of autocompletadoInicio" (click)="selectSearchResult('inicio', item)">
+              {{ item.description }}
+            </ion-item>
+          </ion-list>
         </ion-col>
 
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa la fecha de salida" fill="outline"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu lugar de destino" fill="outline"
+            [(ngModel)]="datosViaje.lugarFinal" (ionInput)="updateSearchResults('final')" name="lugarFinal"></ion-input>
+          <ion-list *ngIf="autocompletadoFinal.length > 0">
+            <ion-item *ngFor="let item of autocompletadoFinal" (click)="selectSearchResult('final', item)">
+              {{ item.description }}
+            </ion-item>
+          </ion-list>
         </ion-col>
 
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa la hora de salida" fill="outline"></ion-input>
-        </ion-col>
-
-        <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu lugar de destino" fill="outline"></ion-input>
-        </ion-col>
-
-        <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa la hora de llegada" fill="outline"></ion-input>
-        </ion-col>
-
-        <ion-col size="12">
-          <ion-select placeholder="Cantidad de pasajeros" fill="outline" interface="popover">
+          <ion-select placeholder="Cantidad de pasajeros" fill="outline" interface="popover"
+            [(ngModel)]="datosViaje.capacidadPasajeros" name="capacidadPasajeros">
             <ion-select-option value="1">1</ion-select-option>
             <ion-select-option value="2">2</ion-select-option>
             <ion-select-option value="3">3</ion-select-option>
@@ -44,7 +46,15 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-button expand="block">Crear Viaje</ion-button>
+          <ion-item class="calendario">
+            <ion-label position="floating">Hora de Inicio</ion-label>
+            <br>
+            <ion-datetime [(ngModel)]="datosViaje.inicioViaje" name="inicioViaje"></ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button expand="block" type="submit">Crear Viaje</ion-button>
         </ion-col>
 
       </ion-row>

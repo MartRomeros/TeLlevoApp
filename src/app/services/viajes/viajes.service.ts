@@ -1,12 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ViajesService {
+
+  private urlPrueba: string = 'http://localhost:3000/viajes'
   private viajesKey = 'viajes';
 
-  constructor() { }
+  constructor(
+    private _http: HttpClient
+  ) { }
 
 
   getViajes(): any[] {
@@ -15,21 +21,19 @@ export class ViajesService {
   }
 
 
-  nuevoViaje(viaje: any): void {
-    const viajes = this.getViajes();
-
-    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
-    const sesion = JSON.parse(localStorage.getItem('sesion')|| '[]')
-
-    for(let i = 0; i < usuarios.length;i++){
-      if(usuarios[i].correo == sesion.correo){
-        viaje.correo = usuarios[i].correo
-        viaje.nombre = usuarios[i].nombre
-        break
-      }
+  nuevoViaje(viaje: any): Observable<any> {
+    const viajeACrear = {
+      fechaInic: viaje.fecha,
+      horaInic: viaje.inicioViaje,
+      capacidad: viaje.capacidadPasajeros,
+      conductor: viaje.correo,
+      destino: viaje.lugarFinal,
+      salida: viaje.lugarInicio
     }
+    return this._http.post(`${this.urlPrueba}/crear_viaje`, viajeACrear)
+  }
 
-    viajes.push(viaje);
-    localStorage.setItem(this.viajesKey, JSON.stringify(viajes));
+  obtenerViajeByEmail(email: string): Observable<any> {
+    return this._http.get(`${this.urlPrueba}/viaje/${email}`)
   }
 }

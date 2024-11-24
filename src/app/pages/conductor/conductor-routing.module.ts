@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { MapaComponent } from './componentes/mapa/mapa.component';
 import { PerfilConductorComponent } from './componentes/perfil-conductor/perfil-conductor.component';
 import { CrearViajeComponent } from './componentes/crear-viaje/crear-viaje.component';
 import { RegistroChoferComponent } from './componentes/registro-chofer/registro-chofer.component';
@@ -12,10 +10,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'historial-viajes-conductor',
     pathMatch: 'full'
-  },
-  {
-    path: 'mapa',
-    component: MapaComponent
   },
   {
     path: 'registro-chofer',
@@ -35,10 +29,9 @@ const routes: Routes = [
   },
 
   { path: 'crear-viaje', loadChildren: () => import('./componentes/crear-viaje/crear-viaje.component').then(m => m.CrearViajeComponent) },
-  { path: 'crear-viaje', loadChildren: () => import('./componentes/mapa/mapa.component').then(m => m.MapaComponent) },
   {
     path: '**',
-    redirectTo: 'historial-viajes-conductor',
+    redirectTo: 'home-conductor',
     pathMatch: 'full'
   },
 ];

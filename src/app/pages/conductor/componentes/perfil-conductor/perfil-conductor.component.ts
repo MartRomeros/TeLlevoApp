@@ -1,6 +1,8 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { ConductorService } from 'src/app/services/conductor/conductor.service';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
@@ -12,43 +14,46 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 export class PerfilConductorComponent implements OnInit {
 
   usuario: any = {}
-  perfilForm: any
+  perfilForm!: FormGroup
+  userName?: string
+  tipoUsuario?: string
 
-  constructor(private router: Router, private teme: ThemeService, private perfil: ProfileService,
+  constructor(private router: Router, private teme: ThemeService, private _conductorServices: ConductorService,
     private fb: FormBuilder
   ) {
-    this.recuperarUsuario()
     this.perfilForm = fb.group({
-      nombre: [this.usuario.nombre],
-      apellido: [this.usuario.apellido],
-      correo: [this.usuario.correo],
+      nombre: [this.usuario],
+      correo: [''],
+      patente: [''],
     })
   }
 
   ngOnInit(): void {
+    this.traerConductor()
     this.teme.verificarTema()
-    this.recuperarUsuario()
-
   }
 
   goTo(ruta: string) {
     this.router.navigate([`conductor/${ruta}`])
-
   }
 
-  recuperarUsuario() {
-    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
-    const sesion = JSON.parse(localStorage.getItem('sesion') || '[]')
-
-    for (let i = 0; i < usuarios.length; i++) {
-      if (usuarios[i].correo == sesion.correo) {
-        this.usuario.correo = usuarios[i].correo
-        this.usuario.nombre = usuarios[i].nombre
-        this.usuario.apellido = usuarios[i].apellido
-        console.log(this.usuario)
-        break
-      }
+  async traerConductor() {
+    const correo = JSON.parse(localStorage.getItem('usuario') || '') || 'nulo'
+    console.log(correo)
+    try {
+      const response: any = await lastValueFrom(this._conductorServices.traerDatos(correo))
+      this.userName = response.user.username
+      this.tipoUsuario = response.user.tipoUsuario
+      this.perfilForm.get('patente')?.setValue(response.user.auto)
+      this.perfilForm.get('correo')?.setValue(response.user.email)
+      this.perfilForm.get('nombre')?.setValue(response.user.username)
+      console.log(response)
+    } catch (error: any) {
+      console.log(error)
     }
   }
+
+
+
 
 }

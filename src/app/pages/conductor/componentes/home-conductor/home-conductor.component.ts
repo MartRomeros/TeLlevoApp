@@ -16,6 +16,8 @@ declare var google: any;
 export class HomeConductorComponent implements OnInit {
   @ViewChild('map', { static: false }) mapElement!: ElementRef;
 
+  viaje?:boolean
+
 
   public map: any;
   public start?: string;
@@ -44,6 +46,11 @@ export class HomeConductorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('viaje')){
+      this.viaje = false
+    }else{
+      this.viaje = true
+    }
     this.mostrarInfo()
     this.route.queryParams.subscribe(params => {
       this.start = params['lugarInicio'] || '';

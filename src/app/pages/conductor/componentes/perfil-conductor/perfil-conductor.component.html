@@ -2,7 +2,7 @@
 
 <ion-content>
   <main>
-    <form>
+    <form [formGroup]="perfilForm">
       <ion-grid>
         <ion-row>
           <ion-col size="12">
@@ -11,33 +11,24 @@
           </ion-col>
 
           <ion-col size="3">
-            <ion-img src="https://docs-demo.ionic.io/assets/madison.jpg"
-              alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+            <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
           </ion-col>
 
           <ion-col size="9">
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            <ion-card-title>{{userName}}</ion-card-title>
+            <ion-card-subtitle>{{tipoUsuario}}</ion-card-subtitle>
           </ion-col>
 
           <ion-col size="12">
-            <ion-input placeholder="Ingrese su nombre" fill="outline"></ion-input>
+            <ion-input placeholder="Ingrese su nombre de usuario" fill="outline" formControlName="nombre"></ion-input>
           </ion-col>
 
           <ion-col size="12">
-            <ion-input placeholder="Numero telefonico" fill="outline"></ion-input>
+            <ion-input placeholder="Correo electronico" fill="outline" formControlName="correo"></ion-input>
           </ion-col>
 
           <ion-col size="12">
-            <ion-input placeholder="Correo electronico" fill="outline"></ion-input>
-          </ion-col>
-
-          <ion-col size="12">
-            <ion-input placeholder="Patente" fill="outline"></ion-input>
-          </ion-col>
-
-          <ion-col size="12">
-            <ion-input placeholder="Marca" fill="outline"></ion-input>
+            <ion-input placeholder="Patente" fill="outline" formControlName="patente"></ion-input>
           </ion-col>
 
           <ion-col size="12">

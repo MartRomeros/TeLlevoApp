@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
 import { conductor } from 'src/app/models/interfaces';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ConductorService {
 
   basePrueba: string = 'http://localhost:3000'
-  baseProduccion:string = 'https://charismatic-determination-production.up.railway.app'
+  baseProduccion: string = 'https://charismatic-determination-production.up.railway.app'
 
   constructor(
     private _http: HttpClient,
@@ -30,9 +30,11 @@ export class ConductorService {
     } catch (error: any) {
 
       console.log(error)
-
     }
+  }
 
+  traerDatos(correo: string): Observable<any> {
+    return this._http.get(`${this.basePrueba}/users/conductor/${correo}`)
   }
 
 }

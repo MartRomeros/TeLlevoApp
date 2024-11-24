@@ -7,6 +7,9 @@
     </ion-toolbar>
   </ion-header>
 
+  @if (!viaje) {
+  <h1>Aun no hay viajes!</h1>
+  }@else {
   <ion-card>
     <div>
       <!-- Contenedor del mapa -->
@@ -33,6 +36,7 @@
       Conductor: <span>{{correo}}</span> <br>
     </ion-card-content>
   </ion-card>
+  }
 
 </ion-content>
 <app-footer-conductor></app-footer-conductor>

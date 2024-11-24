@@ -10,28 +10,40 @@
 <ion-content>
   <ion-header>
     <ion-toolbar>
-      <ion-title>configuracion <ion-icon name="cog"></ion-icon></ion-title>
+      <ion-title>Configuración <ion-icon name="cog"></ion-icon></ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-item lines="none">
+    @if (selectedTheme === "claro"){
     <ion-label>
       <h1>Modo oscuro</h1>
-      <p>Activar el modo oscuro en la aplicacion</p>
+      <p>Activar el modo oscuro en la aplicación</p>
     </ion-label>
+    }@else if (selectedTheme === "oscuro") {
+    <ion-label>
+      <h1>Modo claro</h1>
+      <p>Activar el modo claro en la aplicación</p>
+    </ion-label>
+    }@else {
+    <h1>Cambie el tema de la aplicación</h1>
+    }
   </ion-item>
 
   <ion-item>
-    <ion-radio-group value="claro" (ionChange)="cambiarTema()">
-      <ion-radio value="claro">Claro <ion-icon name="sunny"></ion-icon></ion-radio><br />
-      <ion-radio value="oscuro">Oscuro <ion-icon name="moon"></ion-icon></ion-radio><br />
-    </ion-radio-group>
+    <ion-label>Selecciona el tema</ion-label>
+    <ion-select [(ngModel)]="selectedTheme" (ionChange)="cambiarTema()">
+      <ion-select-option value="claro">Claro <ion-icon name="sunny"></ion-icon></ion-select-option>
+      <ion-select-option value="oscuro">Oscuro <ion-icon name="moon"></ion-icon></ion-select-option>
+    </ion-select>
   </ion-item>
-  @if(usuario !== "noUser"){
+
+  <ion-item *ngIf="usuario !== 'noUser'">
     <ion-button expand="block" (click)="cerrarSesion()">Cerrar Sesión</ion-button>
-  }@else {
+  </ion-item>
+  <ion-item *ngIf="usuario === 'noUser'">
     <ion-button expand="block" (click)="cerrarSesion()">Salir</ion-button>
-  }
+  </ion-item>
 </ion-content>
 
 

@@ -1,23 +1,33 @@
-<app-header-principal titulo="Inicio de Sesión"></app-header-principal>
+<app-header-principal titulo="Registro de usuario"></app-header-principal>
 
 <ion-content>
   <form [formGroup]="formularioRegistro" (ngSubmit)="registrar()">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
-          <h3>Registrarse como pasajero</h3>
+          <h3>Registrate para empezar!</h3>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu nombre de usuario" fill="outline" formControlName="username"
-            [errorText]="validarCampo('username')"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu primer nombre" fill="outline" formControlName="nombre"
+            [errorText]="hasError('nombre')"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="email"
-            [errorText]="validarCampo('email')"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu apellido" fill="outline" formControlName="apellido"
+            [errorText]="hasError('apellido')"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="correo"
+            [errorText]="hasError('correo')"></ion-input>
         </ion-col>
         <ion-col size="12">
           <ion-input type="password" placeholder="Ingresa tu Contraseña" fill="outline" formControlName="password"
-            [errorText]="validarCampo('password')">
+            [errorText]="hasError('password')">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="password" placeholder="Confirma tu Contraseña" fill="outline" formControlName="password2"
+            [errorText]="hasError('password2')">
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-col>
@@ -30,5 +40,5 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <h6>Ya tienes una cuenta? <a [routerLink]="['/auth/login']">Iniciar Sesión</a></h6>
+  <h6>Ya tienes una cuenta? <a [routerLink]="['/auth/login']">Inicia Sesión</a></h6>
 </ion-footer>

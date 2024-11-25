@@ -51,11 +51,11 @@ export class AuthServiceService {
   }
 
   obtenerTipoUsuario(correo: string): Observable<any> {
-    return this.client.get(`${this.urlProduccion}/buscar_usuarios/${correo}`)
+    return this.client.get(`${this.urlPrueba}/buscar_user/${correo}`)
   }
 
   login(data: any, tipo: string): Observable<any> {
-    return this.client.post(`${this.urlProduccion}/${tipo}/login`, data)
+    return this.client.post(`${this.urlPrueba}/${tipo}/login`, data)
   }
 
   logout() {
@@ -69,7 +69,7 @@ export class AuthServiceService {
 
       const data: any = { password: this.generatePassword(10) }
 
-      const response1: any = await lastValueFrom(this.client.put(`${this.urlProduccion}/${tipoUsuario}/reset_password/${correo}`, data))
+      const response1: any = await lastValueFrom(this.client.put(`${this.urlPrueba}/${tipoUsuario}/reset_password/${correo}`, data))
       this.mensajeria.mostrarToast(response1.message)
       //TO DO: MEJORAR EL CORREO ELECTRONICO ENVIADO!!
       const datos = {

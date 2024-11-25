@@ -10,7 +10,6 @@ import { PasajeroPage } from './pasajero.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { HistorialViajesComponent } from './components/historial-viajes/historial-viajes.component';
-import { ViajeDetailComponent } from './components/viaje-detail/viaje-detail.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { RegistroPasajeroComponent } from './components/registro-pasajero/registro-pasajero.component';
 
@@ -23,6 +22,6 @@ import { RegistroPasajeroComponent } from './components/registro-pasajero/regist
     SharedModule,
     ReactiveFormsModule
   ],
-  declarations: [PasajeroPage, HomeComponent, HistorialViajesComponent, ViajeDetailComponent, PerfilUsuarioComponent, RegistroPasajeroComponent]
+  declarations: [PasajeroPage, HomeComponent, HistorialViajesComponent, PerfilUsuarioComponent, RegistroPasajeroComponent]
 })
 export class PasajeroPageModule { }

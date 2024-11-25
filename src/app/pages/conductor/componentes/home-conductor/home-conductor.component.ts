@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController, Platform } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
 import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ViajesService } from 'src/app/services/viajes/viajes.service';
@@ -42,16 +42,14 @@ export class HomeConductorComponent implements OnInit {
     private _viaje: ViajesService,
     private platform: Platform,
     private zone: NgZone,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _navCtrl: NavController,
+    private router: Router
   ) {
-    if (!localStorage.getItem('viaje')) {
-      this.viaje = false
-    } else {
-      this.viaje = true
-    }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.verificarViaje()
     this.mostrarInfo()
     this.route.queryParams.subscribe(params => {
       this.start = params['lugarInicio'] || '';
@@ -156,6 +154,31 @@ export class HomeConductorComponent implements OnInit {
     this.directionsDisplay = new google.maps.DirectionsRenderer();
 
     this.initMap();
+  }
+
+  verificarViaje() {
+    if (localStorage.getItem('viaje') == "undefined") {
+      console.log('no hay viajes')
+      this.viaje = false
+    } else {
+      console.log('hay viajes')
+      this.viaje = true
+    }
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.verificarViaje()
+      this.mostrarInfo()
+      this.route.queryParams.subscribe(params => {
+        this.start = params['lugarInicio'] || '';
+        this.end = params['lugarFinal'] || '';
+        this.platform.ready().then(() => {
+          this.loadMap();
+        });
+      });
+      event.target.complete();
+    }, 2000);
   }
 
 

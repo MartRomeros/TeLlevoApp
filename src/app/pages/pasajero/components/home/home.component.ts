@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
 import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private tema: ThemeService, private viajesService: ViajesService, private fb: FormBuilder,
     private alert: AlertController,
-    private _mensajeria: MensajeriaService
+    private _mensajeria: MensajeriaService,
+    private _router: Router
   ) {
     this.viajeRequestForm = fb.group({
       viajeInic: [''],
@@ -30,7 +32,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("hola")
     this.tema.verificarTema()
     this.traerViajes()
   }
@@ -38,20 +39,16 @@ export class HomeComponent implements OnInit {
   async traerViajes() {
     try {
       const response: any = await lastValueFrom(this.viajesService.traerViajes())
-      console.log(response)
       this.viajes = response
     } catch (error: any) {
-      console.log(error)
     }
   }
 
   async mostrarInfo(id: number) {
     try {
       const response: any = await lastValueFrom(this.viajesService.obtenerViajeById(id))
-      console.log(response)
       this._mensajeria.mostrarActionSheet(response.getViaje)
     } catch (error: any) {
-      console.log(error)
     }
   }
 
@@ -62,9 +59,7 @@ export class HomeComponent implements OnInit {
     }
     try {
       const viaje: any = await lastValueFrom(this.viajesService.obtenerViajeById(id))
-      console.log(viaje)
       const correo = localStorage.getItem('usuario')
-      console.log(correo)
       const data = {
         pasajero: correo,
         salida: viaje.getViaje.salida,
@@ -77,17 +72,14 @@ export class HomeComponent implements OnInit {
       const capacidad = viaje.getViaje.capacidad - 1
       const data2: any = { capacidad: capacidad }
       const response: any = await lastValueFrom(this.viajesService.crearSolicitud(data))
-      console.log(response)
+      this._mensajeria.mostrarToast(response.message)
+      this._router.navigate(['pasajero/historial-viajes'])
       const response2: any = await lastValueFrom(this.viajesService.actualizarCapacidad(data2, id))
-      console.log(response2)
       localStorage.setItem('solicitud', JSON.stringify(data))
     } catch (error: any) {
       console.log(error)
 
     }
   }
-
-
-
 
 }

@@ -49,6 +49,8 @@ export class RegistroPasajeroComponent implements OnInit {
     console.log(data)
     try {
       const response: any = await lastValueFrom(this._pasajero.registrarPasajero(data))
+      this._mensajeria.mostrarToast(response.message)
+      this.router.navigate(['login'])
       console.log(response)
     } catch (error: any) {
 

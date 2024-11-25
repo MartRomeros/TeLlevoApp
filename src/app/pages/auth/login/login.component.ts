@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
+import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 import { ViajesService } from 'src/app/services/viajes/viajes.service';
 
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private tema: ThemeService,
     private _auth: AuthServiceService,
     private _router: Router,
-    private _viaje: ViajesService
+    private _viaje: ViajesService,
+    private _mensajeria: MensajeriaService
   ) {
 
     this.loginForm = fb.group({
@@ -66,7 +68,9 @@ export class LoginComponent implements OnInit {
         default:
           break;
       }
-    } catch (error: any) { }
+    } catch (error: any) {
+      this._mensajeria.mostrarAlert(error.error.message)
+    }
   }
 
   hasError(name: string): string {

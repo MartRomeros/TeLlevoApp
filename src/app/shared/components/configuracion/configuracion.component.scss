@@ -1,5 +1,9 @@
 ion-content {
     --background: var(--ion-content-theme);
+    
+    ion-button {
+      --background: var(--ion-header-theme);
+    }
  
     ion-header {
       --background: var(--ion-content-theme);

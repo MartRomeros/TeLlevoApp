@@ -14,10 +14,12 @@ export class ThemeService {
       case 'oscuro':
         document.documentElement.style.setProperty("--ion-content-theme", "#000")
         document.documentElement.style.setProperty("--ion-text-general", "#fff")
+        document.documentElement.style.setProperty("--ion-header-theme", "#87249d")
         break;
       case 'claro':
         document.documentElement.style.setProperty("--ion-content-theme", "#fff")
         document.documentElement.style.setProperty("--ion-text-general", "#000")
+        document.documentElement.style.setProperty("--ion-header-theme", "#0054e9")
         break;
       default:
         break;

@@ -1,3 +1,8 @@
+app-header-principal {
+    --background-color: var(--ion-header-theme);
+    --background-color: var(--ion-header-text);
+}
+
 ion-content {
     --background-color: var(--ion-content-theme);
     padding: 2vh;

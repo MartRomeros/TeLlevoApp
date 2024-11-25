@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { lastValueFrom, Observable } from 'rxjs';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
 import { FormGroup } from '@angular/forms';
-import { user } from 'src/app/models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class AuthServiceService {
 
   private urlPrueba: string = 'http://localhost:3000/users'
   private urlProduccion: string = 'https://steadfast-motivation-production.up.railway.app/users'
-  private urlResetPassword: string = "https://myths.cl/api"
+  private urlResetPassword: string = "https://myths.cl/api/reset_password.php"
 
 
   constructor(
@@ -51,11 +50,11 @@ export class AuthServiceService {
   }
 
   obtenerTipoUsuario(correo: string): Observable<any> {
-    return this.client.get(`${this.urlPrueba}/buscar_user/${correo}`)
+    return this.client.get(`${this.urlProduccion}/buscar_user/${correo}`)
   }
 
   login(data: any, tipo: string): Observable<any> {
-    return this.client.post(`${this.urlPrueba}/${tipo}/login`, data)
+    return this.client.post(`${this.urlProduccion}/${tipo}/login`, data)
   }
 
   logout() {
@@ -69,7 +68,7 @@ export class AuthServiceService {
 
       const data: any = { password: this.generatePassword(10) }
 
-      const response1: any = await lastValueFrom(this.client.put(`${this.urlPrueba}/${tipoUsuario}/reset_password/${correo}`, data))
+      const response1: any = await lastValueFrom(this.client.put(`${this.urlProduccion}/${tipoUsuario}/reset_password/${correo}`, data))
       this.mensajeria.mostrarToast(response1.message)
       //TO DO: MEJORAR EL CORREO ELECTRONICO ENVIADO!!
       const datos = {
@@ -78,7 +77,7 @@ export class AuthServiceService {
         clave: data.password,
         email: correo
       }
-      //await lastValueFrom(this.client.post(this.urlResetPassword, data))
+      await lastValueFrom(this.client.post(this.urlResetPassword, datos))
       this.mensajeria.mostrarToast('En instantes deberas recibir un correo electronico de la aplicación')
       this.router.navigate(['login']) 
 

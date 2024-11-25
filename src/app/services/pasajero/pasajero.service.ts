@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class PasajeroService {
 
   baseUrlDesarrollo: string = 'http://localhost:3000'
-  baseProduccion: string = 'https://charismatic-determination-production.up.railway.app/pasajeros'
+  baseProduccion: string = 'https://steadfast-motivation-production.up.railway.app'
 
   constructor(
     private _http: HttpClient,
@@ -20,11 +20,11 @@ export class PasajeroService {
   ) { }
 
   registrarPasajero(data: any): Observable<any> {
-    return this._http.post(`${this.baseUrlDesarrollo}/users/pasajero/registro`, data)
+    return this._http.post(`${this.baseProduccion}/users/pasajero/registro`, data)
   }
 
   traerDatos(email: string): Observable<any> {
-    return this._http.get(`${this.baseUrlDesarrollo}/users/pasajero/${email}`)
+    return this._http.get(`${this.baseProduccion}/users/pasajero/${email}`)
   }
 
 

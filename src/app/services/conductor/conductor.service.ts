@@ -23,7 +23,7 @@ export class ConductorService {
 
     try {
 
-      const response: any = await lastValueFrom(this._http.post(`${this.basePrueba}/users/conductor/registro`, data))
+      const response: any = await lastValueFrom(this._http.post(`${this.baseProduccion}/users/conductor/registro`, data))
       this._mensajeria.mostrarToast(response.message)
       this._router.navigate(['login'])
 
@@ -33,7 +33,7 @@ export class ConductorService {
   }
 
   traerDatos(correo: string): Observable<any> {
-    return this._http.get(`${this.basePrueba}/users/conductor/${correo}`)
+    return this._http.get(`${this.baseProduccion}/users/conductor/${correo}`)
   }
 
 }

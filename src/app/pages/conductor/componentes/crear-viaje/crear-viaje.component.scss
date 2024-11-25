@@ -1,12 +1,42 @@
-ion-content{
-    form{
+ion-content {
+    --background: var(--ion-content-theme);
+
+    form {
         padding: 2vh;
-        ion-grid{
+
+        ion-grid {
             padding: 2vh;
-            ion-row{
-                ion-col{
-                    h3,h6{
+
+            ion-row {
+
+                ion-button {
+                    --background: var(--ion-header-theme);
+                }
+
+                ion-input {
+                    color: var(--ion-text-general);
+                }
+
+                ion-select {
+                    color: var(--ion-text-general);
+                }
+
+                ion-item {
+                    --background: var(--ion-content-theme);
+                    color: var(--ion-text-general);
+
+                }
+
+                ion-label {
+                    color: var(--ion-text-general);
+                }
+
+                ion-col {
+
+                    h3,
+                    h6 {
                         text-align: center;
+                        color: var(--ion-text-general);
                     }
                 }
             }

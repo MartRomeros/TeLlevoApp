@@ -1,8 +1,12 @@
 ion-content{
+    --background: var(--ion-content-theme);
     ion-header{
+        --background: var(--ion-content-theme);
         ion-toolbar{
+            --background: var(--ion-content-theme);
             h3{
                 text-align: center;
+                color: var(--ion-text-general);
             }
         
         }

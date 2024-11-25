@@ -4,4 +4,20 @@ ion-content {
         padding: 2vh;
     }
 
+    ion-card-title {
+        color: var(--ion-text-general);
+    }
+
+    ion-card-subtitle {
+        color: var(--ion-text-general);
+    }
+
+    ion-input {
+        color: var(--ion-text-general);
+    }
+
+    ion-button {
+        --background: var(--ion-header-theme);
+    }
+
 }

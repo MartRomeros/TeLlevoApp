@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
 import { FormGroup } from '@angular/forms';
 import { user } from 'src/app/models/interfaces';
@@ -50,33 +50,12 @@ export class AuthServiceService {
 
   }
 
-  async login(data: user) {
+  obtenerTipoUsuario(correo: string): Observable<any> {
+    return this.client.get(`${this.urlPrueba}/buscar_usuarios/${correo}`)
+  }
 
-    try {
-
-
-      const usuario: any = await lastValueFrom(this.client.get(`${this.urlPrueba}/buscar_usuarios/${data.email}`))
-      console.log("obteniendo tipo de usuario")
-      const token = await lastValueFrom(this.client.post(`${this.urlPrueba}/${usuario.user.tipoUsuario}/login`, data))
-      console.log(token)
-      localStorage.setItem('usuario', JSON.stringify(usuario.user.email))
-      localStorage.setItem('token', JSON.stringify(token))
-
-      if (usuario.user.tipoUsuario == 'conductor') {
-        this.router.navigate(['conductor/home-conductor'])
-      }
-
-
-    } catch (error: any) {
-
-      if (error.status == 404) {
-        this.mensajeria.mostrarAlert('Usuario no encontrado!')
-      }
-
-      console.log(error)
-
-    }
-
+  login(data: any, tipo: string): Observable<any> {
+    return this.client.post(`${this.urlPrueba}/${tipo}/login`, data)
   }
 
   logout() {

@@ -9,7 +9,7 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
   styleUrls: ['./configuracion.component.scss'],
 })
 export class ConfiguracionComponent implements OnInit {
-  usuario?: string;
+  tipoUsuario?: string;
   selectedTheme: string = 'claro';
 
   constructor(private tema: ThemeService, private toast: ToastController, private auth: AuthServiceService) {
@@ -40,25 +40,10 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   verificarUsuario() {
-    let sesion = JSON.parse(localStorage.getItem('sesion') || '[]');
-    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-
-    if (sesion.length == 0) {
-      this.usuario = 'noUser';
-      return;
-    }
-
-    for (let i = 0; i < usuarios.length; i++) {
-      if (usuarios[i].correo == sesion.correo) {
-        sesion = usuarios[i];
-        break;
-      }
-    }
-
-    if (sesion.tipoUsuario == 'pasajero') {
-      this.usuario = 'pasajero';
-    } else {
-      this.usuario = 'chofer';
+    try {
+      this.tipoUsuario = JSON.parse(localStorage.getItem('tipo')|| 'noUser') || 'noUser'
+    } catch (error) {
+      this.tipoUsuario = 'noUser'
     }
   }
 

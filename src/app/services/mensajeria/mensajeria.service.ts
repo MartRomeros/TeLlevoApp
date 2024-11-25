@@ -35,13 +35,22 @@ export class MensajeriaService {
 
   }
 
-  async mostrarActionSheet() {
+  async mostrarActionSheet(data: any) {
 
     const actionSheet = await this.actionSheet.create({
       header: 'Informacion sobre el viaje',
       buttons: [
         {
-          text: 'contenido del viaje',
+          text: `Conductor: ${data.conductor}`,
+        },
+        {
+          text: `Salida: ${data.salida}`
+        },
+        {
+          text: `Hora de salida: ${data.fechainicio}`
+        },
+        {
+          text: `Destino: ${data.destino}`
         }
       ]
     })

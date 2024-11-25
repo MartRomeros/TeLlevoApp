@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ViajesService {
 
-  private urlPrueba: string = 'http://localhost:3000/viajes'
+  private urlPrueba: string = 'http://localhost:3000'
   private viajesKey = 'viajes';
 
   constructor(
@@ -30,10 +30,31 @@ export class ViajesService {
       destino: viaje.lugarFinal,
       salida: viaje.lugarInicio
     }
-    return this._http.post(`${this.urlPrueba}/crear_viaje`, viajeACrear)
+    return this._http.post(`${this.urlPrueba}/viajes/crear_viaje`, viajeACrear)
   }
 
   obtenerViajeByEmail(email: string): Observable<any> {
-    return this._http.get(`${this.urlPrueba}/viaje/${email}`)
+    return this._http.get(`${this.urlPrueba}/viajes/viaje/${email}`)
   }
+
+  obtenerViajeById(id: number): Observable<any> {
+    return this._http.get(`${this.urlPrueba}/viajes/viaje_id/${id}`)
+  }
+
+  traerViajes(): Observable<any> {
+    return this._http.get(`${this.urlPrueba}/viajes/all_viajes`)
+  }
+
+  crearSolicitud(data: any): Observable<any> {
+    return this._http.post(`${this.urlPrueba}/solicitud/crear_solicitud`, data)
+  }
+
+  actualizarCapacidad(data: any, id: number): Observable<any> {
+    return this._http.put(`${this.urlPrueba}/viajes/capacidad/${id}`, data)
+  }
+
+  traerSolicitudes(email: string): Observable<any> {
+    return this._http.get(`${this.urlPrueba}/solicitud/solicitudes_pasajero/${email}`)
+  }
+
 }

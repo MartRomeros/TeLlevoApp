@@ -1,6 +1,6 @@
-@if (usuario === "pasajero") {
+@if (tipoUsuario === "pasajero") {
 <app-header-pasajero></app-header-pasajero>
-}@else if (usuario === "chofer"){
+}@else if (tipoUsuario === "conductor"){
 <app-header-conductor></app-header-conductor>
 }@else{
 <app-header-principal titulo="Configuración"></app-header-principal>
@@ -38,18 +38,18 @@
     </ion-select>
   </ion-item>
 
-  <ion-item *ngIf="usuario !== 'noUser'">
+  <ion-item *ngIf="tipoUsuario !== 'noUser'">
     <ion-button expand="block" (click)="cerrarSesion()">Cerrar Sesión</ion-button>
   </ion-item>
-  <ion-item *ngIf="usuario === 'noUser'">
+  <ion-item *ngIf="tipoUsuario === 'noUser'">
     <ion-button expand="block" (click)="cerrarSesion()">Salir</ion-button>
   </ion-item>
 </ion-content>
 
 
-@if (usuario === "pasajero") {
+@if (tipoUsuario === "pasajero") {
 <app-footer-pasajero></app-footer-pasajero>
-}@else if (usuario === "chofer"){
+}@else if (tipoUsuario === "conductor"){
 <app-footer-conductor></app-footer-conductor>
 }@else{
 

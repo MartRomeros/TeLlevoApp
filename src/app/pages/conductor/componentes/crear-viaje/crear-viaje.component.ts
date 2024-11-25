@@ -45,6 +45,10 @@ export class CrearViajeComponent implements OnInit {
 
   async comienzoViaje() {
 
+    if (localStorage.getItem('viaje') == "undefined") {
+      localStorage.removeItem('viaje')
+    }
+
     if (localStorage.getItem('viaje')) {
       console.log('viaje encontrado!')
       this._mensajeria.mostrarAlert('Ya tienes un viaje vigente!')
@@ -56,12 +60,12 @@ export class CrearViajeComponent implements OnInit {
 
     const fecha = new Date(this.datosViaje.inicioViaje).toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
     this.datosViaje.fecha = fecha
-    console.log(this.datosViaje)
 
     try {
-      localStorage.setItem('viaje', JSON.stringify(this.datosViaje))
       const response: any = await lastValueFrom(this.viajesService.nuevoViaje(this.datosViaje))
-      console.log(response)
+      localStorage.setItem('viaje', JSON.stringify(this.datosViaje))
+      this._mensajeria.mostrarToast(response.message)
+      this.router.navigate(['conductor/home-conductor'])
     } catch (error: any) {
       console.log(error)
     }

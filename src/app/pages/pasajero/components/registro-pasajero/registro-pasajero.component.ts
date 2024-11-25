@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
+import { PasajeroService } from 'src/app/services/pasajero/pasajero.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -13,9 +15,6 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 export class RegistroPasajeroComponent implements OnInit {
 
   formularioRegistro!: FormGroup
-  usuario?: any
-
-
 
   constructor(
 
@@ -23,60 +22,37 @@ export class RegistroPasajeroComponent implements OnInit {
     private fb: FormBuilder,
     private tema: ThemeService,
     private _mensajeria: MensajeriaService,
-    private _auth: AuthServiceService
+    private _auth: AuthServiceService,
+    private _pasajero: PasajeroService
+
 
   ) {
-
     this.formularioRegistro = fb.group({
 
-      // usuario: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required,]],
-      password2: ['', [Validators.required,]]
+      tipoUsuario: ['pasajero']
 
     })
-
-    document.querySelector("ion-toggle")?.click()
-
   }
-
 
   ngOnInit() {
-
     this.tema.verificarTema()
-
   }
 
-
-  goTo(ruta: string) {
-    this.router.navigate([ruta])
-  }
-
-  registrar() {
+  async registrar() {
     if (!this.validarCampos()) {
       return;
     }
+    const data = this.formularioRegistro.value
+    console.log(data)
+    try {
+      const response: any = await lastValueFrom(this._pasajero.registrarPasajero(data))
+      console.log(response)
+    } catch (error: any) {
 
-    if (!this.verificarPassword()) {
-      return;
     }
-
-    this.usuario = {
-      nombre: this.formularioRegistro.get('nombre')?.value,
-      apellido: this.formularioRegistro.get('apellido')?.value,
-      correo: this.formularioRegistro.get('correo')?.value,
-      password: this.formularioRegistro.get('password')?.value,
-      tipoUsuario: 'Pasajero'
-    };
-
-    // this._auth.registrar(this.usuario);
-
-    
-    localStorage.setItem('usuarioActual', JSON.stringify(this.usuario));
-
-    this.router.navigate(['pasajero']);
   }
 
   validarCampos(): boolean {

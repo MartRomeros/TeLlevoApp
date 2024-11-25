@@ -1,18 +1,18 @@
 <ion-tab-bar slot="bottom">
+  <ion-tab-button tab="home" (click)="navigateTo('conductor/home-conductor')">
+    <ion-icon name="home"></ion-icon>
+    Home
+  </ion-tab-button>
   <ion-tab-button tab="home" (click)="navigateTo('conductor/crear-viaje')">
     <ion-icon name="add-circle"></ion-icon>
     Crear viaje
   </ion-tab-button>
-  <ion-tab-button tab="home" (click)="navigateTo('perfil-conductor')">
+  <ion-tab-button tab="library" (click)="navigateTo('perfil-conductor')">
     <ion-icon name="person-circle"></ion-icon>
     Mi perfil
   </ion-tab-button>
   <ion-tab-button tab="library" (click)="navigateTo('configuracion')">
     <ion-icon name="settings"></ion-icon>
     Configuración
-  </ion-tab-button>
-  <ion-tab-button tab="library" (click)="navigateTo('mapa')">
-    <ion-icon name="map"></ion-icon>
-    Mapa
   </ion-tab-button>
 </ion-tab-bar>

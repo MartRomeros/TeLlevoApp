@@ -5,38 +5,25 @@
     <ion-toolbar>
       <ion-title>Busca tu viaje de preferencia</ion-title>
     </ion-toolbar>
-    <ion-toolbar>
-      <ion-searchbar placeholder="Ingresa tu viaje de preferencia"></ion-searchbar>
-    </ion-toolbar>
   </ion-header>
-
-  <ion-grid>
-    @if(viajes.length){
-    <ion-row *ngFor="let viaje of viajes">
-      <ion-col size="4" sizeLg="4" sizeMd="4" sizeSm="12" sizeXl="4" sizeXs="12">
-        <form>
-          <ion-card>
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-            <ion-card-header>
-              <ion-card-title>{{ viaje.lugarInicio}}</ion-card-title>
-              <ion-card-title>{{ viaje.lugarFinal}}</ion-card-title>
-              <ion-card-subtitle>Nombre del conductor {{viaje.nombre}}</ion-card-subtitle>
-            </ion-card-header>
-
-            <ion-card-content>
-              <p>Hora de Inicio: {{ viaje.inicioViaje }}</p>
-              <p>Capacidad de Pasajeros: {{ viaje.capacidadPasajeros }}</p>
-            </ion-card-content>
-            <ion-button fill="clear" (click)="solicitarViaje()">Solicitar Viaje</ion-button>
-            <ion-button fill="clear">Ver detalles</ion-button>
-          </ion-card>
-        </form>
-      </ion-col>
-    </ion-row>
-    }@else{
-      <ion-title>Aun no hay viajes disponibles!</ion-title>
-    }
-  </ion-grid>
+  @if(viajes.length){
+  <ion-list *ngFor="let item of viajes">
+    <ion-item>
+      <ion-avatar aria-hidden="true" slot="start">
+        <img alt="" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      </ion-avatar>
+      <ion-label>{{item.salida}} - {{item.destino}}</ion-label>
+      <ion-button slot="end" (click)="solicitarViaje(item.id)">
+        <ion-icon name="trail-sign" slot="end"></ion-icon>Solicitar
+      </ion-button>
+      <ion-button slot="end" (click)="mostrarInfo(item.id)">
+        <ion-icon name="information-circle" slot="end"></ion-icon>Detalles
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  }@else{
+  <ion-title>Aun no hay viajes disponibles!</ion-title>
+  }
 </ion-content>
 
 <app-footer-pasajero></app-footer-pasajero>

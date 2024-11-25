@@ -39,7 +39,6 @@ export class PerfilConductorComponent implements OnInit {
 
   async traerConductor() {
     const correo = JSON.parse(localStorage.getItem('usuario') || '') || 'nulo'
-    console.log(correo)
     try {
       const response: any = await lastValueFrom(this._conductorServices.traerDatos(correo))
       this.userName = response.user.username
@@ -47,7 +46,6 @@ export class PerfilConductorComponent implements OnInit {
       this.perfilForm.get('patente')?.setValue(response.user.auto)
       this.perfilForm.get('correo')?.setValue(response.user.email)
       this.perfilForm.get('nombre')?.setValue(response.user.username)
-      console.log(response)
     } catch (error: any) {
       console.log(error)
     }

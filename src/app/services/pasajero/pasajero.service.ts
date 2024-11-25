@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MensajeriaService } from '../mensajeria/mensajeria.service';
 import { pasajero } from 'src/app/models/interfaces';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class PasajeroService {
 
-  baseUrlDesarrollo: string = 'http://localhost:3000/users/pasajeros'
-  baseProduccion:string = 'https://charismatic-determination-production.up.railway.app/pasajeros'
+  baseUrlDesarrollo: string = 'http://localhost:3000'
+  baseProduccion: string = 'https://charismatic-determination-production.up.railway.app/pasajeros'
 
   constructor(
     private _http: HttpClient,
@@ -19,23 +19,12 @@ export class PasajeroService {
     private _router: Router
   ) { }
 
-  async registrarPasajero(data: pasajero) {
+  registrarPasajero(data: any): Observable<any> {
+    return this._http.post(`${this.baseUrlDesarrollo}/users/pasajero/registro`, data)
+  }
 
-    try {
-
-      const response: any = await lastValueFrom(this._http.post(`${this.baseUrlDesarrollo}/registro`, data))
-      this._mensajeria.mostrarToast(response.message)
-      this._router.navigate(['login'])
-
-    } catch (error: any) {
-
-      if (error.status == 400) {
-        this._mensajeria.mostrarAlert(error.error.message)
-      }
-      console.log(error)
-
-    }
-
+  traerDatos(email: string): Observable<any> {
+    return this._http.get(`${this.baseUrlDesarrollo}/users/pasajero/${email}`)
   }
 
 

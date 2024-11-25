@@ -8,26 +8,16 @@
           <h3>Registrate para empezar!</h3>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu primer nombre" fill="outline" formControlName="nombre"
-            [errorText]="hasError('nombre')"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu nombre de usuario" fill="outline" formControlName="username"
+            [errorText]="hasError('username')"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="text" placeholder="Ingresa tu apellido" fill="outline" formControlName="apellido"
-            [errorText]="hasError('apellido')"></ion-input>
-        </ion-col>
-        <ion-col size="12">
-          <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="correo"
-            [errorText]="hasError('correo')"></ion-input>
+          <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="email"
+            [errorText]="hasError('email')"></ion-input>
         </ion-col>
         <ion-col size="12">
           <ion-input type="password" placeholder="Ingresa tu Contraseña" fill="outline" formControlName="password"
             [errorText]="hasError('password')">
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-          </ion-input>
-        </ion-col>
-        <ion-col size="12">
-          <ion-input type="password" placeholder="Confirma tu Contraseña" fill="outline" formControlName="password2"
-            [errorText]="hasError('password2')">
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-col>

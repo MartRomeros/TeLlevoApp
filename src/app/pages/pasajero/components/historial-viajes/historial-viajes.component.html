@@ -4,23 +4,15 @@
     <ion-toolbar>
       <ion-title>Historial de viajes</ion-title>
     </ion-toolbar>
-    <ion-toolbar>
-      <ion-searchbar placeholder="Buscar viajes"></ion-searchbar>
-    </ion-toolbar>
   </ion-header>
   @if(historial.length){
-  <ion-list>
+  <ion-list *ngFor="let item of historial">
     <ion-item>
-      <ion-icon aria-hidden="true" name="car-sport" slot="start"></ion-icon>
-      <ion-label>{{historial.viajeInic}} - {{historial.viajeTer}}</ion-label>
-      <ion-button slot="end" color="danger">
-        <ion-icon name="star" slot="end" class="star"></ion-icon>
-        Ver Detalles
-      </ion-button>
+      <ion-label>{{item.salida}} - {{item.destino}}</ion-label>
     </ion-item>
   </ion-list>
   }@else{
-    <ion-title>Aun no tienes viajes solicitados</ion-title>
+  <ion-title>Aun no tienes viajes solicitados</ion-title>
   }
 
 

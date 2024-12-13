@@ -1,33 +1,15 @@
-@if (tipoUsuario === "pasajero") {
-<app-header-pasajero></app-header-pasajero>
-}@else if (tipoUsuario === "conductor"){
-<app-header-conductor></app-header-conductor>
-}@else{
-<app-header-principal titulo="Configuración"></app-header-principal>
-}
-
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración <ion-icon name="cog"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Configuración <ion-icon name="cog"></ion-icon></ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-item lines="none">
-    @if (selectedTheme === "claro"){
-    <ion-label>
-      <h1>Modo oscuro</h1>
-      <p>Activar el modo oscuro en la aplicación</p>
-    </ion-label>
-    }@else if (selectedTheme === "oscuro") {
-    <ion-label>
-      <h1>Modo claro</h1>
-      <p>Activar el modo claro en la aplicación</p>
-    </ion-label>
-    }@else {
-    <h1>Cambie el tema de la aplicación</h1>
-    }
+    Tema de la aplicación
   </ion-item>
 
   <ion-item>
@@ -38,12 +20,12 @@
     </ion-select>
   </ion-item>
 
-  <ion-item *ngIf="tipoUsuario !== 'noUser'">
+  @if (tipoUsuario !== 'noUser') {
     <ion-button expand="block" (click)="cerrarSesion()">Cerrar Sesión</ion-button>
-  </ion-item>
-  <ion-item *ngIf="tipoUsuario === 'noUser'">
+  }@else if (tipoUsuario === 'noUser') {
     <ion-button expand="block" (click)="cerrarSesion()">Salir</ion-button>
-  </ion-item>
+  }
+
 </ion-content>
 
 

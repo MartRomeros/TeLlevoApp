@@ -1,13 +1,10 @@
-app-header-principal {
-    --background-color: var(--ion-header-theme);
-    --background-color: var(--ion-header-text);
-}
-
 ion-content {
-    --background-color: var(--ion-content-theme);
+    --background: var(--ion-content-theme);
     padding: 2vh;
 
     form {
+
+        background: var(--ion-content-theme);
         display: flex;
         align-items: center;
 
@@ -20,6 +17,11 @@ ion-content {
                     display: flex;
                     flex-direction: column;
                     gap: 1vh;
+
+                    ion-card-title{
+                        text-align: center;
+                        --color:var(--ion-text-general);
+                    }                    
 
                     a {
                         text-align: end;
@@ -35,6 +37,11 @@ ion-content {
                         padding: 2vh;
                         text-align: center;
                     }
+
+                    ion-button{
+                        --color:var(--ion-header-text);
+                        --background:var(--ion-header-theme);
+                    }
                 }
             }
         }
@@ -42,11 +49,12 @@ ion-content {
 }
 
 ion-footer {
+    background: var(--ion-content-theme);
     padding-bottom: 4vh;
     h6 {
-        text-align: center;
         a{
             text-decoration: none;
+            text-align: center;
         }
     }
 }

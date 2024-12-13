@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
@@ -9,24 +9,23 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
   styleUrls: ['./configuracion.component.scss'],
 })
 export class ConfiguracionComponent implements OnInit {
-  tipoUsuario?: string;
-  selectedTheme: string = 'claro';
+  private _tema = inject(ThemeService)
 
-  constructor(private tema: ThemeService, private toast: ToastController, private auth: AuthServiceService) {
+  public tipoUsuario?: string;
+  public selectedTheme: string = 'claro';
+
+
+  constructor(private toast: ToastController, private auth: AuthServiceService) {
     this.verificarUsuario();
   }
 
   ngOnInit() {
-    this.tema.TemaApp();
-    const storedTheme = JSON.parse(localStorage.getItem('tema')!);
-    if (storedTheme) {
-      this.selectedTheme = storedTheme;
-    }
+    this._tema.TemaApp();
   }
 
   cambiarTema() {
-    this.tema.cambiarTema(this.selectedTheme);
-    this.tema.TemaApp();
+    this._tema.cambiarTema(this.selectedTheme);
+    this._tema.TemaApp();
     this.presentToast('bottom');
   }
 

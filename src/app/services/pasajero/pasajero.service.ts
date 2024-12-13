@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class PasajeroService {
 
-  baseUrlDesarrollo: string = 'http://localhost:3000'
-  baseProduccion: string = 'https://steadfast-motivation-production.up.railway.app'
+  private urlLocal: string = 'http://localhost:3000'
+  private baseProduccion: string = 'https://vigilant-wholeness-production.up.railway.app'
 
   constructor(
     private _http: HttpClient,

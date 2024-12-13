@@ -1,6 +1,8 @@
 <app-header-pasajero></app-header-pasajero>
-
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-header>
     <ion-toolbar>
       <ion-title>Busca tu viaje de preferencia</ion-title>
@@ -12,7 +14,6 @@
       <ion-avatar aria-hidden="true" slot="start">
         <img alt="" src="https://ionicframework.com/docs/img/demos/card-media.png" />
       </ion-avatar>
-      <ion-label>{{item.salida}} - {{item.destino}}</ion-label>
       <ion-button slot="end" (click)="solicitarViaje(item.id)">
         <ion-icon name="trail-sign" slot="end"></ion-icon>Solicitar
       </ion-button>

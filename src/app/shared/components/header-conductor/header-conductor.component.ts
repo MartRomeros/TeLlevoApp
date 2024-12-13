@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 
 @Component({
   selector: 'app-header-conductor',
@@ -7,11 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./header-conductor.component.scss'],
 })
 export class HeaderConductorComponent {
+  private _auth = inject(AuthServiceService)
 
   constructor(private _router: Router) { }
 
   goHome() {
-    this._router.navigate(['conductor/home-conductor'])
+    this._auth.logout()
   }
 
 }

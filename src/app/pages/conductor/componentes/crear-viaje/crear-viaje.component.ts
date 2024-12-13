@@ -16,6 +16,7 @@ declare var google: any;
 })
 export class CrearViajeComponent implements OnInit {
 
+  public cargando?:boolean
   datosViaje = {
     inicioViaje: '',
     lugarInicio: '',
@@ -44,14 +45,15 @@ export class CrearViajeComponent implements OnInit {
   }
 
   async comienzoViaje() {
-
+    this.cargando = true
     if (localStorage.getItem('viaje') == "undefined") {
-      localStorage.removeItem('viaje')
+      localStorage.removeItem('viaje')      
     }
 
     if (localStorage.getItem('viaje')) {
       console.log('viaje encontrado!')
       this._mensajeria.mostrarAlert('Ya tienes un viaje vigente!')
+      this.cargando = false
       return
     }
 
@@ -65,8 +67,10 @@ export class CrearViajeComponent implements OnInit {
       const response: any = await lastValueFrom(this.viajesService.nuevoViaje(this.datosViaje))
       localStorage.setItem('viaje', JSON.stringify(this.datosViaje))
       this._mensajeria.mostrarToast(response.message)
-      this.router.navigate(['conductor/home-conductor'])
+      this.cargando = false
+      this.router.navigate(['conductor/home-conductor'], { replaceUrl: true })
     } catch (error: any) {
+      this.cargando = false
       console.log(error)
     }
 

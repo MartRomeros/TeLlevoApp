@@ -1,4 +1,7 @@
 <app-header-conductor></app-header-conductor>
+@if(cargando){
+  <ion-progress-bar type="indeterminate"></ion-progress-bar>
+}
 
 <ion-content>
   <form (ngSubmit)="comienzoViaje()">

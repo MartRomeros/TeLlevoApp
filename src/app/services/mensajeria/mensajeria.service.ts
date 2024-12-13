@@ -47,7 +47,7 @@ export class MensajeriaService {
           text: `Salida: ${data.salida}`
         },
         {
-          text: `Hora de salida: ${data.fechainicio}`
+          text: `Fecha de salida: ${data.fechainicio}`
         },
         {
           text: `Destino: ${data.destino}`

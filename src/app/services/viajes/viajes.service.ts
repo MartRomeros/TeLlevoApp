@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ViajesService {
 
-  private urlPrueba: string = 'http://localhost:3000'
-  private urlProduccion:string = 'https://steadfast-motivation-production.up.railway.app'
+  private urlLocal: string = 'http://localhost:3000'
+  private urlProduccion:string = 'https://vigilant-wholeness-production.up.railway.app'
   private viajesKey = 'viajes';
 
   constructor(

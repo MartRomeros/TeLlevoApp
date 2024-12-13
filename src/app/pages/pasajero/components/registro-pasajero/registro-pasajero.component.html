@@ -1,4 +1,7 @@
 <app-header-principal titulo="Registro de usuario"></app-header-principal>
+@if(cargando){
+<ion-progress-bar type="indeterminate"></ion-progress-bar>
+}
 
 <ion-content>
   <form [formGroup]="formularioRegistro" (ngSubmit)="registrar()">
@@ -29,6 +32,6 @@
   </form>
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer>
   <h6>Ya tienes una cuenta? <a [routerLink]="['/auth/login']">Inicia Sesión</a></h6>
 </ion-footer>

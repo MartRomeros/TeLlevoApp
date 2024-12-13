@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 import { conductor } from 'src/app/models/interfaces';
 import { AuthServiceService } from 'src/app/services/auth/auth-service.service';
 import { ConductorService } from 'src/app/services/conductor/conductor.service';
+import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-registro-chofer',
   templateUrl: './registro-chofer.component.html',
   styleUrls: ['./registro-chofer.component.scss'],
 })
-export class RegistroChoferComponent {
+export class RegistroChoferComponent implements OnInit {
 
-  registroForm!: FormGroup
+  public registroForm!: FormGroup
+  public cargando?: boolean
+
+  private _mensajeria = inject(MensajeriaService)
+  private _router = inject(Router)
+  private _tema = inject(ThemeService)
 
   constructor(private fb: FormBuilder, private _auth: AuthServiceService, private _conductor: ConductorService) {
 
@@ -25,9 +34,15 @@ export class RegistroChoferComponent {
 
   }
 
-  registrar() {
+  ngOnInit(): void {
+    this._tema.verificarTema()
+  }
+
+  async registrar() {
+    this.cargando = true
 
     if (!this._auth.validarCampos(this.registroForm)) {
+      this.cargando = false
       return
     }
 
@@ -40,9 +55,17 @@ export class RegistroChoferComponent {
       tipoUsuario: 'conductor'
     }
 
-    this._conductor.registrarConductor(data)
-
-
+    try {
+      const response: any = await lastValueFrom(this._conductor.registrarConductor(data))
+      this.cargando = false
+      this._mensajeria.mostrarToast(response.message)
+      this._router.navigate(['login'])
+    } catch (error: any) {
+      
+      this.cargando = false
+      this._mensajeria.mostrarAlert(error.error.message)
+      console.log(error)
+    }
 
   }
 

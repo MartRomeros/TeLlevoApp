@@ -1,22 +1,28 @@
-ion-content {
-    --background: var(--ion-content-theme);
-    
-    ion-button {
-      --background: var(--ion-header-theme);
-    }
- 
-    ion-header {
-      --background: var(--ion-content-theme);
- 
-      ion-toolbar {
-        --background: var(--ion-content-theme);
- 
-        ion-title {
-          color: var(--ion-text-general);
-        }
+ion-header {
+  --background: var(--ion-header-theme);
+
+  ion-toolbar {
+    --background: var(--ion-header-theme);
+    ion-buttons{
+      ion-back-button{
+        color: var(--ion-header-text);
       }
     }
- 
+
+    ion-title {
+      color: var(--ion-header-text);
+    }
+  }
+
+}
+
+
+ion-content {
+    --background: var(--ion-content-theme);
+
+    ion-button {
+      --background: var(--ion-header-theme);
+    } 
     ion-item::part(native) {
       background-color: var(--ion-content-theme);
       color: var(--ion-text-general);

@@ -1,8 +1,9 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
 import { MensajeriaService } from 'src/app/services/mensajeria/mensajeria.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 import { ViajesService } from 'src/app/services/viajes/viajes.service';
 
 declare var google: any;
@@ -13,7 +14,7 @@ declare var google: any;
   styleUrls: ['./home-conductor.component.scss'],
 })
 
-export class HomeConductorComponent implements OnInit {
+export class HomeConductorComponent implements OnInit, AfterViewInit {
   @ViewChild('map', { static: false }) mapElement!: ElementRef;
 
   viaje?: boolean
@@ -37,6 +38,8 @@ export class HomeConductorComponent implements OnInit {
   fecha?: string
   capacidad?: string
 
+  private _tema = inject(ThemeService)
+
   constructor(
     private _mensajeria: MensajeriaService,
     private _viaje: ViajesService,
@@ -45,19 +48,39 @@ export class HomeConductorComponent implements OnInit {
     private route: ActivatedRoute,
     private _navCtrl: NavController,
     private router: Router
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
-    this.verificarViaje()
-    this.mostrarInfo()
-    this.route.queryParams.subscribe(params => {
-      this.start = params['lugarInicio'] || '';
-      this.end = params['lugarFinal'] || '';
-      this.platform.ready().then(() => {
-        this.loadMap();
+    this._tema.verificarTema()
+    if (this.verificarViaje()) {
+      console.log('hay viajes, se deberia cargar el mapa')
+    } else {
+      console.log('no hay viajes, no se cargara el mapa')
+      localStorage.removeItem('viaje')
+    }
+  }
+
+  ionViewWillEnter() {
+    if (this.verificarViaje()) {
+      console.log('hay viajes, se deberia cargar el mapa')
+      this.mostrarInfo()
+    } else {
+      console.log('no hay viajes, no se cargara el mapa')
+      localStorage.removeItem('viaje')
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.verificarViaje()) {
+      this.initMap()
+      this.route.queryParams.subscribe(params => {
+        this.start = params['lugarInicio'] || '';
+        this.end = params['lugarFinal'] || '';
+        this.platform.ready().then(() => {
+          this.loadMap();
+        });
       });
-    });
+    }
   }
 
   async mostrarInfo() {
@@ -156,13 +179,31 @@ export class HomeConductorComponent implements OnInit {
     this.initMap();
   }
 
-  verificarViaje() {
+  verificarViaje(): boolean {
+
     if (localStorage.getItem('viaje') == "undefined") {
-      console.log('no hay viajes')
       this.viaje = false
+      return false
+
+    } else if (!localStorage.getItem('viaje')) {
+      this.viaje = false
+      return false
+
     } else {
+      this.mostrarInfo()
+
+      this.route.queryParams.subscribe(params => {
+        this.start = params['lugarInicio'] || '';
+        this.end = params['lugarFinal'] || '';
+        this.platform.ready().then(() => {
+          this.loadMap();
+        });
+      });
+
       console.log('hay viajes')
       this.viaje = true
+      return true
+
     }
   }
 

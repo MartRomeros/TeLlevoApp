@@ -1,12 +1,14 @@
 ion-content {
-    --background-color: var(--ion-content-theme);
-    padding: 2vh;
+    --background: var(--ion-content-theme);
+    padding: 4vh;
 
     form {
-        height: 65%;
+        background: var(--ion-content-theme);
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-
+        padding: 2vh;
         ion-grid {
 
             ion-row {
@@ -30,6 +32,16 @@ ion-content {
                     h3{
                         padding: 2vh;
                         text-align: center;
+                        color: var(--ion-text-general);
+                    }
+                    h6{
+                        padding: 2vh;
+                        text-align: center;
+                        color: var(--ion-text-general);
+                    }
+
+                    ion-button{
+                        --background: var(--ion-header-theme);
                     }
 
                     ion-radio-group {
@@ -40,15 +52,11 @@ ion-content {
                 }
             }
         }
-    }
-}
-
-ion-footer {
-    padding-bottom: 4vh;
-    h6 {
-        text-align: center;
-        a{
-            text-decoration: none;
+        h6 {
+            text-align: center;
+            a{
+                text-decoration: none;
+            }
         }
     }
 }

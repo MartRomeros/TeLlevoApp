@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 export class AuthServiceService {
 
   private urlPrueba: string = 'http://localhost:3000/users'
-  private urlProduccion: string = 'https://steadfast-motivation-production.up.railway.app/users'
+  private urlProduccion: string = 'https://vigilant-wholeness-production.up.railway.app/users'
   private urlResetPassword: string = "https://myths.cl/api/reset_password.php"
 
 
@@ -58,7 +58,11 @@ export class AuthServiceService {
   }
 
   logout() {
-    localStorage.clear()
+    localStorage.removeItem('usuario')
+    localStorage.removeItem('token')
+    localStorage.removeItem('tipo')
+    localStorage.removeItem('solicitud')
+    localStorage.removeItem('viaje')
     this.router.navigate(['auth/login'])
   }
 

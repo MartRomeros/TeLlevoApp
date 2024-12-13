@@ -1,11 +1,15 @@
 <app-header-principal titulo="Inicio de Sesión"></app-header-principal>
+@if(cargando){
+<ion-progress-bar type="indeterminate"></ion-progress-bar>
+}
 
 <ion-content>
   <form [formGroup]="loginForm" (ngSubmit)="logIn()">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
-          <h3>Bienvenido de vuelta!, nos alegra verte de nuevo!</h3>
+          <h3>Inicio de sesión</h3>
+          <h6>Completa el formulario para ingresar con tu perfil de usuario</h6>
         </ion-col>
         <ion-col size="12">
           <ion-input type="email" placeholder="Ingresa tu correo electronico" fill="outline" formControlName="email"
@@ -23,10 +27,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <h6><a [routerLink]="['/pasajero/registro-pasajero']">Registrate como pasajero</a></h6>
+    <h6><a [routerLink]="['/conductor/registro-chofer']">Registrate como conductor</a></h6>
   </form>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <h6>No tienes una cuenta? <a [routerLink]="['/pasajero/registro-pasajero']">Registrate como pasajero</a></h6>
-  <h6>No tienes una cuenta? <a [routerLink]="['/conductor/registro-chofer']">Registrate como conductor</a></h6>
-</ion-footer>

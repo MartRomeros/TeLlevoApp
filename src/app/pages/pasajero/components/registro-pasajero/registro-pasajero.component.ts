@@ -14,7 +14,8 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class RegistroPasajeroComponent implements OnInit {
 
-  formularioRegistro!: FormGroup
+  public cargando?:boolean
+  public formularioRegistro!: FormGroup
 
   constructor(
 
@@ -42,7 +43,9 @@ export class RegistroPasajeroComponent implements OnInit {
   }
 
   async registrar() {
+    this.cargando = true
     if (!this.validarCampos()) {
+      this.cargando = false
       return;
     }
     const data = this.formularioRegistro.value
@@ -50,9 +53,13 @@ export class RegistroPasajeroComponent implements OnInit {
     try {
       const response: any = await lastValueFrom(this._pasajero.registrarPasajero(data))
       this._mensajeria.mostrarToast(response.message)
+      this.cargando = false
       this.router.navigate(['login'])
       console.log(response)
     } catch (error: any) {
+      console.log(error)
+      this._mensajeria.mostrarAlert('Ha ocurrido un error, intente mas tarde')
+      this.cargando = false
 
     }
   }
@@ -82,25 +89,6 @@ export class RegistroPasajeroComponent implements OnInit {
     }
 
   }
-
-  verificarPassword(): boolean {
-
-    const password1 = this.formularioRegistro.get('password')!.value
-    const password2 = this.formularioRegistro.get('password2')!.value
-
-    console.log(password1)
-    console.log(password2)
-
-    if (password1 !== password2) {
-      this._mensajeria.mostrarAlert("Las contraseñas no coinciden!")
-      console.log("no son iguales")
-      return false
-    }
-
-    return true
-
-  }
-
 
 }
 

@@ -6,16 +6,14 @@ import { Router } from '@angular/router';
   templateUrl: './header-principal.component.html',
   styleUrls: ['./header-principal.component.scss'],
 })
-export class HeaderPrincipalComponent  implements OnInit {
-  @Input() titulo?:string;
+export class HeaderPrincipalComponent {
 
-  constructor(private router:Router) {}
+  @Input() button?: any
+  @Input() titulo?: string;
 
-  ngOnInit() {
-    console.log("header principal iniciado")
-  }
+  constructor(private router: Router) { }
 
-  goTo(ruta:string){
+  goTo(ruta: string) {
     this.router.navigate([`/${ruta}`])
   }
 

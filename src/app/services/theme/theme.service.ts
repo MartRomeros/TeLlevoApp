@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ThemeService {
-  tema?: string
+  public tema?: string
 
-  constructor() { }
+  constructor() {}
 
   TemaApp() {
     this.tema = JSON.parse(localStorage.getItem('tema')!)

@@ -1,9 +1,11 @@
 ion-content {
-    --background-color: var(--ion-content-theme);
+    --background: var(--ion-content-theme);
     padding: 2vh;
 
     form {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
 
         ion-grid {
@@ -36,12 +38,12 @@ ion-content {
     }
 }
 
-ion-footer {
-    padding-bottom: 4vh;
+ion-footer{
+    background: var(--ion-content-theme);
     h6 {
-        text-align: center;
         a{
             text-decoration: none;
+            text-align: center;
         }
     }
 }

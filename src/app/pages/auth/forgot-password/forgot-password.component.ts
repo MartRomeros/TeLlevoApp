@@ -27,14 +27,13 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.cargando = false
     this.tema.verificarTema()
   }
 
   recuperarPassword() {
-
+    this.cargando = true
     if (!this.authServicio.validarCampos(this.forgotForm)) {
+      this.cargando = false
       return
     }
 
@@ -42,9 +41,7 @@ export class ForgotPasswordComponent implements OnInit {
     const email = this.forgotForm.get('correo')?.value
 
     this.authServicio.resetPassword(tipoUsuario, email)
-
-
-
+    this.cargando = false
   }
 
   validarCampo(nombre: string): string {

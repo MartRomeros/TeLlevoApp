@@ -32,6 +32,12 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if (localStorage.getItem('viaje') == "undefined") {
+      localStorage.removeItem('solicitud')
+    } else if (!localStorage.getItem('viaje')) {
+      localStorage.removeItem('solicitud')
+    }
+
     this.tema.verificarTema()
     this.traerViajes()
   }
@@ -59,7 +65,7 @@ export class HomeComponent implements OnInit {
     }
     try {
       const viaje: any = await lastValueFrom(this.viajesService.obtenerViajeById(id))
-      const correo = localStorage.getItem('usuario')
+      const correo = JSON.parse(localStorage.getItem('usuario')!)
       const data = {
         pasajero: correo,
         salida: viaje.getViaje.salida,
@@ -80,6 +86,13 @@ export class HomeComponent implements OnInit {
       console.log(error)
 
     }
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.traerViajes()
+      event.target.complete();
+    }, 2000);
   }
 
 }

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup
   email!: string
   password!: string
+  public cargando?: boolean
 
   constructor(
     private router: Router,
@@ -41,7 +42,9 @@ export class LoginComponent implements OnInit {
 
 
   async logIn() {
+    this.cargando = true
     if (!this._auth.validarCampos(this.loginForm)) {
+      this.cargando = false
       return
     }
     try {
@@ -49,26 +52,36 @@ export class LoginComponent implements OnInit {
       //obetenmos el tipo de usuario para armar la url
       const response: any = await lastValueFrom(this._auth.obtenerTipoUsuario(data.email))
       //iniciamos sesion y traemos el token
-      const response2: any = await lastValueFrom(this._auth.login(data, response.user.tipoUsuario))
+      const response2: any = await lastValueFrom(this._auth.login(data, response.user.tipousuario))
       const response3: any = await lastValueFrom(this._viaje.obtenerViajeByEmail(data.email))
-      console.log(response3.getViaje[0])
+      const response4:any = await lastValueFrom(this._viaje.traerSolicitudes(data.email))
+
+
+      console.log(response4.solicitudes[0])
 
       localStorage.setItem('token', JSON.stringify(response2.token))
       localStorage.setItem('usuario', JSON.stringify(response2.user.email))
-      localStorage.setItem('tipo', JSON.stringify(response2.user.tipoUsuario))
-      localStorage.setItem('viaje', JSON.stringify(response3.getViaje[0]))
+      localStorage.setItem('tipo', JSON.stringify(response2.user.tipousuario))
 
-      switch (response2.user.tipoUsuario) {
+      this.cargando = false
+      switch (response2.user.tipousuario) {
         case 'conductor':
+          localStorage.setItem('viaje', JSON.stringify(response3.getViaje[0]))
           this._router.navigate(['conductor/home-conductor'])
           break;
         case 'pasajero':
+          localStorage.setItem('solicitud',JSON.stringify(response4.solicitudes[0]))
           this._router.navigate(['pasajero/home'])
           break
         default:
           break;
       }
     } catch (error: any) {
+      this.cargando = false
+      if (error.status == 0) {
+        this._mensajeria.mostrarAlert('Ha ocurrido un error, intente mas tarde!')
+        return
+      }
       this._mensajeria.mostrarAlert(error.error.message)
     }
   }

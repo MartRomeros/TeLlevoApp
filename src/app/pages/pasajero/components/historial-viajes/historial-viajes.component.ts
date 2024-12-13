@@ -23,7 +23,7 @@ export class HistorialViajesComponent implements OnInit {
 
   async traerSolicitudes() {
     try {
-      const email: any = localStorage.getItem('usuario')
+      const email: any = JSON.parse(localStorage.getItem('usuario')!)
       const response = await lastValueFrom(this._viaje.traerSolicitudes(email))
       console.log(response)
       this.historial = response.solicitudes

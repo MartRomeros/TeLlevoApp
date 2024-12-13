@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ConductorService {
 
-  basePrueba: string = 'http://localhost:3000'
-  baseProduccion: string = 'https://steadfast-motivation-production.up.railway.app'
+  private basePrueba: string = 'http://localhost:3000/'
+  private baseProduccion: string = 'https://vigilant-wholeness-production.up.railway.app/'
 
   constructor(
     private _http: HttpClient,
@@ -19,21 +19,12 @@ export class ConductorService {
     private _router: Router
   ) { }
 
-  async registrarConductor(data: conductor) {
-
-    try {
-
-      const response: any = await lastValueFrom(this._http.post(`${this.baseProduccion}/users/conductor/registro`, data))
-      this._mensajeria.mostrarToast(response.message)
-      this._router.navigate(['login'])
-
-    } catch (error: any) {
-      this._mensajeria.mostrarAlert(error.error.message)
-    }
+  registrarConductor(data: conductor): Observable<any> {
+    return this._http.post(`${this.baseProduccion}users/conductor/registro`, data)
   }
 
   traerDatos(correo: string): Observable<any> {
-    return this._http.get(`${this.baseProduccion}/users/conductor/${correo}`)
+    return this._http.get(`${this.baseProduccion}users/conductor/${correo}`)
   }
 
 }

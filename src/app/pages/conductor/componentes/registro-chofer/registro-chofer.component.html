@@ -1,4 +1,7 @@
 <app-header-principal titulo="Inicio de Sesión"></app-header-principal>
+@if (cargando) {
+<ion-progress-bar type="indeterminate"></ion-progress-bar>
+}
 
 <ion-content>
   <form [formGroup]="registroForm" (ngSubmit)="registrar()">
